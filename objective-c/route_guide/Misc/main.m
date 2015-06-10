@@ -1,4 +1,3 @@
-<?php
 /*
  *
  * Copyright 2015, Google Inc.
@@ -32,18 +31,11 @@
  *
  */
 
-require 'vendor/autoload.php';
-require 'helloworld.php';
+#import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
-function greet($name) {
-  $client = new helloworld\GreeterClient(
-      new Grpc\BaseStub('localhost:50051', []));
-  $request = new helloworld\HelloRequest();
-  $request->setName($name);
-  list($reply, $status) = $client->SayHello($request)->wait();
-  $message = $reply->getMessage();
-  return $message;
+int main(int argc, char * argv[]) {
+  @autoreleasepool {
+    return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+  }
 }
-
-$name = !empty($argv[1]) ? $argv[1] : 'world';
-print(greet($name)."\n");
