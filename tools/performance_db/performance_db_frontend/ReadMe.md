@@ -15,4 +15,4 @@ The front end can display four types of pages, including:
   * Server user time percentage
   * Client system time percentage
   * Client user time percentage
-  lolol
+ lol
