@@ -328,28 +328,40 @@ class DataDetails : public ::google::protobuf::Message {
   ::std::string* release_test_name();
   void set_allocated_test_name(::std::string* test_name);
 
-  // optional .grpc.testing.Metrics metrics = 3;
+  // optional string sys_info = 3;
+  bool has_sys_info() const;
+  void clear_sys_info();
+  static const int kSysInfoFieldNumber = 3;
+  const ::std::string& sys_info() const;
+  void set_sys_info(const ::std::string& value);
+  void set_sys_info(const char* value);
+  void set_sys_info(const char* value, size_t size);
+  ::std::string* mutable_sys_info();
+  ::std::string* release_sys_info();
+  void set_allocated_sys_info(::std::string* sys_info);
+
+  // optional .grpc.testing.Metrics metrics = 4;
   bool has_metrics() const;
   void clear_metrics();
-  static const int kMetricsFieldNumber = 3;
+  static const int kMetricsFieldNumber = 4;
   const ::grpc::testing::Metrics& metrics() const;
   ::grpc::testing::Metrics* mutable_metrics();
   ::grpc::testing::Metrics* release_metrics();
   void set_allocated_metrics(::grpc::testing::Metrics* metrics);
 
-  // optional .grpc.testing.ClientConfig client_config = 4;
+  // optional .grpc.testing.ClientConfig client_config = 5;
   bool has_client_config() const;
   void clear_client_config();
-  static const int kClientConfigFieldNumber = 4;
+  static const int kClientConfigFieldNumber = 5;
   const ::grpc::testing::ClientConfig& client_config() const;
   ::grpc::testing::ClientConfig* mutable_client_config();
   ::grpc::testing::ClientConfig* release_client_config();
   void set_allocated_client_config(::grpc::testing::ClientConfig* client_config);
 
-  // optional .grpc.testing.ServerConfig server_config = 5;
+  // optional .grpc.testing.ServerConfig server_config = 6;
   bool has_server_config() const;
   void clear_server_config();
-  static const int kServerConfigFieldNumber = 5;
+  static const int kServerConfigFieldNumber = 6;
   const ::grpc::testing::ServerConfig& server_config() const;
   ::grpc::testing::ServerConfig* mutable_server_config();
   ::grpc::testing::ServerConfig* release_server_config();
@@ -361,6 +373,8 @@ class DataDetails : public ::google::protobuf::Message {
   inline void clear_has_timestamp();
   inline void set_has_test_name();
   inline void clear_has_test_name();
+  inline void set_has_sys_info();
+  inline void clear_has_sys_info();
   inline void set_has_metrics();
   inline void clear_has_metrics();
   inline void set_has_client_config();
@@ -373,6 +387,7 @@ class DataDetails : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::internal::ArenaStringPtr timestamp_;
   ::google::protobuf::internal::ArenaStringPtr test_name_;
+  ::google::protobuf::internal::ArenaStringPtr sys_info_;
   ::grpc::testing::Metrics* metrics_;
   ::grpc::testing::ClientConfig* client_config_;
   ::grpc::testing::ServerConfig* server_config_;
@@ -816,28 +831,40 @@ class SingleUserRecordRequest : public ::google::protobuf::Message {
   ::std::string* release_test_name();
   void set_allocated_test_name(::std::string* test_name);
 
-  // optional .grpc.testing.Metrics metrics = 3;
+  // optional string sys_info = 3;
+  bool has_sys_info() const;
+  void clear_sys_info();
+  static const int kSysInfoFieldNumber = 3;
+  const ::std::string& sys_info() const;
+  void set_sys_info(const ::std::string& value);
+  void set_sys_info(const char* value);
+  void set_sys_info(const char* value, size_t size);
+  ::std::string* mutable_sys_info();
+  ::std::string* release_sys_info();
+  void set_allocated_sys_info(::std::string* sys_info);
+
+  // optional .grpc.testing.Metrics metrics = 4;
   bool has_metrics() const;
   void clear_metrics();
-  static const int kMetricsFieldNumber = 3;
+  static const int kMetricsFieldNumber = 4;
   const ::grpc::testing::Metrics& metrics() const;
   ::grpc::testing::Metrics* mutable_metrics();
   ::grpc::testing::Metrics* release_metrics();
   void set_allocated_metrics(::grpc::testing::Metrics* metrics);
 
-  // optional .grpc.testing.ClientConfig client_config = 4;
+  // optional .grpc.testing.ClientConfig client_config = 5;
   bool has_client_config() const;
   void clear_client_config();
-  static const int kClientConfigFieldNumber = 4;
+  static const int kClientConfigFieldNumber = 5;
   const ::grpc::testing::ClientConfig& client_config() const;
   ::grpc::testing::ClientConfig* mutable_client_config();
   ::grpc::testing::ClientConfig* release_client_config();
   void set_allocated_client_config(::grpc::testing::ClientConfig* client_config);
 
-  // optional .grpc.testing.ServerConfig server_config = 5;
+  // optional .grpc.testing.ServerConfig server_config = 6;
   bool has_server_config() const;
   void clear_server_config();
-  static const int kServerConfigFieldNumber = 5;
+  static const int kServerConfigFieldNumber = 6;
   const ::grpc::testing::ServerConfig& server_config() const;
   ::grpc::testing::ServerConfig* mutable_server_config();
   ::grpc::testing::ServerConfig* release_server_config();
@@ -849,6 +876,8 @@ class SingleUserRecordRequest : public ::google::protobuf::Message {
   inline void clear_has_access_token();
   inline void set_has_test_name();
   inline void clear_has_test_name();
+  inline void set_has_sys_info();
+  inline void clear_has_sys_info();
   inline void set_has_metrics();
   inline void clear_has_metrics();
   inline void set_has_client_config();
@@ -861,6 +890,7 @@ class SingleUserRecordRequest : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::google::protobuf::internal::ArenaStringPtr access_token_;
   ::google::protobuf::internal::ArenaStringPtr test_name_;
+  ::google::protobuf::internal::ArenaStringPtr sys_info_;
   ::grpc::testing::Metrics* metrics_;
   ::grpc::testing::ClientConfig* client_config_;
   ::grpc::testing::ServerConfig* server_config_;
@@ -1688,15 +1718,68 @@ inline void DataDetails::set_allocated_test_name(::std::string* test_name) {
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.DataDetails.test_name)
 }
 
-// optional .grpc.testing.Metrics metrics = 3;
-inline bool DataDetails::has_metrics() const {
+// optional string sys_info = 3;
+inline bool DataDetails::has_sys_info() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void DataDetails::set_has_metrics() {
+inline void DataDetails::set_has_sys_info() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void DataDetails::clear_has_metrics() {
+inline void DataDetails::clear_has_sys_info() {
   _has_bits_[0] &= ~0x00000004u;
+}
+inline void DataDetails::clear_sys_info() {
+  sys_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_sys_info();
+}
+inline const ::std::string& DataDetails::sys_info() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.DataDetails.sys_info)
+  return sys_info_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void DataDetails::set_sys_info(const ::std::string& value) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:grpc.testing.DataDetails.sys_info)
+}
+inline void DataDetails::set_sys_info(const char* value) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:grpc.testing.DataDetails.sys_info)
+}
+inline void DataDetails::set_sys_info(const char* value, size_t size) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:grpc.testing.DataDetails.sys_info)
+}
+inline ::std::string* DataDetails::mutable_sys_info() {
+  set_has_sys_info();
+  // @@protoc_insertion_point(field_mutable:grpc.testing.DataDetails.sys_info)
+  return sys_info_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* DataDetails::release_sys_info() {
+  clear_has_sys_info();
+  return sys_info_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void DataDetails::set_allocated_sys_info(::std::string* sys_info) {
+  if (sys_info != NULL) {
+    set_has_sys_info();
+  } else {
+    clear_has_sys_info();
+  }
+  sys_info_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), sys_info);
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.DataDetails.sys_info)
+}
+
+// optional .grpc.testing.Metrics metrics = 4;
+inline bool DataDetails::has_metrics() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void DataDetails::set_has_metrics() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void DataDetails::clear_has_metrics() {
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void DataDetails::clear_metrics() {
   if (metrics_ != NULL) metrics_->::grpc::testing::Metrics::Clear();
@@ -1731,15 +1814,15 @@ inline void DataDetails::set_allocated_metrics(::grpc::testing::Metrics* metrics
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.DataDetails.metrics)
 }
 
-// optional .grpc.testing.ClientConfig client_config = 4;
+// optional .grpc.testing.ClientConfig client_config = 5;
 inline bool DataDetails::has_client_config() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void DataDetails::set_has_client_config() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void DataDetails::clear_has_client_config() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void DataDetails::clear_client_config() {
   if (client_config_ != NULL) client_config_->::grpc::testing::ClientConfig::Clear();
@@ -1774,15 +1857,15 @@ inline void DataDetails::set_allocated_client_config(::grpc::testing::ClientConf
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.DataDetails.client_config)
 }
 
-// optional .grpc.testing.ServerConfig server_config = 5;
+// optional .grpc.testing.ServerConfig server_config = 6;
 inline bool DataDetails::has_server_config() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void DataDetails::set_has_server_config() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void DataDetails::clear_has_server_config() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void DataDetails::clear_server_config() {
   if (server_config_ != NULL) server_config_->::grpc::testing::ServerConfig::Clear();
@@ -2562,15 +2645,68 @@ inline void SingleUserRecordRequest::set_allocated_test_name(::std::string* test
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.SingleUserRecordRequest.test_name)
 }
 
-// optional .grpc.testing.Metrics metrics = 3;
-inline bool SingleUserRecordRequest::has_metrics() const {
+// optional string sys_info = 3;
+inline bool SingleUserRecordRequest::has_sys_info() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void SingleUserRecordRequest::set_has_metrics() {
+inline void SingleUserRecordRequest::set_has_sys_info() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void SingleUserRecordRequest::clear_has_metrics() {
+inline void SingleUserRecordRequest::clear_has_sys_info() {
   _has_bits_[0] &= ~0x00000004u;
+}
+inline void SingleUserRecordRequest::clear_sys_info() {
+  sys_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_sys_info();
+}
+inline const ::std::string& SingleUserRecordRequest::sys_info() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.SingleUserRecordRequest.sys_info)
+  return sys_info_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void SingleUserRecordRequest::set_sys_info(const ::std::string& value) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:grpc.testing.SingleUserRecordRequest.sys_info)
+}
+inline void SingleUserRecordRequest::set_sys_info(const char* value) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:grpc.testing.SingleUserRecordRequest.sys_info)
+}
+inline void SingleUserRecordRequest::set_sys_info(const char* value, size_t size) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:grpc.testing.SingleUserRecordRequest.sys_info)
+}
+inline ::std::string* SingleUserRecordRequest::mutable_sys_info() {
+  set_has_sys_info();
+  // @@protoc_insertion_point(field_mutable:grpc.testing.SingleUserRecordRequest.sys_info)
+  return sys_info_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* SingleUserRecordRequest::release_sys_info() {
+  clear_has_sys_info();
+  return sys_info_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void SingleUserRecordRequest::set_allocated_sys_info(::std::string* sys_info) {
+  if (sys_info != NULL) {
+    set_has_sys_info();
+  } else {
+    clear_has_sys_info();
+  }
+  sys_info_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), sys_info);
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.SingleUserRecordRequest.sys_info)
+}
+
+// optional .grpc.testing.Metrics metrics = 4;
+inline bool SingleUserRecordRequest::has_metrics() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void SingleUserRecordRequest::set_has_metrics() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void SingleUserRecordRequest::clear_has_metrics() {
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline void SingleUserRecordRequest::clear_metrics() {
   if (metrics_ != NULL) metrics_->::grpc::testing::Metrics::Clear();
@@ -2605,15 +2741,15 @@ inline void SingleUserRecordRequest::set_allocated_metrics(::grpc::testing::Metr
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.SingleUserRecordRequest.metrics)
 }
 
-// optional .grpc.testing.ClientConfig client_config = 4;
+// optional .grpc.testing.ClientConfig client_config = 5;
 inline bool SingleUserRecordRequest::has_client_config() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void SingleUserRecordRequest::set_has_client_config() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 inline void SingleUserRecordRequest::clear_has_client_config() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline void SingleUserRecordRequest::clear_client_config() {
   if (client_config_ != NULL) client_config_->::grpc::testing::ClientConfig::Clear();
@@ -2648,15 +2784,15 @@ inline void SingleUserRecordRequest::set_allocated_client_config(::grpc::testing
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.SingleUserRecordRequest.client_config)
 }
 
-// optional .grpc.testing.ServerConfig server_config = 5;
+// optional .grpc.testing.ServerConfig server_config = 6;
 inline bool SingleUserRecordRequest::has_server_config() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void SingleUserRecordRequest::set_has_server_config() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 inline void SingleUserRecordRequest::clear_has_server_config() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void SingleUserRecordRequest::clear_server_config() {
   if (server_config_ != NULL) server_config_->::grpc::testing::ServerConfig::Clear();

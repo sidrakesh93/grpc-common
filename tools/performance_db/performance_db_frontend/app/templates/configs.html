@@ -71,86 +71,48 @@
     <div class="container">
       <h3 align="center">Client Configuration</h3>
       <hr>
-      <div id="configs">
-      <!-- {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %} -->
-        <table id="client-configs-table"
-              class="table table-striped">
+      <div id="client_configs">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th style="text-align:center; width:50%">Field</th>
               <th style="text-align:center; width:50%">Value</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td style="text-align:center">Client type</td>
-              <td id="client_type" style="text-align:center"></td>
-            </tr>
-            <tr>
-              <td style="text-align:center">Enable SSL</td>
-              <td id="client_enable_ssl" style="text-align:center"></td>
-            </tr>
-            <tr>
-              <td style="text-align:center">Outstanding RPCs per channel</td>
-              <td id="outstanding_rpcs_per_channel" style="text-align:center"></td>
-            </tr>
-            <tr>
-              <td style="text-align:center">Client channels</td>
-              <td id="client_channels" style="text-align:center"></td>
-            </tr>
-            <tr>
-              <td style="text-align:center">Payload size</td>
-              <td id="payload_size" style="text-align:center"></td>
-            </tr>
-            <tr>
-              <td style="text-align:center">Async Client Threads</td>
-              <td id="async_client_threads" style="text-align:center"></td>
-            </tr>
-            <tr>
-              <td style="text-align:center">RPC Type</td>
-              <td id="rpc_type" style="text-align:center"></td>
-            </tr>
-            <tr>
-              <td style="text-align:center">Host</td>
-              <td id="client_host" style="text-align:center"></td>
-            </tr>
+          <tbody id="client-configs-table">
           </tbody>
         </table>
       </div>
       <hr>
       <h3 align="center">Server Configuration</h3>
       <hr>
-      <div id="configs">
-      <!-- {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %} -->
-        <table id="server-configs-table"
-              class="table table-striped">
+      <div id="server_configs">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th style="text-align:center; width:50%">Field</th>
               <th style="text-align:center; width:50%">Value</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td style="text-align:center">Server type</td>
-              <td id="server_type" style="text-align:center"></td>
-            </tr>
-            <tr>
-              <td style="text-align:center">Threads</td>
-              <td id="threads" style="text-align:center"></td>
-            </tr>
-            <tr>
-              <td style="text-align:center">Enable SSL</td>
-              <td id="server_enable_ssl" style="text-align:center"></td>
-            </tr>
-            <tr>
-              <td style="text-align:center">Host</td>
-              <td id="server_host" style="text-align:center"></td>
-            </tr>
+          <tbody id="server-configs-table">
           </tbody>
         </table>
       </div>
-      
+      <hr>
+      <h3 align="center">System Configuration</h3>
+      <div id="sys_info">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th style="text-align:center; width:50%">Field</th>
+              <th style="text-align:center; width:50%">Value</th>
+            </tr>
+          </thead>
+          <tbody id="sys-info-table">
+          </tbody>
+        </table>
+      </div>
+      <hr>
     </div><!-- /.container -->
 
     <!-- JQuery core javascript  -->
@@ -161,31 +123,36 @@
       var find = '\'';
       var re = new RegExp(find, 'g');
       var clientConfig = sessionStorage.clientConfig.replace(re, '"');
-      var obj = jQuery.parseJSON(clientConfig);
       
-      document.getElementById("client_type").innerHTML = obj.client_type;
-      document.getElementById("client_enable_ssl").innerHTML = obj.enable_ssl;
-      document.getElementById("outstanding_rpcs_per_channel").innerHTML = obj.outstanding_rpcs_per_channel;
-      document.getElementById("client_channels").innerHTML = obj.client_channels;
-      document.getElementById("payload_size").innerHTML = obj.payload_size;
-
-      if(obj.client_type == 'Synchronous') {
-        document.getElementById("client-configs-table").deleteRow(6);
-      }
-      else {
-        document.getElementById("async_client_threads").innerHTML = obj.async_client_threads;
-      }
-
-      document.getElementById("rpc_type").innerHTML = obj.rpc_type;
-      document.getElementById("client_host").innerHTML = obj.host;
+      var table = document.getElementById("client-configs-table");
+      fillTable(table, clientConfig);
 
       var serverConfig = sessionStorage.serverConfig.replace(re, '"');
-      obj = jQuery.parseJSON(serverConfig);
+      table = document.getElementById("server-configs-table");
+      fillTable(table, serverConfig);
+      
+      var ufind = 'u"';
+      var ure = new RegExp(ufind, 'g');
+      var sysInfo = sessionStorage.sysInfo.replace(re, '"');
+      sysInfo = sysInfo.replace(ure, '"');
+      table = document.getElementById("sys-info-table");
 
-      document.getElementById("server_type").innerHTML = obj.server_type;
-      document.getElementById("threads").innerHTML = obj.threads;
-      document.getElementById("server_enable_ssl").innerHTML = obj.enable_ssl;
-      document.getElementById("server_host").innerHTML = obj.host;
+      fillTable(table, sysInfo);
+
+      function fillTable(table, info) {
+        JSON.parse(info, function(k, v) {
+          var row = table.insertRow(-1);
+          var cell1 = row.insertCell(0);
+          var cell2 = row.insertCell(1);
+
+          cell1.innerHTML = k;
+          cell2.innerHTML = v;
+
+          cell1.style.textAlign = 'center';
+          cell2.style.textAlign = 'center';
+        });
+        table.deleteRow(-1);
+      }
     </script>
   </body>
 </html>

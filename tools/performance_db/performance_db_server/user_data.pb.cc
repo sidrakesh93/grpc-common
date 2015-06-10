@@ -87,9 +87,10 @@ void protobuf_AssignDesc_user_5fdata_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Metrics, _internal_metadata_),
       -1);
   DataDetails_descriptor_ = file->message_type(1);
-  static const int DataDetails_offsets_[5] = {
+  static const int DataDetails_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataDetails, timestamp_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataDetails, test_name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataDetails, sys_info_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataDetails, metrics_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataDetails, client_config_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataDetails, server_config_),
@@ -147,9 +148,10 @@ void protobuf_AssignDesc_user_5fdata_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SingleUserDetails, _internal_metadata_),
       -1);
   SingleUserRecordRequest_descriptor_ = file->message_type(4);
-  static const int SingleUserRecordRequest_offsets_[5] = {
+  static const int SingleUserRecordRequest_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SingleUserRecordRequest, access_token_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SingleUserRecordRequest, test_name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SingleUserRecordRequest, sys_info_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SingleUserRecordRequest, metrics_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SingleUserRecordRequest, client_config_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SingleUserRecordRequest, server_config_),
@@ -312,40 +314,41 @@ void protobuf_AddDesc_user_5fdata_2eproto() {
     "perc_lat_99\030\006 \001(\001\022\033\n\023perc_lat_99_point_9"
     "\030\007 \001(\001\022\032\n\022server_system_time\030\010 \001(\001\022\030\n\020se"
     "rver_user_time\030\t \001(\001\022\032\n\022client_system_ti"
-    "me\030\n \001(\001\022\030\n\020client_user_time\030\013 \001(\001\"\301\001\n\013D"
+    "me\030\n \001(\001\022\030\n\020client_user_time\030\013 \001(\001\"\323\001\n\013D"
     "ataDetails\022\021\n\ttimestamp\030\001 \001(\t\022\021\n\ttest_na"
-    "me\030\002 \001(\t\022&\n\007metrics\030\003 \001(\0132\025.grpc.testing"
-    ".Metrics\0221\n\rclient_config\030\004 \001(\0132\032.grpc.t"
-    "esting.ClientConfig\0221\n\rserver_config\030\005 \001"
-    "(\0132\032.grpc.testing.ServerConfig\"\302\001\n\013UserD"
-    "etails\022\n\n\002id\030\001 \001(\t\022\r\n\005email\030\002 \001(\t\022\026\n\016ver"
-    "ified_email\030\003 \001(\010\022\014\n\004name\030\004 \001(\t\022\022\n\ngiven"
-    "_name\030\005 \001(\t\022\023\n\013family_name\030\006 \001(\t\022\014\n\004link"
-    "\030\007 \001(\t\022\017\n\007picture\030\010 \001(\t\022\016\n\006gender\030\t \001(\t\022"
-    "\016\n\006locale\030\n \001(\t\022\n\n\002hd\030\013 \001(\t\"u\n\021SingleUse"
-    "rDetails\022/\n\014data_details\030\001 \003(\0132\031.grpc.te"
-    "sting.DataDetails\022/\n\014user_details\030\002 \001(\0132"
-    "\031.grpc.testing.UserDetails\"\320\001\n\027SingleUse"
-    "rRecordRequest\022\024\n\014access_token\030\001 \001(\t\022\021\n\t"
-    "test_name\030\002 \001(\t\022&\n\007metrics\030\003 \001(\0132\025.grpc."
-    "testing.Metrics\0221\n\rclient_config\030\004 \001(\0132\032"
-    ".grpc.testing.ClientConfig\0221\n\rserver_con"
-    "fig\030\005 \001(\0132\032.grpc.testing.ServerConfig\"\027\n"
-    "\025SingleUserRecordReply\",\n\031SingleUserRetr"
-    "ieveRequest\022\017\n\007user_id\030\001 \001(\t\"K\n\027SingleUs"
-    "erRetrieveReply\0220\n\007details\030\001 \001(\0132\037.grpc."
-    "testing.SingleUserDetails\"K\n\025AllUsersRet"
-    "rieveReply\0222\n\tuser_data\030\001 \003(\0132\037.grpc.tes"
-    "ting.SingleUserDetails\"\031\n\027AllUsersRetrie"
-    "veRequest2\314\002\n\020UserDataTransfer\022f\n\026Record"
-    "SingleClientData\022%.grpc.testing.SingleUs"
-    "erRecordRequest\032#.grpc.testing.SingleUse"
-    "rRecordReply\"\000\022j\n\026RetrieveSingleUserData"
-    "\022\'.grpc.testing.SingleUserRetrieveReques"
-    "t\032%.grpc.testing.SingleUserRetrieveReply"
-    "\"\000\022d\n\024RetrieveAllUsersData\022%.grpc.testin"
-    "g.AllUsersRetrieveRequest\032#.grpc.testing"
-    ".AllUsersRetrieveReply\"\000", 1624);
+    "me\030\002 \001(\t\022\020\n\010sys_info\030\003 \001(\t\022&\n\007metrics\030\004 "
+    "\001(\0132\025.grpc.testing.Metrics\0221\n\rclient_con"
+    "fig\030\005 \001(\0132\032.grpc.testing.ClientConfig\0221\n"
+    "\rserver_config\030\006 \001(\0132\032.grpc.testing.Serv"
+    "erConfig\"\302\001\n\013UserDetails\022\n\n\002id\030\001 \001(\t\022\r\n\005"
+    "email\030\002 \001(\t\022\026\n\016verified_email\030\003 \001(\010\022\014\n\004n"
+    "ame\030\004 \001(\t\022\022\n\ngiven_name\030\005 \001(\t\022\023\n\013family_"
+    "name\030\006 \001(\t\022\014\n\004link\030\007 \001(\t\022\017\n\007picture\030\010 \001("
+    "\t\022\016\n\006gender\030\t \001(\t\022\016\n\006locale\030\n \001(\t\022\n\n\002hd\030"
+    "\013 \001(\t\"u\n\021SingleUserDetails\022/\n\014data_detai"
+    "ls\030\001 \003(\0132\031.grpc.testing.DataDetails\022/\n\014u"
+    "ser_details\030\002 \001(\0132\031.grpc.testing.UserDet"
+    "ails\"\342\001\n\027SingleUserRecordRequest\022\024\n\014acce"
+    "ss_token\030\001 \001(\t\022\021\n\ttest_name\030\002 \001(\t\022\020\n\010sys"
+    "_info\030\003 \001(\t\022&\n\007metrics\030\004 \001(\0132\025.grpc.test"
+    "ing.Metrics\0221\n\rclient_config\030\005 \001(\0132\032.grp"
+    "c.testing.ClientConfig\0221\n\rserver_config\030"
+    "\006 \001(\0132\032.grpc.testing.ServerConfig\"\027\n\025Sin"
+    "gleUserRecordReply\",\n\031SingleUserRetrieve"
+    "Request\022\017\n\007user_id\030\001 \001(\t\"K\n\027SingleUserRe"
+    "trieveReply\0220\n\007details\030\001 \001(\0132\037.grpc.test"
+    "ing.SingleUserDetails\"K\n\025AllUsersRetriev"
+    "eReply\0222\n\tuser_data\030\001 \003(\0132\037.grpc.testing"
+    ".SingleUserDetails\"\031\n\027AllUsersRetrieveRe"
+    "quest2\314\002\n\020UserDataTransfer\022f\n\026RecordSing"
+    "leClientData\022%.grpc.testing.SingleUserRe"
+    "cordRequest\032#.grpc.testing.SingleUserRec"
+    "ordReply\"\000\022j\n\026RetrieveSingleUserData\022\'.g"
+    "rpc.testing.SingleUserRetrieveRequest\032%."
+    "grpc.testing.SingleUserRetrieveReply\"\000\022d"
+    "\n\024RetrieveAllUsersData\022%.grpc.testing.Al"
+    "lUsersRetrieveRequest\032#.grpc.testing.All"
+    "UsersRetrieveReply\"\000", 1660);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "user_data.proto", &protobuf_RegisterTypes);
   Metrics::default_instance_ = new Metrics();
@@ -1271,6 +1274,7 @@ void Metrics::clear_client_user_time() {
 #ifndef _MSC_VER
 const int DataDetails::kTimestampFieldNumber;
 const int DataDetails::kTestNameFieldNumber;
+const int DataDetails::kSysInfoFieldNumber;
 const int DataDetails::kMetricsFieldNumber;
 const int DataDetails::kClientConfigFieldNumber;
 const int DataDetails::kServerConfigFieldNumber;
@@ -1301,6 +1305,7 @@ void DataDetails::SharedCtor() {
   _cached_size_ = 0;
   timestamp_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   test_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  sys_info_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   metrics_ = NULL;
   client_config_ = NULL;
   server_config_ = NULL;
@@ -1315,6 +1320,7 @@ DataDetails::~DataDetails() {
 void DataDetails::SharedDtor() {
   timestamp_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   test_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  sys_info_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
     delete metrics_;
     delete client_config_;
@@ -1348,12 +1354,15 @@ DataDetails* DataDetails::New(::google::protobuf::Arena* arena) const {
 }
 
 void DataDetails::Clear() {
-  if (_has_bits_[0 / 32] & 31u) {
+  if (_has_bits_[0 / 32] & 63u) {
     if (has_timestamp()) {
       timestamp_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_test_name()) {
       test_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    if (has_sys_info()) {
+      sys_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_metrics()) {
       if (metrics_ != NULL) metrics_->::grpc::testing::Metrics::Clear();
@@ -1410,39 +1419,56 @@ bool DataDetails::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(26)) goto parse_metrics;
+        if (input->ExpectTag(26)) goto parse_sys_info;
         break;
       }
 
-      // optional .grpc.testing.Metrics metrics = 3;
+      // optional string sys_info = 3;
       case 3: {
         if (tag == 26) {
+         parse_sys_info:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_sys_info()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->sys_info().data(), this->sys_info().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "grpc.testing.DataDetails.sys_info");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_metrics;
+        break;
+      }
+
+      // optional .grpc.testing.Metrics metrics = 4;
+      case 4: {
+        if (tag == 34) {
          parse_metrics:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_metrics()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(34)) goto parse_client_config;
+        if (input->ExpectTag(42)) goto parse_client_config;
         break;
       }
 
-      // optional .grpc.testing.ClientConfig client_config = 4;
-      case 4: {
-        if (tag == 34) {
+      // optional .grpc.testing.ClientConfig client_config = 5;
+      case 5: {
+        if (tag == 42) {
          parse_client_config:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_client_config()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(42)) goto parse_server_config;
+        if (input->ExpectTag(50)) goto parse_server_config;
         break;
       }
 
-      // optional .grpc.testing.ServerConfig server_config = 5;
-      case 5: {
-        if (tag == 42) {
+      // optional .grpc.testing.ServerConfig server_config = 6;
+      case 6: {
+        if (tag == 50) {
          parse_server_config:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_server_config()));
@@ -1498,22 +1524,32 @@ void DataDetails::SerializeWithCachedSizes(
       2, this->test_name(), output);
   }
 
-  // optional .grpc.testing.Metrics metrics = 3;
+  // optional string sys_info = 3;
+  if (has_sys_info()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->sys_info().data(), this->sys_info().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "grpc.testing.DataDetails.sys_info");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->sys_info(), output);
+  }
+
+  // optional .grpc.testing.Metrics metrics = 4;
   if (has_metrics()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, *this->metrics_, output);
+      4, *this->metrics_, output);
   }
 
-  // optional .grpc.testing.ClientConfig client_config = 4;
+  // optional .grpc.testing.ClientConfig client_config = 5;
   if (has_client_config()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *this->client_config_, output);
+      5, *this->client_config_, output);
   }
 
-  // optional .grpc.testing.ServerConfig server_config = 5;
+  // optional .grpc.testing.ServerConfig server_config = 6;
   if (has_server_config()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, *this->server_config_, output);
+      6, *this->server_config_, output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1548,25 +1584,36 @@ void DataDetails::SerializeWithCachedSizes(
         2, this->test_name(), target);
   }
 
-  // optional .grpc.testing.Metrics metrics = 3;
+  // optional string sys_info = 3;
+  if (has_sys_info()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->sys_info().data(), this->sys_info().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "grpc.testing.DataDetails.sys_info");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->sys_info(), target);
+  }
+
+  // optional .grpc.testing.Metrics metrics = 4;
   if (has_metrics()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        3, *this->metrics_, target);
+        4, *this->metrics_, target);
   }
 
-  // optional .grpc.testing.ClientConfig client_config = 4;
+  // optional .grpc.testing.ClientConfig client_config = 5;
   if (has_client_config()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        4, *this->client_config_, target);
+        5, *this->client_config_, target);
   }
 
-  // optional .grpc.testing.ServerConfig server_config = 5;
+  // optional .grpc.testing.ServerConfig server_config = 6;
   if (has_server_config()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        5, *this->server_config_, target);
+        6, *this->server_config_, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1580,7 +1627,7 @@ void DataDetails::SerializeWithCachedSizes(
 int DataDetails::ByteSize() const {
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & 31) {
+  if (_has_bits_[0 / 32] & 63) {
     // optional string timestamp = 1;
     if (has_timestamp()) {
       total_size += 1 +
@@ -1595,21 +1642,28 @@ int DataDetails::ByteSize() const {
           this->test_name());
     }
 
-    // optional .grpc.testing.Metrics metrics = 3;
+    // optional string sys_info = 3;
+    if (has_sys_info()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->sys_info());
+    }
+
+    // optional .grpc.testing.Metrics metrics = 4;
     if (has_metrics()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *this->metrics_);
     }
 
-    // optional .grpc.testing.ClientConfig client_config = 4;
+    // optional .grpc.testing.ClientConfig client_config = 5;
     if (has_client_config()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *this->client_config_);
     }
 
-    // optional .grpc.testing.ServerConfig server_config = 5;
+    // optional .grpc.testing.ServerConfig server_config = 6;
     if (has_server_config()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1650,6 +1704,10 @@ void DataDetails::MergeFrom(const DataDetails& from) {
     if (from.has_test_name()) {
       set_has_test_name();
       test_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.test_name_);
+    }
+    if (from.has_sys_info()) {
+      set_has_sys_info();
+      sys_info_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.sys_info_);
     }
     if (from.has_metrics()) {
       mutable_metrics()->::grpc::testing::Metrics::MergeFrom(from.metrics());
@@ -1696,6 +1754,7 @@ void DataDetails::Swap(DataDetails* other) {
 void DataDetails::InternalSwap(DataDetails* other) {
   timestamp_.Swap(&other->timestamp_);
   test_name_.Swap(&other->test_name_);
+  sys_info_.Swap(&other->sys_info_);
   std::swap(metrics_, other->metrics_);
   std::swap(client_config_, other->client_config_);
   std::swap(server_config_, other->server_config_);
@@ -1821,15 +1880,68 @@ void DataDetails::clear_test_name() {
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.DataDetails.test_name)
 }
 
-// optional .grpc.testing.Metrics metrics = 3;
-bool DataDetails::has_metrics() const {
+// optional string sys_info = 3;
+bool DataDetails::has_sys_info() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-void DataDetails::set_has_metrics() {
+void DataDetails::set_has_sys_info() {
   _has_bits_[0] |= 0x00000004u;
 }
-void DataDetails::clear_has_metrics() {
+void DataDetails::clear_has_sys_info() {
   _has_bits_[0] &= ~0x00000004u;
+}
+void DataDetails::clear_sys_info() {
+  sys_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_sys_info();
+}
+ const ::std::string& DataDetails::sys_info() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.DataDetails.sys_info)
+  return sys_info_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void DataDetails::set_sys_info(const ::std::string& value) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:grpc.testing.DataDetails.sys_info)
+}
+ void DataDetails::set_sys_info(const char* value) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:grpc.testing.DataDetails.sys_info)
+}
+ void DataDetails::set_sys_info(const char* value, size_t size) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:grpc.testing.DataDetails.sys_info)
+}
+ ::std::string* DataDetails::mutable_sys_info() {
+  set_has_sys_info();
+  // @@protoc_insertion_point(field_mutable:grpc.testing.DataDetails.sys_info)
+  return sys_info_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* DataDetails::release_sys_info() {
+  clear_has_sys_info();
+  return sys_info_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void DataDetails::set_allocated_sys_info(::std::string* sys_info) {
+  if (sys_info != NULL) {
+    set_has_sys_info();
+  } else {
+    clear_has_sys_info();
+  }
+  sys_info_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), sys_info);
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.DataDetails.sys_info)
+}
+
+// optional .grpc.testing.Metrics metrics = 4;
+bool DataDetails::has_metrics() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void DataDetails::set_has_metrics() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void DataDetails::clear_has_metrics() {
+  _has_bits_[0] &= ~0x00000008u;
 }
 void DataDetails::clear_metrics() {
   if (metrics_ != NULL) metrics_->::grpc::testing::Metrics::Clear();
@@ -1864,15 +1976,15 @@ void DataDetails::clear_metrics() {
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.DataDetails.metrics)
 }
 
-// optional .grpc.testing.ClientConfig client_config = 4;
+// optional .grpc.testing.ClientConfig client_config = 5;
 bool DataDetails::has_client_config() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 void DataDetails::set_has_client_config() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 void DataDetails::clear_has_client_config() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 void DataDetails::clear_client_config() {
   if (client_config_ != NULL) client_config_->::grpc::testing::ClientConfig::Clear();
@@ -1907,15 +2019,15 @@ void DataDetails::clear_client_config() {
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.DataDetails.client_config)
 }
 
-// optional .grpc.testing.ServerConfig server_config = 5;
+// optional .grpc.testing.ServerConfig server_config = 6;
 bool DataDetails::has_server_config() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 void DataDetails::set_has_server_config() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 void DataDetails::clear_has_server_config() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 void DataDetails::clear_server_config() {
   if (server_config_ != NULL) server_config_->::grpc::testing::ServerConfig::Clear();
@@ -3671,6 +3783,7 @@ void SingleUserDetails::clear_user_details() {
 #ifndef _MSC_VER
 const int SingleUserRecordRequest::kAccessTokenFieldNumber;
 const int SingleUserRecordRequest::kTestNameFieldNumber;
+const int SingleUserRecordRequest::kSysInfoFieldNumber;
 const int SingleUserRecordRequest::kMetricsFieldNumber;
 const int SingleUserRecordRequest::kClientConfigFieldNumber;
 const int SingleUserRecordRequest::kServerConfigFieldNumber;
@@ -3701,6 +3814,7 @@ void SingleUserRecordRequest::SharedCtor() {
   _cached_size_ = 0;
   access_token_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   test_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  sys_info_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   metrics_ = NULL;
   client_config_ = NULL;
   server_config_ = NULL;
@@ -3715,6 +3829,7 @@ SingleUserRecordRequest::~SingleUserRecordRequest() {
 void SingleUserRecordRequest::SharedDtor() {
   access_token_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   test_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  sys_info_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
     delete metrics_;
     delete client_config_;
@@ -3748,12 +3863,15 @@ SingleUserRecordRequest* SingleUserRecordRequest::New(::google::protobuf::Arena*
 }
 
 void SingleUserRecordRequest::Clear() {
-  if (_has_bits_[0 / 32] & 31u) {
+  if (_has_bits_[0 / 32] & 63u) {
     if (has_access_token()) {
       access_token_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_test_name()) {
       test_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    }
+    if (has_sys_info()) {
+      sys_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
     if (has_metrics()) {
       if (metrics_ != NULL) metrics_->::grpc::testing::Metrics::Clear();
@@ -3810,39 +3928,56 @@ bool SingleUserRecordRequest::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(26)) goto parse_metrics;
+        if (input->ExpectTag(26)) goto parse_sys_info;
         break;
       }
 
-      // optional .grpc.testing.Metrics metrics = 3;
+      // optional string sys_info = 3;
       case 3: {
         if (tag == 26) {
+         parse_sys_info:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_sys_info()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->sys_info().data(), this->sys_info().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "grpc.testing.SingleUserRecordRequest.sys_info");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_metrics;
+        break;
+      }
+
+      // optional .grpc.testing.Metrics metrics = 4;
+      case 4: {
+        if (tag == 34) {
          parse_metrics:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_metrics()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(34)) goto parse_client_config;
+        if (input->ExpectTag(42)) goto parse_client_config;
         break;
       }
 
-      // optional .grpc.testing.ClientConfig client_config = 4;
-      case 4: {
-        if (tag == 34) {
+      // optional .grpc.testing.ClientConfig client_config = 5;
+      case 5: {
+        if (tag == 42) {
          parse_client_config:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_client_config()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(42)) goto parse_server_config;
+        if (input->ExpectTag(50)) goto parse_server_config;
         break;
       }
 
-      // optional .grpc.testing.ServerConfig server_config = 5;
-      case 5: {
-        if (tag == 42) {
+      // optional .grpc.testing.ServerConfig server_config = 6;
+      case 6: {
+        if (tag == 50) {
          parse_server_config:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_server_config()));
@@ -3898,22 +4033,32 @@ void SingleUserRecordRequest::SerializeWithCachedSizes(
       2, this->test_name(), output);
   }
 
-  // optional .grpc.testing.Metrics metrics = 3;
+  // optional string sys_info = 3;
+  if (has_sys_info()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->sys_info().data(), this->sys_info().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "grpc.testing.SingleUserRecordRequest.sys_info");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->sys_info(), output);
+  }
+
+  // optional .grpc.testing.Metrics metrics = 4;
   if (has_metrics()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, *this->metrics_, output);
+      4, *this->metrics_, output);
   }
 
-  // optional .grpc.testing.ClientConfig client_config = 4;
+  // optional .grpc.testing.ClientConfig client_config = 5;
   if (has_client_config()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *this->client_config_, output);
+      5, *this->client_config_, output);
   }
 
-  // optional .grpc.testing.ServerConfig server_config = 5;
+  // optional .grpc.testing.ServerConfig server_config = 6;
   if (has_server_config()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, *this->server_config_, output);
+      6, *this->server_config_, output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -3948,25 +4093,36 @@ void SingleUserRecordRequest::SerializeWithCachedSizes(
         2, this->test_name(), target);
   }
 
-  // optional .grpc.testing.Metrics metrics = 3;
+  // optional string sys_info = 3;
+  if (has_sys_info()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->sys_info().data(), this->sys_info().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "grpc.testing.SingleUserRecordRequest.sys_info");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->sys_info(), target);
+  }
+
+  // optional .grpc.testing.Metrics metrics = 4;
   if (has_metrics()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        3, *this->metrics_, target);
+        4, *this->metrics_, target);
   }
 
-  // optional .grpc.testing.ClientConfig client_config = 4;
+  // optional .grpc.testing.ClientConfig client_config = 5;
   if (has_client_config()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        4, *this->client_config_, target);
+        5, *this->client_config_, target);
   }
 
-  // optional .grpc.testing.ServerConfig server_config = 5;
+  // optional .grpc.testing.ServerConfig server_config = 6;
   if (has_server_config()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        5, *this->server_config_, target);
+        6, *this->server_config_, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -3980,7 +4136,7 @@ void SingleUserRecordRequest::SerializeWithCachedSizes(
 int SingleUserRecordRequest::ByteSize() const {
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & 31) {
+  if (_has_bits_[0 / 32] & 63) {
     // optional string access_token = 1;
     if (has_access_token()) {
       total_size += 1 +
@@ -3995,21 +4151,28 @@ int SingleUserRecordRequest::ByteSize() const {
           this->test_name());
     }
 
-    // optional .grpc.testing.Metrics metrics = 3;
+    // optional string sys_info = 3;
+    if (has_sys_info()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->sys_info());
+    }
+
+    // optional .grpc.testing.Metrics metrics = 4;
     if (has_metrics()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *this->metrics_);
     }
 
-    // optional .grpc.testing.ClientConfig client_config = 4;
+    // optional .grpc.testing.ClientConfig client_config = 5;
     if (has_client_config()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           *this->client_config_);
     }
 
-    // optional .grpc.testing.ServerConfig server_config = 5;
+    // optional .grpc.testing.ServerConfig server_config = 6;
     if (has_server_config()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -4050,6 +4213,10 @@ void SingleUserRecordRequest::MergeFrom(const SingleUserRecordRequest& from) {
     if (from.has_test_name()) {
       set_has_test_name();
       test_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.test_name_);
+    }
+    if (from.has_sys_info()) {
+      set_has_sys_info();
+      sys_info_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.sys_info_);
     }
     if (from.has_metrics()) {
       mutable_metrics()->::grpc::testing::Metrics::MergeFrom(from.metrics());
@@ -4096,6 +4263,7 @@ void SingleUserRecordRequest::Swap(SingleUserRecordRequest* other) {
 void SingleUserRecordRequest::InternalSwap(SingleUserRecordRequest* other) {
   access_token_.Swap(&other->access_token_);
   test_name_.Swap(&other->test_name_);
+  sys_info_.Swap(&other->sys_info_);
   std::swap(metrics_, other->metrics_);
   std::swap(client_config_, other->client_config_);
   std::swap(server_config_, other->server_config_);
@@ -4221,15 +4389,68 @@ void SingleUserRecordRequest::clear_test_name() {
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.SingleUserRecordRequest.test_name)
 }
 
-// optional .grpc.testing.Metrics metrics = 3;
-bool SingleUserRecordRequest::has_metrics() const {
+// optional string sys_info = 3;
+bool SingleUserRecordRequest::has_sys_info() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-void SingleUserRecordRequest::set_has_metrics() {
+void SingleUserRecordRequest::set_has_sys_info() {
   _has_bits_[0] |= 0x00000004u;
 }
-void SingleUserRecordRequest::clear_has_metrics() {
+void SingleUserRecordRequest::clear_has_sys_info() {
   _has_bits_[0] &= ~0x00000004u;
+}
+void SingleUserRecordRequest::clear_sys_info() {
+  sys_info_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_sys_info();
+}
+ const ::std::string& SingleUserRecordRequest::sys_info() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.SingleUserRecordRequest.sys_info)
+  return sys_info_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void SingleUserRecordRequest::set_sys_info(const ::std::string& value) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:grpc.testing.SingleUserRecordRequest.sys_info)
+}
+ void SingleUserRecordRequest::set_sys_info(const char* value) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:grpc.testing.SingleUserRecordRequest.sys_info)
+}
+ void SingleUserRecordRequest::set_sys_info(const char* value, size_t size) {
+  set_has_sys_info();
+  sys_info_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:grpc.testing.SingleUserRecordRequest.sys_info)
+}
+ ::std::string* SingleUserRecordRequest::mutable_sys_info() {
+  set_has_sys_info();
+  // @@protoc_insertion_point(field_mutable:grpc.testing.SingleUserRecordRequest.sys_info)
+  return sys_info_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* SingleUserRecordRequest::release_sys_info() {
+  clear_has_sys_info();
+  return sys_info_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void SingleUserRecordRequest::set_allocated_sys_info(::std::string* sys_info) {
+  if (sys_info != NULL) {
+    set_has_sys_info();
+  } else {
+    clear_has_sys_info();
+  }
+  sys_info_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), sys_info);
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.SingleUserRecordRequest.sys_info)
+}
+
+// optional .grpc.testing.Metrics metrics = 4;
+bool SingleUserRecordRequest::has_metrics() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+void SingleUserRecordRequest::set_has_metrics() {
+  _has_bits_[0] |= 0x00000008u;
+}
+void SingleUserRecordRequest::clear_has_metrics() {
+  _has_bits_[0] &= ~0x00000008u;
 }
 void SingleUserRecordRequest::clear_metrics() {
   if (metrics_ != NULL) metrics_->::grpc::testing::Metrics::Clear();
@@ -4264,15 +4485,15 @@ void SingleUserRecordRequest::clear_metrics() {
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.SingleUserRecordRequest.metrics)
 }
 
-// optional .grpc.testing.ClientConfig client_config = 4;
+// optional .grpc.testing.ClientConfig client_config = 5;
 bool SingleUserRecordRequest::has_client_config() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 void SingleUserRecordRequest::set_has_client_config() {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
 }
 void SingleUserRecordRequest::clear_has_client_config() {
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 void SingleUserRecordRequest::clear_client_config() {
   if (client_config_ != NULL) client_config_->::grpc::testing::ClientConfig::Clear();
@@ -4307,15 +4528,15 @@ void SingleUserRecordRequest::clear_client_config() {
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.SingleUserRecordRequest.client_config)
 }
 
-// optional .grpc.testing.ServerConfig server_config = 5;
+// optional .grpc.testing.ServerConfig server_config = 6;
 bool SingleUserRecordRequest::has_server_config() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 void SingleUserRecordRequest::set_has_server_config() {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
 }
 void SingleUserRecordRequest::clear_has_server_config() {
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 void SingleUserRecordRequest::clear_server_config() {
   if (server_config_ != NULL) server_config_->::grpc::testing::ServerConfig::Clear();

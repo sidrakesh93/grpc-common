@@ -81,42 +81,66 @@ class UserData(object):
     serverConfigDict = {}
 
     if serverConfig.server_type == qpstest_pb2.SYNCHRONOUS_SERVER:
-      serverConfigDict['server_type'] = 'Synchronous'
+      serverConfigDict['Server Type'] = 'Synchronous'
     elif serverConfig.server_type == qpstest_pb2.ASYNC_SERVER:
-      serverConfigDict['server_type'] = 'Asynchronous'
+      serverConfigDict['Server Type'] = 'Asynchronous'
 
-    serverConfigDict['threads'] = str(serverConfig.threads)
-    serverConfigDict['enable_ssl'] = str(serverConfig.enable_ssl)
-    serverConfigDict['host'] = str(serverConfig.host)
+    serverConfigDict['Threads'] = str(serverConfig.threads)
+    serverConfigDict['Enable SSL'] = str(serverConfig.enable_ssl)
+    serverConfigDict['Host'] = str(serverConfig.host)
 
     return serverConfigDict
 
   def getClientConfigDict(self, clientConfig):
     clientConfigDict = {}
 
-    if clientConfig.client_type == qpstest_pb2.SYNCHRONOUS_CLIENT:
-      clientConfigDict['client_type'] = 'Synchronous'
-    elif clientConfig.client_type == qpstest_pb2.ASYNC_CLIENT:
-      clientConfigDict['client_type'] = 'Asynchronous'
+    serverTargets = []
 
-    clientConfigDict['outstanding_rpcs_per_channel'] = str(clientConfig.outstanding_rpcs_per_channel)
-    clientConfigDict['client_channels'] = str(clientConfig.client_channels)
-    clientConfigDict['payload_size'] = str(clientConfig.payload_size)
-    clientConfigDict['async_client_threads'] = str(clientConfig.async_client_threads)
+    for serverTarget in clientConfig.server_targets:
+      serverTargets.append(str(serverTarget))
+
+    serverTargetsStr = ', '.join(serverTargets)
+
+    clientConfigDict['Server Targets'] = serverTargetsStr
+
+    if clientConfig.client_type == qpstest_pb2.SYNCHRONOUS_CLIENT:
+      clientConfigDict['Client Type'] = 'Synchronous'
+    elif clientConfig.client_type == qpstest_pb2.ASYNC_CLIENT:
+      clientConfigDict['Client Type'] = 'Asynchronous'
+      clientConfigDict['Asynchronous Client Threads'] = str(clientConfig.async_client_threads)
+
+    clientConfigDict['Outstanding RPCs Per Channel'] = str(clientConfig.outstanding_rpcs_per_channel)
+    clientConfigDict['Client Channels'] = str(clientConfig.client_channels)
+    clientConfigDict['Payload Size'] = str(clientConfig.payload_size)
     
     if clientConfig.rpc_type == qpstest_pb2.UNARY:
-      clientConfigDict['rpc_type'] = 'Unary'
+      clientConfigDict['RPC Type'] = 'Unary'
     elif clientConfig.rpc_type == qpstest_pb2.STREAMING:
-      clientConfigDict['rpc_type'] = 'Streaming'
+      clientConfigDict['RPC Type'] = 'Streaming'
 
-    clientConfigDict['enable_ssl'] = str(clientConfig.enable_ssl)
-    clientConfigDict['host'] = str(clientConfig.host)
+    clientConfigDict['Enable SSL'] = str(clientConfig.enable_ssl)
+    clientConfigDict['Host'] = str(clientConfig.host)
 
     return clientConfigDict
 
+  def getSysInfoDict(self, sysInfo):
+    sysInfoDict = {}
+
+    sysInfo = sysInfo.lstrip('\'')
+    sysInfo = sysInfo.rstrip('\\n\'')
+
+    sysInfoList = sysInfo.split('\\n\', \'')
+
+    for sysInfoStr in sysInfoList:
+      sysInfoParamList = re.split(':', sysInfoStr)
+      sysParamValue = sysInfoParamList[1].lstrip(' ')
+
+      sysInfoDict[sysInfoParamList[0]] = sysParamValue
+
+    return sysInfoDict
+
   def getAllUsersData(self):
     metricsTable = []
-    #configsDict = {}
 
     _TIMEOUT_SECONDS = 10
 
@@ -145,6 +169,7 @@ class UserData(object):
           userMetricsDict['client_user_time'] = str(self.validValue(dataDetail.metrics.client_user_time))
           userMetricsDict['server_config'] = self.getServerConfigDict(dataDetail.server_config)
           userMetricsDict['client_config'] = self.getClientConfigDict(dataDetail.client_config)
+          userMetricsDict['sys_info'] = self.getSysInfoDict(dataDetail.sys_info)
 
           metricsTable.append(userMetricsDict)
 
