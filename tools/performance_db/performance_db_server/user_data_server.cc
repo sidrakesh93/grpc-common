@@ -50,28 +50,30 @@ namespace grpc{
 namespace testing{
 
 class UserDataTransferServiceImpl final : public UserDataTransfer::Service {
+public:
+  UserDataTransferServiceImpl() {
+    dbManager.setDatabase("/tmp/clientmetricsdb");
+  }
+
   Status RecordSingleClientData(ServerContext* context, const SingleUserRecordRequest* request,
                   SingleUserRecordReply* reply) override {
-    DatabaseManager dbManager("/tmp/clientmetricsdb");
     dbManager.recordSingleUserData(request);
     return Status::OK;
   }
 
   Status RetrieveSingleUserData(ServerContext* context, const SingleUserRetrieveRequest* request,
                   SingleUserRetrieveReply* reply) override { 
-    DatabaseManager dbManager("/tmp/clientmetricsdb");
     *reply = dbManager.retrieveSingleUserData(request);
     return Status::OK;
   }
 
   Status RetrieveAllUsersData(ServerContext* context, const AllUsersRetrieveRequest* request,
                   AllUsersRetrieveReply* reply) override {
-    DatabaseManager dbManager("/tmp/clientmetricsdb");
     *reply = dbManager.retrieveAllUsersData(request);
     return Status::OK;
   }
-
-  
+private:
+  DatabaseManager dbManager;
 };
 
 void RunServer(char* address_port) {

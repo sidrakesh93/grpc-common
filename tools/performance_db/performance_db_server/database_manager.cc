@@ -41,17 +41,19 @@
 namespace grpc{
 namespace testing{
 
-DatabaseManager::DatabaseManager(std::string database) {
+DatabaseManager::DatabaseManager() {}
+
+DatabaseManager::~DatabaseManager() {
+  delete db;
+}
+
+void DatabaseManager::setDatabase(std::string database) {
   database_ = database;
   leveldb::Options options;
 
   options.create_if_missing = true;
   leveldb::Status status = leveldb::DB::Open(options, database_, &db);
   assert(status.ok());
-}
-
-DatabaseManager::~DatabaseManager() {
-  delete db;
 }
 
 // Get current date/time, format is YYYY-MM-DD.HH:mm:ss

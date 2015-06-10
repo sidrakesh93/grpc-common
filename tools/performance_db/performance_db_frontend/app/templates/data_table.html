@@ -1,0 +1,179 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body { 
+        padding-top: 70px;
+      } 
+    </style>
+    <title>
+      Performance Database
+    </title>
+    <link rel="shortcut icon" type="image/png" href="../static/images/favicon.png">
+      <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Performance Database">
+    <meta name="keywords" content="Performance Database, GRPC">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/css/bootstrap-table.min.css">
+    
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+          <div class="navbar-header">
+            <button id="toggle_button" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistical Plots<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li id="plotQPS" class=""><a href="/plotGeneral/QPS">QPS statistics</a></li>
+                  <li id="plotPercentile50" class=""><a href="/plotGeneral/p50">50<sup>th</sup> %ile Latency statistics</a></li>
+                  <li id="plotPercentile90" class=""><a href="/plotGeneral/p90">90<sup>th</sup> %ile Latency statistics</a></li>
+                  <li id="plotPercentile95" class=""><a href="/plotGeneral/p95">95<sup>th</sup> %ile Latency statistics</a></li>
+                  <li id="plotPercentile99" class=""><a href="/plotGeneral/p99">99<sup>th</sup> %ile Latency statistics</a></li>
+                  <li id="plotPercentile99Point9" class=""><a href="/plotGeneral/p99point9">99.9<sup>th</sup> %ile Latency statistics</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            <li id="about_item" class=""><a id="about" onclick="$('#aboutModal').modal()" href="#">Contact</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <!-- Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="aboutModalLabel">Contact Us</h4>
+          </div>
+          <div class="modal-body">
+            <b>For any issues related to this leaderboard, please reach out at: grpc-io@googlegroups.com</b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="width:99%;">
+      <h2 align="center">Performance Database</h2>
+      <hr>
+      <div id="metrics">
+      <!-- {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %} -->
+        <table id="metrics-table"
+              class="table table-striped"
+              data-toggle="table"
+              data-search="true"
+              data-pagination="true"
+              data-show-columns="true">
+          <thead>
+            <tr>
+              <th data-field="userid"
+                  data-sortable="true"
+                  data-align="center">User</th>
+              <th data-field="timestamp"
+                  data-sortable="true"
+                  data-align="center">Timestamp</th>
+              <th data-field="testName"
+                  data-sortable="true"
+                  data-align="center">Test</th>
+              <th data-field="QPS"
+                  data-sortable="true"
+                  data-align="center">Queries Per Second</th>
+              <th data-field="QPSPerCore"
+                  data-sortable="true"
+                  data-align="center">QPS Per Core</th>
+              <th data-field="p50"
+                  data-sortable="true"
+                  data-align="center">50<sup>th</sup> %ile latency (&micros)</th>
+              <th data-field="p90"
+                  data-sortable="true"
+                  data-align="center">90<sup>th</sup> %ile latency (&micros)</th>
+              <th data-field="p95"
+                  data-sortable="true"
+                  data-align="center">95<sup>th</sup> %ile latency (&micros)</th>
+              <th data-field="p99"
+                  data-sortable="true"
+                  data-align="center">99<sup>th</sup> %ile latency (&micros)</th>
+              <th data-field="p99point9"
+                  data-sortable="true"
+                  data-align="center">99.9<sup>th</sup> %ile latency (&micros)</th>
+              <th data-field="serverSystemTime"
+                  data-sortable="true"
+                  data-align="center"
+                  data-visible="false">Server System Time %</th>
+              <th data-field="serverUserTime"
+                  data-sortable="true"
+                  data-align="center"
+                  data-visible="false">Server User Time %</th>
+              <th data-field="clientSystemTime"
+                  data-sortable="true"
+                  data-align="center"
+                  data-visible="false">Client System Time %</th>
+              <th data-field="clientUserTime"
+                  data-sortable="true"
+                  data-align="center"
+                  data-visible="false">Client User Time %</th>
+            </tr>
+          </thead>
+          <tbody style="cursor: pointer">
+            {% if request.session.metricstable %}
+              {% for row in request.session.metricstable %}
+                <tr>
+                  <td><a href="/plotUser/{{ row.id }}" clientConfigData="{{ row.client_config }}" serverConfigData="{{ row.server_config }}">{{ row.name }}</a></td>
+                  <td>{{ row.timestamp }}</td>
+                  <td>{{ row.test_name }}</td>
+                  <td>{{ row.qps }}</td>
+                  <td>{{ row.qps_per_core }}</td>
+                  <td>{{ row.perc_lat_50 }}</td>
+                  <td>{{ row.perc_lat_90 }}</td>
+                  <td>{{ row.perc_lat_95 }}</td>
+                  <td>{{ row.perc_lat_99 }}</td>
+                  <td>{{ row.perc_lat_99_point_9 }}</td>
+                  <td>{{ row.server_system_time }}</td>
+                  <td>{{ row.server_user_time }}</td>
+                  <td>{{ row.client_system_time }}</td>
+                  <td>{{ row.client_user_time }}</td>
+                </tr>  
+              {% endfor %}
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+      
+    </div><!-- /.container -->
+
+    <!-- JQuery core javascript  -->
+    <script type="text/javascript" src="../static/jQuery/jquery-1.11.3.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/bootstrap-table.min.js"></script>
+    <script>
+
+      $('#metrics-table').bootstrapTable({
+      }).on('click-row.bs.table', function (e, row, $element) {
+        var splitArray = row['userid'].split("\"");
+        sessionStorage.clientConfig = splitArray[3];
+        sessionStorage.serverConfig = splitArray[5];
+
+        window.open("/configs");
+      });
+    </script>
+  </body>
+</html>
+  

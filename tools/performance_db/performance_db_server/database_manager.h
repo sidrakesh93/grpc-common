@@ -42,8 +42,9 @@ namespace testing{
 
 class DatabaseManager{
   public:
-    DatabaseManager(std::string database);
+    DatabaseManager();
     ~DatabaseManager();
+    void setDatabase(std::string database);
     void recordSingleUserData(const SingleUserRecordRequest* request);
     SingleUserRetrieveReply retrieveSingleUserData(const SingleUserRetrieveRequest* request);
     AllUsersRetrieveReply retrieveAllUsersData(const AllUsersRetrieveRequest* request);

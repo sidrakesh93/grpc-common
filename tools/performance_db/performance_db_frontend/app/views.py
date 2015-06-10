@@ -3,7 +3,12 @@ from user_data import UserData
 
 def displayLeaderboard(request):
   metricstable = allUsersData()
-  return render(request, 'leaderboard.html', {'metricstable': metricstable})
+  request.session['metricstable'] = metricstable
+  # request.session['configs'] = metricstable[1]
+  return render(request, 'data_table.html', {})
+
+def displayConfigs(request):
+  return render(request, 'configs.html', {})
 
 def plotGeneralStatistic(request, metric):
   return plotRenderer(request, metric)
