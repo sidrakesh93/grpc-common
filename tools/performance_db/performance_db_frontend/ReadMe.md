@@ -27,3 +27,5 @@ The front end can display four types of pages, including:
   * _Client times chart_: Plots the client system time and client user time.
 
 * **General statistics page**: The general statistics page displays the Histograms for various performance metrics, using the performance data for all the users in a given time frame. The histograms are generated using the [Google charts API](https://developers.google.com/chart/interactive/docs/gallery/histogram), while the time range is implemented using [Date range picker](https://github.com/dangrossman/bootstrap-daterangepicker). Each performance metric is displayed on a different general statistics page.
+
+* **Configurations page**: The configurations page can be accessed by clicking the hyperlinked test name in the performance database table. This page contains the test configuration information, which include the Client and Server configurations. It also contains the user system specifications, at the time of submitting the test results.
