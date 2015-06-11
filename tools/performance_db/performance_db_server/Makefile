@@ -37,7 +37,7 @@ PROTOC = protoc
 GRPC_CPP_PLUGIN = grpc_cpp_plugin
 GRPC_CPP_PLUGIN_PATH ?= `which $(GRPC_CPP_PLUGIN)`
 
-PROTOS_PATH = .
+PROTOS_PATH = ../protos
 
 vpath %.proto $(PROTOS_PATH)
 
@@ -53,7 +53,7 @@ user_data_server: qpstest.pb.o user_data.pb.o user_data.grpc.pb.o pbjson/pbjson.
 	$(PROTOC) -I $(PROTOS_PATH) --cpp_out=. $<
 
 clean:
-	rm -f *.o *.pb.cc *.pb.h leaderboard_server
+	rm -f *.o *.pb.cc *.pb.h user_data_server
 
 
 # The following is to test your system and ensure a smoother experience.
