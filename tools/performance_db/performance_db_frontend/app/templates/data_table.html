@@ -20,8 +20,15 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap table CSS -->
     <link href="../static/css/bootstrap-table.min.css">
-    
+
+    <!-- JQuery core javascript  -->
+    <script type="text/javascript" src="../static/jQuery/jquery-1.11.3.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="../static/js/bootstrap.min.js"></script>
+    <!-- Bootstrap table javascript -->
+    <script src="../static/js/bootstrap-table.min.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -85,13 +92,16 @@
             <tr>
               <th data-field="userid"
                   data-sortable="true"
-                  data-align="center">User</th>
+                  data-align="center"
+                  data-switchable="false">User</th>
               <th data-field="timestamp"
                   data-sortable="true"
-                  data-align="center">Timestamp</th>
+                  data-align="center"
+                  data-switchable="false">Timestamp</th>
               <th data-field="testName"
                   data-sortable="true"
-                  data-align="center">Test</th>
+                  data-align="center"
+                  data-switchable="false">Test</th>
               <th data-field="QPS"
                   data-sortable="true"
                   data-align="center">Queries Per Second</th>
@@ -135,9 +145,9 @@
             {% if request.session.metricstable %}
               {% for row in request.session.metricstable %}
                 <tr>
-                  <td><a href="/plotUser/{{ row.id }}" clientConfigData="{{ row.client_config }}" serverConfigData="{{ row.server_config }}" sysInfo="{{ row.sys_info }}">{{ row.name }}</a></td>
+                  <td><a href="/plotUser/{{ row.id }}">{{ row.name }}</a></td>
                   <td>{{ row.timestamp }}</td>
-                  <td><a id="config" href="/configs" target="_blank">{{ row.test_name }}</a></td>
+                  <td><a id="config" href="/configs/{{ row.client_config }}%{{ row.server_config }}%{{ row.sys_info }}" target="_blank">{{ row.test_name }}</a></td>
                   <td>{{ row.qps }}</td>
                   <td>{{ row.qps_per_core }}</td>
                   <td>{{ row.perc_lat_50 }}</td>
@@ -157,21 +167,6 @@
       </div>
       
     </div><!-- /.container -->
-
-    <!-- JQuery core javascript  -->
-    <script type="text/javascript" src="../static/jQuery/jquery-1.11.3.min.js"></script>
-    <!-- Bootstrap core JavaScript -->
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/bootstrap-table.min.js"></script>
-    <script>
-      $('#metrics-table').bootstrapTable({
-      }).on('click-row.bs.table', function (e, row, $element) {
-        var splitArray = row['userid'].split("\"");
-        sessionStorage.clientConfig = splitArray[3];
-        sessionStorage.serverConfig = splitArray[5];
-        sessionStorage.sysInfo = splitArray[7];
-      });
-    </script>
   </body>
 </html>
   

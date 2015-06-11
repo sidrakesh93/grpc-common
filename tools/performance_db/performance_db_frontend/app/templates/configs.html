@@ -120,24 +120,26 @@
     <!-- Bootstrap core JavaScript -->
     <script src="../static/js/bootstrap.min.js"></script>
     <script>
-      var find = '\'';
-      var re = new RegExp(find, 'g');
-      var clientConfig = sessionStorage.clientConfig.replace(re, '"');
+      var pathName = window.location.pathname;
+
+      pathName = pathName.replace(/\/configs\//g, '');
+      pathName = pathName.replace(/%20/g, ' ');
+      pathName = pathName.replace(/%7B/g, '{');
+      pathName = pathName.replace(/%7D/g, '}');
+      pathName = pathName.replace(/\'/g, '"');
+      pathName = pathName.replace(/ u"/g, ' "');
+      pathName = pathName.replace(/\{u"/g, '{"');
+
+      var pathNameParts = pathName.split('%');
       
       var table = document.getElementById("client-configs-table");
-      fillTable(table, clientConfig);
+      fillTable(table, pathNameParts[0]);
 
-      var serverConfig = sessionStorage.serverConfig.replace(re, '"');
       table = document.getElementById("server-configs-table");
-      fillTable(table, serverConfig);
+      fillTable(table, pathNameParts[1]);
       
-      var ufind = 'u"';
-      var ure = new RegExp(ufind, 'g');
-      var sysInfo = sessionStorage.sysInfo.replace(re, '"');
-      sysInfo = sysInfo.replace(ure, '"');
       table = document.getElementById("sys-info-table");
-
-      fillTable(table, sysInfo);
+      fillTable(table, pathNameParts[2]);
 
       function fillTable(table, info) {
         JSON.parse(info, function(k, v) {
