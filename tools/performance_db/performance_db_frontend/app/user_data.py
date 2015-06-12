@@ -131,10 +131,12 @@ class UserData(object):
 
     sysInfoList = sysInfo.split('\\n\', \'')
 
+    print sysInfoList
+
     for sysInfoStr in sysInfoList:
       sysInfoParamList = re.split(':', sysInfoStr)
-      sysParamValue = sysInfoParamList[1].lstrip(' ')
 
+      sysParamValue = sysInfoParamList[1].lstrip(' ')
       sysInfoDict[sysInfoParamList[0]] = sysParamValue
 
     return sysInfoDict
