@@ -56,11 +56,16 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistical Plots<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li id="plotQPS" class=""><a href="/plotGeneral/QPS">QPS statistics</a></li>
+                  <li id="plotQPSPerCore" class=""><a href="/plotGeneral/qpsPerCore">QPS Per Core statistics</a></li>
                   <li id="plotPercentile50" class=""><a href="/plotGeneral/p50">50<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile90" class=""><a href="/plotGeneral/p90">90<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile95" class=""><a href="/plotGeneral/p95">95<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile99" class=""><a href="/plotGeneral/p99">99<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile99Point9" class=""><a href="/plotGeneral/p99point9">99.9<sup>th</sup> %ile Latency statistics</a></li>
+                  <li id="plotServerSysTime" class=""><a href="/plotGeneral/serverSysTime">Server System Time</a></li>
+                  <li id="plotServerUserTime" class=""><a href="/plotGeneral/serverUserTime">Server User Time</a></li>
+                  <li id="plotClientSysTime" class=""><a href="/plotGeneral/clientSysTime">Client System Time</a></li>
+                  <li id="plotClientUserTime" class=""><a href="/plotGeneral/clientUserTime">Client User Time</a></li>
                 </ul>
               </li>
             </ul>
@@ -179,6 +184,13 @@
         },
       };
 
+      function configOpener(chart, configs) {
+        var selection = chart.getSelection();
+        chart.setSelection([]);
+        var row = selection[0].row;
+        window.open('/configs/'+configs[row][0].replace(/&#39;/g,'\'')+'%'+configs[row][1].replace(/&#39;/g,'\'')+'%'+configs[row][2].replace(/&#39;/g,'\''), '_blank');
+      }
+
       //Function for rendering the chart
       function drawQpsChart(start, end) {
         var qpsArgs = [[{label: 'Time'}, {type: 'number', label:'QPS'}]];
@@ -186,16 +198,19 @@
         var startDate = moment();
         var endDate = moment().subtract(1000,'years');
 
+        var configs = []
+
         {% if userdata %}
           {% for item in userdata.qpsData %}
-            var metricDate = new Date({{ item.0.year }}, {{ item.0.month }}-1, {{ item.0.day }}, {{ item.0.hour }}, {{ item.0.min }}, {{ item.0.sec }}, 0);
+            var metricDate = new Date({{ item.timestamp.year }}, {{ item.timestamp.month }}-1, {{ item.timestamp.day }}, {{ item.timestamp.hour }}, {{ item.timestamp.min }}, {{ item.timestamp.sec }}, 0);
             if(start <= metricDate && end >= metricDate) {
-              qpsArgs.push([metricDate, {{ item.1 }}]);
+              qpsArgs.push([metricDate, {{ item.qps }}]);
+              configs.push(['{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
               if(metricDate < startDate) {
                 startDate = metricDate;
               }
               if(metricDate > endDate) {
-                startDate = metricDate;
+                endDate = metricDate;
               }
             }
           {% endfor %}
@@ -214,6 +229,18 @@
         var chart = new google.visualization.LineChart(document.getElementById('chart-div-qps'));
         chart.draw(qpsData, qpsOptions);
 
+        google.visualization.events.addListener(chart, 'select', function() {
+          configOpener(chart, configs);
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseover', function() {
+          $('#chart-div-qps').css('cursor','pointer');
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseout', function() {
+          $('#chart-div-qps').css('cursor','auto');
+        });
+
         if(qpsArgs.length != 1) {
           //Update date range field
           $('#qps-report-range span').html(moment(startDate).format('MM/DD/YYYY, HH:mm:ss') + ' - ' + moment(endDate).format('MM/DD/YYYY, HH:mm:ss'));
@@ -227,16 +254,19 @@
         var startDate = moment();
         var endDate = moment().subtract(1000,'years');
 
+        var configs = []
+
         {% if userdata %}
           {% for item in userdata.qpsPerCoreData %}
-            var metricDate = new Date({{ item.0.year }}, {{ item.0.month }}-1, {{ item.0.day }}, {{ item.0.hour }}, {{ item.0.min }}, {{ item.0.sec }}, 0);
+            var metricDate = new Date({{ item.timestamp.year }}, {{ item.timestamp.month }}-1, {{ item.timestamp.day }}, {{ item.timestamp.hour }}, {{ item.timestamp.min }}, {{ item.timestamp.sec }}, 0);
             if(start <= metricDate && end >= metricDate) {
-              qpsPerCoreArgs.push([metricDate, {{ item.1 }}]);
+              qpsPerCoreArgs.push([metricDate, {{ item.qps_per_core }}]);
+              configs.push(['{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
               if(metricDate < startDate) {
                 startDate = metricDate;
               }
               if(metricDate > endDate) {
-                startDate = metricDate;
+                endDate = metricDate;
               }
             }
           {% endfor %}
@@ -255,6 +285,18 @@
         var chart = new google.visualization.LineChart(document.getElementById('chart-div-qps-per-core'));
         chart.draw(qpsPerCoreData, qpsPerCoreOptions);
 
+        google.visualization.events.addListener(chart, 'select', function() {
+          configOpener(chart, configs);
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseover', function() {
+          $('#chart-div-qps').css('cursor','pointer');
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseout', function() {
+          $('#chart-div-qps').css('cursor','auto');
+        });
+
         if(qpsPerCoreArgs.length != 1) {
           //Update date range field
           $('#qps-per-core-report-range span').html(moment(startDate).format('MM/DD/YYYY, HH:mm:ss') + ' - ' + moment(endDate).format('MM/DD/YYYY, HH:mm:ss'));
@@ -268,16 +310,19 @@
         var startDate = moment();
         var endDate = moment().subtract(1000,'years');
 
+        var configs = []
+
         {% if userdata %}
           {% for item in userdata.latData %}
-            var metricDate = new Date({{ item.0.year }}, {{ item.0.month }}-1, {{ item.0.day }}, {{ item.0.hour }}, {{ item.0.min }}, {{ item.0.sec }}, 0);
+            var metricDate = new Date({{ item.timestamp.year }}, {{ item.timestamp.month }}-1, {{ item.timestamp.day }}, {{ item.timestamp.hour }}, {{ item.timestamp.min }}, {{ item.timestamp.sec }}, 0);
             if(start <= metricDate && end >= metricDate) {
-              latArgs.push([metricDate, {{ item.1.perc_lat_50 }}, {{ item.1.perc_lat_90 }}, {{ item.1.perc_lat_95 }}, {{ item.1.perc_lat_99 }}, {{ item.1.perc_lat_99_point_9 }}]);
+              latArgs.push([metricDate, {{ item.lat.perc_lat_50 }}, {{ item.lat.perc_lat_90 }}, {{ item.lat.perc_lat_95 }}, {{ item.lat.perc_lat_99 }}, {{ item.lat.perc_lat_99_point_9 }}]);
+              configs.push(['{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
               if(metricDate < startDate) {
                 startDate = metricDate;
               }
               if(metricDate > endDate) {
-                startDate = metricDate;
+                endDate = metricDate;
               }
             }
           {% endfor %}
@@ -297,6 +342,18 @@
         var chart = new google.visualization.LineChart(document.getElementById('chart-div-percentile-latencies'));
         chart.draw(latData, latOptions);
 
+        google.visualization.events.addListener(chart, 'select', function() {
+          configOpener(chart, configs);
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseover', function() {
+          $('#chart-div-qps').css('cursor','pointer');
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseout', function() {
+          $('#chart-div-qps').css('cursor','auto');
+        });
+
         if(latArgs.length != 1) {
           //Update date range field
           $('#perc-lat-report-range span').html(moment(startDate).format('MM/DD/YYYY, HH:mm:ss') + ' - ' + moment(endDate).format('MM/DD/YYYY, HH:mm:ss'));
@@ -308,6 +365,8 @@
       timesOptions.vAxis.title = 'Percentage Time';
       timesOptions.vAxis.format = '0.0%';
 
+      var configs = []
+
       //Function for rendering the chart
       function drawServerTimesChart(start, end) {
         var serverTimesArgs = [[{label: 'Time'}, {type: 'number', label:'Server System Time'}, {type: 'number', label:'Server User Time'}]];
@@ -317,14 +376,15 @@
 
         {% if userdata %}
           {% for item in userdata.timesData %}
-            var metricDate = new Date({{ item.0.year }}, {{ item.0.month }}-1, {{ item.0.day }}, {{ item.0.hour }}, {{ item.0.min }}, {{ item.0.sec }}, 0);
+            var metricDate = new Date({{ item.timestamp.year }}, {{ item.timestamp.month }}-1, {{ item.timestamp.day }}, {{ item.timestamp.hour }}, {{ item.timestamp.min }}, {{ item.timestamp.sec }}, 0);
             if(start <= metricDate && end >= metricDate) {
-              serverTimesArgs.push([metricDate, {{ item.1.server_system_time }}/100.0, {{ item.1.server_user_time }}/100.0]);
+              serverTimesArgs.push([metricDate, {{ item.times.server_system_time }}/100.0, {{ item.times.server_user_time }}/100.0]);
+              configs.push(['{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
               if(metricDate < startDate) {
                 startDate = metricDate;
               }
               if(metricDate > endDate) {
-                startDate = metricDate;
+                endDate = metricDate;
               }
             }
           {% endfor %}
@@ -346,6 +406,18 @@
         var chart = new google.visualization.LineChart(document.getElementById('chart-div-server-times'));
         chart.draw(serverTimesData, serverTimesOptions);
 
+        google.visualization.events.addListener(chart, 'select', function() {
+          configOpener(chart, configs);
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseover', function() {
+          $('#chart-div-qps').css('cursor','pointer');
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseout', function() {
+          $('#chart-div-qps').css('cursor','auto');
+        });
+
         if(serverTimesArgs.length != 1) {
           //Update date range field
           $('#server-times-report-range span').html(moment(startDate).format('MM/DD/YYYY, HH:mm:ss') + ' - ' + moment(endDate).format('MM/DD/YYYY, HH:mm:ss'));
@@ -359,16 +431,19 @@
         var startDate = moment();
         var endDate = moment().subtract(1000,'years');
 
+        var configs = []
+
         {% if userdata %}
           {% for item in userdata.timesData %}
-            var metricDate = new Date({{ item.0.year }}, {{ item.0.month }}-1, {{ item.0.day }}, {{ item.0.hour }}, {{ item.0.min }}, {{ item.0.sec }}, 0);
+            var metricDate = new Date({{ item.timestamp.year }}, {{ item.timestamp.month }}-1, {{ item.timestamp.day }}, {{ item.timestamp.hour }}, {{ item.timestamp.min }}, {{ item.timestamp.sec }}, 0);
             if(start <= metricDate && end >= metricDate) {
-              clientTimesArgs.push([metricDate, {{ item.1.client_system_time }}/100.0, {{ item.1.client_user_time }}/100.0]);
+              clientTimesArgs.push([metricDate, {{ item.times.client_system_time }}/100.0, {{ item.times.client_user_time }}/100.0]);
+              configs.push(['{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
               if(metricDate < startDate) {
                 startDate = metricDate;
               }
               if(metricDate > endDate) {
-                startDate = metricDate;
+                endDate = metricDate;
               }
             }
           {% endfor %}
@@ -389,6 +464,18 @@
         //Draw client times chart
         var chart = new google.visualization.LineChart(document.getElementById('chart-div-client-times'));
         chart.draw(clientTimesData, clientTimesOptions);
+
+        google.visualization.events.addListener(chart, 'select', function() {
+          configOpener(chart, configs);
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseover', function() {
+          $('#chart-div-qps').css('cursor','pointer');
+        });
+
+        google.visualization.events.addListener(chart, 'onmouseout', function() {
+          $('#chart-div-qps').css('cursor','auto');
+        });
 
         if(clientTimesArgs.length != 1) {
           //Update date range field

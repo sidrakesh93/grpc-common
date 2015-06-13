@@ -22,6 +22,8 @@
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap table CSS -->
     <link href="../static/css/bootstrap-table.min.css">
+    <!-- Date Range picker CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/daterangepicker-bs3.css" />
 
     <!-- JQuery core javascript  -->
     <script type="text/javascript" src="../static/jQuery/jquery-1.11.3.min.js"></script>
@@ -29,6 +31,10 @@
     <script src="../static/js/bootstrap.min.js"></script>
     <!-- Bootstrap table javascript -->
     <script src="../static/js/bootstrap-table.min.js"></script>
+    <!-- Moment Javascript -->
+    <script type="text/javascript" src="../static/js/moment.min.js"></script>
+    <!-- Date Range picker Javascript -->
+    <script type="text/javascript" src="../static/js/daterangepicker.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -47,11 +53,16 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistical Plots<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li id="plotQPS" class=""><a href="/plotGeneral/QPS">QPS statistics</a></li>
+                  <li id="plotQPSPerCore" class=""><a href="/plotGeneral/qpsPerCore">QPS Per Core statistics</a></li>
                   <li id="plotPercentile50" class=""><a href="/plotGeneral/p50">50<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile90" class=""><a href="/plotGeneral/p90">90<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile95" class=""><a href="/plotGeneral/p95">95<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile99" class=""><a href="/plotGeneral/p99">99<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile99Point9" class=""><a href="/plotGeneral/p99point9">99.9<sup>th</sup> %ile Latency statistics</a></li>
+                  <li id="plotServerSysTime" class=""><a href="/plotGeneral/serverSysTime">Server System Time</a></li>
+                  <li id="plotServerUserTime" class=""><a href="/plotGeneral/serverUserTime">Server User Time</a></li>
+                  <li id="plotClientSysTime" class=""><a href="/plotGeneral/clientSysTime">Client System Time</a></li>
+                  <li id="plotClientUserTime" class=""><a href="/plotGeneral/clientUserTime">Client User Time</a></li>
                 </ul>
               </li>
             </ul>
@@ -80,15 +91,18 @@
     <div class="container" style="width:99%;">
       <h2 align="center">Performance Database</h2>
       <hr>
+      <div id="report-range" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; margin-left:10px">
+        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+        <span></span> <b class="caret"></b>
+      </div>
       <div id="metrics">
-      <!-- {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %} -->
         <table id="metrics-table"
               class="table table-striped"
               data-toggle="table"
               data-search="true"
               data-pagination="true"
               data-show-columns="true">
-          <thead>
+          <thead id='metrics-table-head'>
             <tr>
               <th data-field="userid"
                   data-sortable="true"
@@ -141,32 +155,179 @@
                   data-visible="false">Client User Time %</th>
             </tr>
           </thead>
-          <tbody>
-            {% if request.session.metricstable %}
-              {% for row in request.session.metricstable %}
-                <tr>
-                  <td><a href="/plotUser/{{ row.id }}">{{ row.name }}</a></td>
-                  <td>{{ row.timestamp }}</td>
-                  <td><a id="config" href="/configs/{{ row.client_config }}%{{ row.server_config }}%{{ row.sys_info }}" target="_blank">{{ row.test_name }}</a></td>
-                  <td>{{ row.qps }}</td>
-                  <td>{{ row.qps_per_core }}</td>
-                  <td>{{ row.perc_lat_50 }}</td>
-                  <td>{{ row.perc_lat_90 }}</td>
-                  <td>{{ row.perc_lat_95 }}</td>
-                  <td>{{ row.perc_lat_99 }}</td>
-                  <td>{{ row.perc_lat_99_point_9 }}</td>
-                  <td>{{ row.server_system_time }}</td>
-                  <td>{{ row.server_user_time }}</td>
-                  <td>{{ row.client_system_time }}</td>
-                  <td>{{ row.client_user_time }}</td>
-                </tr>  
-              {% endfor %}
-            {% endif %}
+          <tbody id="metrics-table-body">
           </tbody>
         </table>
-      </div>
-      
+      </div>    
     </div><!-- /.container -->
+    <script type="text/javascript">
+
+      addDataToTableInit(moment().subtract(1000,'years'), moment());
+
+      function addCell(tableRow, cellContent) {
+        var cell = tableRow.insertCell(-1);
+        cell.innerHTML = cellContent;
+        cell.style.textAlign = 'center';
+      }
+
+      function addDataToTableInit(start, end) {
+        oldTableBody = document.getElementById("metrics-table-body");
+        oldTableBody.innerHTML = '';
+
+        var startDate = moment();
+        var endDate = moment().subtract(1000,'years');
+
+        {% for row in request.session.metricstable %}
+          rowDate = new Date({{ row.timestamp.year }}, {{ row.timestamp.month }}-1, {{ row.timestamp.day }}, {{ row.timestamp.hour }}, {{ row.timestamp.min }}, {{ row.timestamp.sec }}, 0);
+          
+          if(rowDate > start && rowDate < end) {
+            var tableRow = oldTableBody.insertRow(-1);
+            addCell(tableRow, '<a href="/plotUser/{{ row.id }}">{{ row.name }}</a>');
+            addCell(tableRow, '{{ row.timestamp.year }}/{{ row.timestamp.month }}/{{ row.timestamp.day }} {{ row.timestamp.hour }}:{{ row.timestamp.min }}:{{ row.timestamp.sec }}');
+            addCell(tableRow, '<a id="config" href="/configs/{{ row.client_config }}%{{ row.server_config }}%{{ row.sys_info }}" target="_blank">{{ row.test_name }}</a>');
+            addCell(tableRow, '{{ row.qps }}');
+            addCell(tableRow, '{{ row.qps_per_core }}');
+            addCell(tableRow, '{{ row.perc_lat_50 }}');
+            addCell(tableRow, '{{ row.perc_lat_90 }}');
+            addCell(tableRow, '{{ row.perc_lat_95 }}');
+            addCell(tableRow, '{{ row.perc_lat_99 }}');
+            addCell(tableRow, '{{ row.perc_lat_99_point_9 }}');
+            addCell(tableRow, '{{ row.server_system_time }}');
+            addCell(tableRow, '{{ row.server_user_time }}');
+            addCell(tableRow, '{{ row.client_system_time }}');
+            addCell(tableRow, '{{ row.client_user_time }}');
+            if(rowDate < startDate) {
+              startDate = rowDate;
+            }
+            if(rowDate > endDate) {
+              endDate = rowDate;
+            }
+          }
+        {% endfor %}
+
+        $('#report-range span').html(moment(startDate).format('MM/DD/YYYY, HH:mm:ss') + ' - ' + moment(endDate).format('MM/DD/YYYY, HH:mm:ss'));
+      }
+
+      function checkHeadersPresent() {
+        var headers = document.getElementById("metrics-table-head");
+        var headersHTML = headers.rows[0].innerHTML;
+        var splitHeaders = headersHTML.split('<div class="th-inner sortable">');
+
+        var isPresent = [false, false, false, false, false, false, false, false, false, false, false];
+
+        if (typeof String.prototype.startsWith != 'function') {
+          String.prototype.startsWith = function (str){
+            return this.indexOf(str) === 0;
+          };
+        }
+
+        for (i=4; i<splitHeaders.length; i+=1) {
+          var splitHeader = splitHeaders[i].split('</div>');
+
+          if(splitHeader[0] == 'Queries Per Second') {
+            isPresent[0] = true;
+          }
+          else if(splitHeader[0] == 'QPS Per Core') {
+            isPresent[1] = true;
+          }
+          else if(splitHeader[0].startsWith('50<sup>')) {
+            isPresent[2] = true;
+          }
+          else if(splitHeader[0].startsWith('90<sup>')) {
+            isPresent[3] = true;
+          }
+          else if(splitHeader[0].startsWith('95<sup>')) {
+            isPresent[4] = true;
+          }
+          else if(splitHeader[0].startsWith('99<sup>')) {
+            isPresent[5] = true;
+          }
+          else if(splitHeader[0].startsWith('99.9<sup>')) {
+            isPresent[6] = true;
+          }
+          else if(splitHeader[0] == 'Server System Time %') {
+            isPresent[7] = true;
+          }
+          else if(splitHeader[0] == 'Server User Time %') {
+            isPresent[8] = true;
+          }
+          else if(splitHeader[0] == 'Client System Time %') {
+            isPresent[9] = true;
+          }
+          else if(splitHeader[0] == 'Client User Time %') {
+            isPresent[10] = true;
+          }
+        }
+
+        return isPresent;
+      }
+
+      $('#report-range').daterangepicker({
+        format: 'MM/DD/YYYY, HH:mm:ss',
+        showDropdowns: true,
+        timePicker: true,
+        timePickerIncrement: 1,
+        timePicker12Hour: false,
+        timePickerSeconds: true,
+        ranges: {
+          'Today': [moment().startOf('day'), moment()],
+          'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf('day')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+          'All Time': [moment().subtract(29, 'days'), moment()]
+        },
+        opens: 'left',
+        drops: 'down',
+        buttonClasses: ['btn', 'btn-sm'],
+        applyClass: 'btn-primary',
+        cancelClass: 'btn-default',
+        separator: ' to ',
+      }, function(start, end, label) {
+        isPresent = checkHeadersPresent();
+
+        oldTableBody = document.getElementById("metrics-table-body");
+        oldTableBody.innerHTML = '';
+
+        var startDate = moment();
+        var endDate = moment().subtract(1000,'years');
+
+        i = 0;
+
+        {% for row in request.session.metricstable %}
+          rowDate = new Date({{ row.timestamp.year }}, {{ row.timestamp.month }}-1, {{ row.timestamp.day }}, {{ row.timestamp.hour }}, {{ row.timestamp.min }}, {{ row.timestamp.sec }}, 0);
+          
+          if(rowDate > start && rowDate < end) {
+            var tableRow = oldTableBody.insertRow(-1);
+            tableRow.setAttribute("data-index",i+''); i++;
+
+            addCell(tableRow, '<a href="/plotUser/{{ row.id }}">{{ row.name }}</a>');
+            addCell(tableRow, '{{ row.timestamp.year }}/{{ row.timestamp.month }}/{{ row.timestamp.day }} {{ row.timestamp.hour }}:{{ row.timestamp.min }}:{{ row.timestamp.sec }}');
+            addCell(tableRow, '<a id="config" href="/configs/{{ row.client_config }}%{{ row.server_config }}%{{ row.sys_info }}" target="_blank">{{ row.test_name }}</a>');
+            
+            if(isPresent[0]) { addCell(tableRow, '{{ row.qps }}'); }
+            if(isPresent[1]) { addCell(tableRow, '{{ row.qps_per_core }}'); }
+            if(isPresent[2]) { addCell(tableRow, '{{ row.perc_lat_50 }}'); }
+            if(isPresent[3]) { addCell(tableRow, '{{ row.perc_lat_90 }}'); }
+            if(isPresent[4]) { addCell(tableRow, '{{ row.perc_lat_95 }}'); }
+            if(isPresent[5]) { addCell(tableRow, '{{ row.perc_lat_99 }}'); }
+            if(isPresent[6]) { addCell(tableRow, '{{ row.perc_lat_99_point_9 }}'); }
+            if(isPresent[7]) { addCell(tableRow, '{{ row.server_system_time }}'); }
+            if(isPresent[8]) { addCell(tableRow, '{{ row.server_user_time }}'); }
+            if(isPresent[9]) { addCell(tableRow, '{{ row.client_system_time }}'); }
+            if(isPresent[10]) { addCell(tableRow, '{{ row.client_user_time }}'); }
+
+            if(rowDate < startDate) {
+              startDate = rowDate;
+            }
+            if(rowDate > endDate) {
+              endDate = rowDate;
+            }
+          }
+        {% endfor %}
+      });
+    </script>
   </body>
 </html>
   

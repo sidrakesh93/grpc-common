@@ -20,6 +20,15 @@ class UserData(object):
     parsed['sec'] = parsedTimeList[5]
     return parsed
 
+  def initSingleDataDict(self, timestamp, clientConfig, serverConfig, sysInfo):
+    singleDataDict = {}
+    singleDataDict['timestamp'] = self.parseTimeString(timestamp)
+    singleDataDict['client_config'] = self.getClientConfigDict(clientConfig)
+    singleDataDict['server_config'] = self.getServerConfigDict(serverConfig)
+    singleDataDict['sys_info'] = self.getSysInfoDict(sysInfo)
+
+    return singleDataDict
+
   def getSingleUserData(self, userId):
     with user_data_pb2.early_adopter_create_UserDataTransfer_stub(self.address, self.port) as stub:
       singleUserRetrieveRequest = user_data_pb2.SingleUserRetrieveRequest()
@@ -38,30 +47,40 @@ class UserData(object):
       timesList = []
 
       for dataDetail in sortedClientData:
-        timestampDict = self.parseTimeString(dataDetail.timestamp)
-
         if dataDetail.metrics.qps != 0.0:
-          qpsList.append([timestampDict,round(dataDetail.metrics.qps,1)])
+          singleDataDict = self.initSingleDataDict(dataDetail.timestamp, dataDetail.client_config, dataDetail.server_config, dataDetail.sys_info)
+          singleDataDict['qps'] = round(dataDetail.metrics.qps,1)
+          qpsList.append(singleDataDict)
 
         if dataDetail.metrics.qps_per_core != 0.0:
-          qpsPerCoreList.append([timestampDict,round(dataDetail.metrics.qps_per_core,1)])
+          singleDataDict = self.initSingleDataDict(dataDetail.timestamp, dataDetail.client_config, dataDetail.server_config, dataDetail.sys_info)
+          singleDataDict['qps_per_core'] = round(dataDetail.metrics.qps_per_core,1)
+          qpsPerCoreList.append(singleDataDict)
         
         if dataDetail.metrics.perc_lat_50 != 0.0 and dataDetail.metrics.perc_lat_90 != 0.0 and dataDetail.metrics.perc_lat_95 != 0.0 and dataDetail.metrics.perc_lat_99 != 0.0 and dataDetail.metrics.perc_lat_99_point_9 != 0.0:
+          singleDataDict = self.initSingleDataDict(dataDetail.timestamp, dataDetail.client_config, dataDetail.server_config, dataDetail.sys_info)
+          
           latDict = {}
           latDict['perc_lat_50'] = round(dataDetail.metrics.perc_lat_50,1)
           latDict['perc_lat_90'] = round(dataDetail.metrics.perc_lat_90,1)
           latDict['perc_lat_95'] = round(dataDetail.metrics.perc_lat_95,1)
           latDict['perc_lat_99'] = round(dataDetail.metrics.perc_lat_99,1)
           latDict['perc_lat_99_point_9'] = round(dataDetail.metrics.perc_lat_99_point_9,1)
-          latList.append([timestampDict,latDict])
+
+          singleDataDict['lat'] = latDict
+          latList.append(singleDataDict)
         
         if dataDetail.metrics.server_system_time != 0.0 and dataDetail.metrics.server_user_time != 0.0 and dataDetail.metrics.client_system_time != 0.0 and dataDetail.metrics.client_user_time != 0.0:
+          singleDataDict = self.initSingleDataDict(dataDetail.timestamp, dataDetail.client_config, dataDetail.server_config, dataDetail.sys_info)
+
           timesDict = {}
           timesDict['server_system_time'] = round(dataDetail.metrics.server_system_time,1)
           timesDict['server_user_time'] = round(dataDetail.metrics.server_user_time,1)
           timesDict['client_system_time'] = round(dataDetail.metrics.client_system_time,1)
           timesDict['client_user_time'] = round(dataDetail.metrics.client_user_time,1)
-          timesList.append([timestampDict,timesDict])
+          
+          singleDataDict['times'] = timesDict
+          timesList.append(singleDataDict)
 
       dataDict = defaultdict(list)
       dataDict['qpsData'] = qpsList
@@ -137,7 +156,7 @@ class UserData(object):
       sysInfoParamList = re.split(':', sysInfoStr)
 
       sysParamValue = sysInfoParamList[1].lstrip(' ')
-      sysInfoDict[sysInfoParamList[0]] = sysParamValue
+      sysInfoDict[str(sysInfoParamList[0])] = str(sysParamValue)
 
     return sysInfoDict
 
@@ -156,7 +175,7 @@ class UserData(object):
           userMetricsDict = {}
           userMetricsDict['id'] = str(userData.user_details.id)
           userMetricsDict['name'] = str(userData.user_details.name)
-          userMetricsDict['timestamp'] = str(dataDetail.timestamp)
+          userMetricsDict['timestamp'] = self.parseTimeString(dataDetail.timestamp)
           userMetricsDict['test_name'] = str(dataDetail.test_name)
           userMetricsDict['qps'] = str(self.validValue(dataDetail.metrics.qps))
           userMetricsDict['qps_per_core'] = str(self.validValue(dataDetail.metrics.qps_per_core))
@@ -195,7 +214,7 @@ class UserData(object):
 
           if metric == 'QPS':
             userMetricsDict['value'] = round(dataDetail.metrics.qps,1)
-          elif metric == 'QPSPerCore':
+          elif metric == 'qpsPerCore':
             userMetricsDict['value'] = round(dataDetail.metrics.qps_per_core,1)
           elif metric == 'p50':
             userMetricsDict['value'] = round(dataDetail.metrics.perc_lat_50,1)

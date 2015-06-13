@@ -56,11 +56,16 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Statistical Plots<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li id="plotQPS" class=""><a href="/plotGeneral/QPS">QPS statistics</a></li>
+                  <li id="plotQPSPerCore" class=""><a href="/plotGeneral/qpsPerCore">QPS Per Core statistics</a></li>
                   <li id="plotPercentile50" class=""><a href="/plotGeneral/p50">50<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile90" class=""><a href="/plotGeneral/p90">90<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile95" class=""><a href="/plotGeneral/p95">95<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile99" class=""><a href="/plotGeneral/p99">99<sup>th</sup> %ile Latency statistics</a></li>
                   <li id="plotPercentile99Point9" class=""><a href="/plotGeneral/p99point9">99.9<sup>th</sup> %ile Latency statistics</a></li>
+                  <li id="plotServerSysTime" class=""><a href="/plotGeneral/serverSysTime">Server System Time</a></li>
+                  <li id="plotServerUserTime" class=""><a href="/plotGeneral/serverUserTime">Server User Time</a></li>
+                  <li id="plotClientSysTime" class=""><a href="/plotGeneral/clientSysTime">Client System Time</a></li>
+                  <li id="plotClientUserTime" class=""><a href="/plotGeneral/clientUserTime">Client User Time</a></li>
                 </ul>
               </li>
             </ul>
@@ -96,6 +101,7 @@
       </div>
       <!-- General statistics plot -->
       <div class="container" style="width: 100%;">
+        <h3 id="error-header" style="text-align:center"></h3>
         <div id="chart_div" style="height: 700px"></div>
       </div>
     </div>
@@ -122,9 +128,15 @@
         drawChart(earliestDate, latestDate);
       }
 
+      if (typeof String.prototype.startsWith != 'function') {
+        String.prototype.startsWith = function (str){
+          return this.indexOf(str) === 0;
+        };
+      }
+
       function drawChart(start, end) {
         var metricName;
-        if( '{{ metric }}' != 'Queries Per Second' ) {
+        if( '{{ metric }}'.startsWith('9') || '{{ metric }}'.startsWith('5') ) {
           metricName = "{{ metric }} (\xB5s)";
         }
         else {
@@ -133,17 +145,29 @@
 
         var args = [[metricName]];
 
+        var startDate = moment();
+        var endDate = moment().subtract(1000,'years');
+
         {% if data %}
           {% for item in data %}
               var metricDate = new Date({{ item.year }}, {{ item.month }}-1, {{ item.day }}, {{ item.hour }}, {{ item.min }}, {{ item.sec }}, 0);
               if(start <= metricDate && end >= metricDate) {
-                args.push([{{ item.value }}]);
+                if({{ item.value }} != 0.0)
+                  args.push([{{ item.value }}]);
+                
+                if(metricDate < startDate) {
+                  startDate = metricDate;
+                }
+                if(metricDate > endDate) {
+                  endDate = metricDate;
+                }
               }
           {% endfor %}
         {% endif %}
         
         if(args.length == 1) {
-          alert("No user data available for given date range");
+          var errorHeader = document.getElementById("error-header");
+          errorHeader.innerHTML = "Sorry, no data is available for the given time range";
         }
         else {
           var data = google.visualization.arrayToDataTable(
@@ -168,7 +192,7 @@
 
           var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
           chart.draw(data, options);
-          $('#reportrange span').html(moment(start).format('MM/DD/YYYY, HH:mm:ss') + ' - ' + moment(end).format('MM/DD/YYYY, HH:mm:ss'));
+          $('#reportrange span').html(moment(startDate).format('MM/DD/YYYY, HH:mm:ss') + ' - ' + moment(endDate).format('MM/DD/YYYY, HH:mm:ss'));
         }
       }
 

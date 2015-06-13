@@ -24,6 +24,8 @@ def plotUserMetrics(request, clientid):
 def getMetricFullDesc(metric):
   if metric == 'QPS':
     metricName = 'Queries Per Second'
+  elif metric == 'qpsPerCore':
+    metricName = 'QPS Per Core'
   elif metric == 'p50':
     metricName = '50th Percentile Latency'
   elif metric == 'p90':
@@ -34,6 +36,14 @@ def getMetricFullDesc(metric):
     metricName = '99th Percentile Latency'
   elif metric == 'p99point9':
     metricName = '99.9th Percentile Latency'
+  elif metric == 'serverSysTime':
+    metricName = 'Server System Time'
+  elif metric == 'serverUserTime':
+    metricName = 'Server User Time'
+  elif metric == 'clientSysTime':
+    metricName = 'Client System Time'
+  elif metric == 'clientUserTime':
+    metricName = 'Client User Time'
 
   return metricName
 
