@@ -45,6 +45,16 @@
 #include "database_manager.h"
 #include "leveldb/db.h"
 #include <cstdlib>
+#include <gflags/gflags.h>
+
+DEFINE_string(address, "", "Address of server in Hostname:Port format");
+
+// In some distros, gflags is in the namespace google, and in some others,
+// in gflags. This hack is enabling us to find both.
+namespace google {}
+namespace gflags {}
+using namespace google;
+using namespace gflags;
 
 namespace grpc{
 namespace testing{
@@ -76,14 +86,13 @@ private:
   DatabaseManager dbManager;
 };
 
-void RunServer(char* address_port) {
-  std::string server_address(address_port);
+void RunServer() {
   UserDataTransferServiceImpl service;
   ServerBuilder builder;
-  builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+  builder.AddListeningPort(FLAGS_address, grpc::InsecureServerCredentials());
   builder.RegisterService(&service);
   std::unique_ptr<Server> server(builder.BuildAndStart());
-  std::cout << "Server listening on " << server_address << std::endl;
+  std::cout << "Server listening on " << FLAGS_address << std::endl;
   server->Wait();
 }
 
@@ -91,7 +100,8 @@ void RunServer(char* address_port) {
 } //grpc
 
 int main(int argc, char** argv) {
-  grpc::testing::RunServer(argv[1]);
+  google::ParseCommandLineFlags(&argc, &argv, true);
+  grpc::testing::RunServer();
 
   return 0;
 }
