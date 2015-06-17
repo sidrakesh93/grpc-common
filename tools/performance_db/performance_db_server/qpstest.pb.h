@@ -42,6 +42,11 @@ class StatsRequest;
 class ServerStats;
 class Payload;
 class HistogramData;
+class PoissonParams;
+class UniformParams;
+class DeterministicParams;
+class ParetoParams;
+class LoadParams;
 class ClientConfig;
 class Mark;
 class ClientArgs;
@@ -54,9 +59,11 @@ class SimpleRequest;
 class SimpleResponse;
 
 enum PayloadType {
-  COMPRESSABLE = 1,
-  UNCOMPRESSABLE = 2,
-  RANDOM = 3
+  COMPRESSABLE = 0,
+  UNCOMPRESSABLE = 1,
+  RANDOM = 2,
+  PayloadType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  PayloadType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool PayloadType_IsValid(int value);
 const PayloadType PayloadType_MIN = COMPRESSABLE;
@@ -74,8 +81,10 @@ inline bool PayloadType_Parse(
     PayloadType_descriptor(), name, value);
 }
 enum ClientType {
-  SYNCHRONOUS_CLIENT = 1,
-  ASYNC_CLIENT = 2
+  SYNCHRONOUS_CLIENT = 0,
+  ASYNC_CLIENT = 1,
+  ClientType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ClientType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ClientType_IsValid(int value);
 const ClientType ClientType_MIN = SYNCHRONOUS_CLIENT;
@@ -93,8 +102,10 @@ inline bool ClientType_Parse(
     ClientType_descriptor(), name, value);
 }
 enum ServerType {
-  SYNCHRONOUS_SERVER = 1,
-  ASYNC_SERVER = 2
+  SYNCHRONOUS_SERVER = 0,
+  ASYNC_SERVER = 1,
+  ServerType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  ServerType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool ServerType_IsValid(int value);
 const ServerType ServerType_MIN = SYNCHRONOUS_SERVER;
@@ -112,8 +123,10 @@ inline bool ServerType_Parse(
     ServerType_descriptor(), name, value);
 }
 enum RpcType {
-  UNARY = 1,
-  STREAMING = 2
+  UNARY = 0,
+  STREAMING = 1,
+  RpcType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  RpcType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
 bool RpcType_IsValid(int value);
 const RpcType RpcType_MIN = UNARY;
@@ -130,6 +143,30 @@ inline bool RpcType_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<RpcType>(
     RpcType_descriptor(), name, value);
 }
+enum LoadType {
+  CLOSED_LOOP = 0,
+  POISSON = 1,
+  UNIFORM = 2,
+  DETERMINISTIC = 3,
+  PARETO = 4,
+  LoadType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  LoadType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+};
+bool LoadType_IsValid(int value);
+const LoadType LoadType_MIN = CLOSED_LOOP;
+const LoadType LoadType_MAX = PARETO;
+const int LoadType_ARRAYSIZE = LoadType_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* LoadType_descriptor();
+inline const ::std::string& LoadType_Name(LoadType value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    LoadType_descriptor(), value);
+}
+inline bool LoadType_Parse(
+    const ::std::string& name, LoadType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<LoadType>(
+    LoadType_descriptor(), name, value);
+}
 // ===================================================================
 
 class StatsRequest : public ::google::protobuf::Message {
@@ -142,14 +179,6 @@ class StatsRequest : public ::google::protobuf::Message {
   inline StatsRequest& operator=(const StatsRequest& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -197,7 +226,6 @@ class StatsRequest : public ::google::protobuf::Message {
   // accessors -------------------------------------------------------
 
   // optional int32 test_num = 1;
-  bool has_test_num() const;
   void clear_test_num();
   static const int kTestNumFieldNumber = 1;
   ::google::protobuf::int32 test_num() const;
@@ -205,13 +233,11 @@ class StatsRequest : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:grpc.testing.StatsRequest)
  private:
-  inline void set_has_test_num();
-  inline void clear_has_test_num();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::google::protobuf::int32 test_num_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
   friend void protobuf_ShutdownFile_qpstest_2eproto();
@@ -231,14 +257,6 @@ class ServerStats : public ::google::protobuf::Message {
   inline ServerStats& operator=(const ServerStats& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -285,22 +303,19 @@ class ServerStats : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required double time_elapsed = 1;
-  bool has_time_elapsed() const;
+  // optional double time_elapsed = 1;
   void clear_time_elapsed();
   static const int kTimeElapsedFieldNumber = 1;
   double time_elapsed() const;
   void set_time_elapsed(double value);
 
-  // required double time_user = 2;
-  bool has_time_user() const;
+  // optional double time_user = 2;
   void clear_time_user();
   static const int kTimeUserFieldNumber = 2;
   double time_user() const;
   void set_time_user(double value);
 
-  // required double time_system = 3;
-  bool has_time_system() const;
+  // optional double time_system = 3;
   void clear_time_system();
   static const int kTimeSystemFieldNumber = 3;
   double time_system() const;
@@ -308,22 +323,13 @@ class ServerStats : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:grpc.testing.ServerStats)
  private:
-  inline void set_has_time_elapsed();
-  inline void clear_has_time_elapsed();
-  inline void set_has_time_user();
-  inline void clear_has_time_user();
-  inline void set_has_time_system();
-  inline void clear_has_time_system();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   double time_elapsed_;
   double time_user_;
   double time_system_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
   friend void protobuf_ShutdownFile_qpstest_2eproto();
@@ -343,14 +349,6 @@ class Payload : public ::google::protobuf::Message {
   inline Payload& operator=(const Payload& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -398,14 +396,12 @@ class Payload : public ::google::protobuf::Message {
   // accessors -------------------------------------------------------
 
   // optional .grpc.testing.PayloadType type = 1;
-  bool has_type() const;
   void clear_type();
   static const int kTypeFieldNumber = 1;
   ::grpc::testing::PayloadType type() const;
   void set_type(::grpc::testing::PayloadType value);
 
   // optional bytes body = 2;
-  bool has_body() const;
   void clear_body();
   static const int kBodyFieldNumber = 2;
   const ::std::string& body() const;
@@ -418,16 +414,12 @@ class Payload : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:grpc.testing.Payload)
  private:
-  inline void set_has_type();
-  inline void clear_has_type();
-  inline void set_has_body();
-  inline void clear_has_body();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr body_;
   int type_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
   friend void protobuf_ShutdownFile_qpstest_2eproto();
@@ -447,14 +439,6 @@ class HistogramData : public ::google::protobuf::Message {
   inline HistogramData& operator=(const HistogramData& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -513,36 +497,31 @@ class HistogramData : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
       mutable_bucket();
 
-  // required double min_seen = 2;
-  bool has_min_seen() const;
+  // optional double min_seen = 2;
   void clear_min_seen();
   static const int kMinSeenFieldNumber = 2;
   double min_seen() const;
   void set_min_seen(double value);
 
-  // required double max_seen = 3;
-  bool has_max_seen() const;
+  // optional double max_seen = 3;
   void clear_max_seen();
   static const int kMaxSeenFieldNumber = 3;
   double max_seen() const;
   void set_max_seen(double value);
 
-  // required double sum = 4;
-  bool has_sum() const;
+  // optional double sum = 4;
   void clear_sum();
   static const int kSumFieldNumber = 4;
   double sum() const;
   void set_sum(double value);
 
-  // required double sum_of_squares = 5;
-  bool has_sum_of_squares() const;
+  // optional double sum_of_squares = 5;
   void clear_sum_of_squares();
   static const int kSumOfSquaresFieldNumber = 5;
   double sum_of_squares() const;
   void set_sum_of_squares(double value);
 
-  // required double count = 6;
-  bool has_count() const;
+  // optional double count = 6;
   void clear_count();
   static const int kCountFieldNumber = 6;
   double count() const;
@@ -550,35 +529,482 @@ class HistogramData : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:grpc.testing.HistogramData)
  private:
-  inline void set_has_min_seen();
-  inline void clear_has_min_seen();
-  inline void set_has_max_seen();
-  inline void clear_has_max_seen();
-  inline void set_has_sum();
-  inline void clear_has_sum();
-  inline void set_has_sum_of_squares();
-  inline void clear_has_sum_of_squares();
-  inline void set_has_count();
-  inline void clear_has_count();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > bucket_;
+  mutable int _bucket_cached_byte_size_;
   double min_seen_;
   double max_seen_;
   double sum_;
   double sum_of_squares_;
   double count_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
   friend void protobuf_ShutdownFile_qpstest_2eproto();
 
   void InitAsDefaultInstance();
   static HistogramData* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PoissonParams : public ::google::protobuf::Message {
+ public:
+  PoissonParams();
+  virtual ~PoissonParams();
+
+  PoissonParams(const PoissonParams& from);
+
+  inline PoissonParams& operator=(const PoissonParams& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PoissonParams& default_instance();
+
+  void Swap(PoissonParams* other);
+
+  // implements Message ----------------------------------------------
+
+  inline PoissonParams* New() const { return New(NULL); }
+
+  PoissonParams* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PoissonParams& from);
+  void MergeFrom(const PoissonParams& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(PoissonParams* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional double offered_load = 1;
+  void clear_offered_load();
+  static const int kOfferedLoadFieldNumber = 1;
+  double offered_load() const;
+  void set_offered_load(double value);
+
+  // @@protoc_insertion_point(class_scope:grpc.testing.PoissonParams)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  double offered_load_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_qpstest_2eproto();
+  friend void protobuf_AssignDesc_qpstest_2eproto();
+  friend void protobuf_ShutdownFile_qpstest_2eproto();
+
+  void InitAsDefaultInstance();
+  static PoissonParams* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class UniformParams : public ::google::protobuf::Message {
+ public:
+  UniformParams();
+  virtual ~UniformParams();
+
+  UniformParams(const UniformParams& from);
+
+  inline UniformParams& operator=(const UniformParams& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const UniformParams& default_instance();
+
+  void Swap(UniformParams* other);
+
+  // implements Message ----------------------------------------------
+
+  inline UniformParams* New() const { return New(NULL); }
+
+  UniformParams* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const UniformParams& from);
+  void MergeFrom(const UniformParams& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(UniformParams* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional double interarrival_lo = 1;
+  void clear_interarrival_lo();
+  static const int kInterarrivalLoFieldNumber = 1;
+  double interarrival_lo() const;
+  void set_interarrival_lo(double value);
+
+  // optional double interarrival_hi = 2;
+  void clear_interarrival_hi();
+  static const int kInterarrivalHiFieldNumber = 2;
+  double interarrival_hi() const;
+  void set_interarrival_hi(double value);
+
+  // @@protoc_insertion_point(class_scope:grpc.testing.UniformParams)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  double interarrival_lo_;
+  double interarrival_hi_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_qpstest_2eproto();
+  friend void protobuf_AssignDesc_qpstest_2eproto();
+  friend void protobuf_ShutdownFile_qpstest_2eproto();
+
+  void InitAsDefaultInstance();
+  static UniformParams* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class DeterministicParams : public ::google::protobuf::Message {
+ public:
+  DeterministicParams();
+  virtual ~DeterministicParams();
+
+  DeterministicParams(const DeterministicParams& from);
+
+  inline DeterministicParams& operator=(const DeterministicParams& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const DeterministicParams& default_instance();
+
+  void Swap(DeterministicParams* other);
+
+  // implements Message ----------------------------------------------
+
+  inline DeterministicParams* New() const { return New(NULL); }
+
+  DeterministicParams* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const DeterministicParams& from);
+  void MergeFrom(const DeterministicParams& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(DeterministicParams* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional double offered_load = 1;
+  void clear_offered_load();
+  static const int kOfferedLoadFieldNumber = 1;
+  double offered_load() const;
+  void set_offered_load(double value);
+
+  // @@protoc_insertion_point(class_scope:grpc.testing.DeterministicParams)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  double offered_load_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_qpstest_2eproto();
+  friend void protobuf_AssignDesc_qpstest_2eproto();
+  friend void protobuf_ShutdownFile_qpstest_2eproto();
+
+  void InitAsDefaultInstance();
+  static DeterministicParams* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ParetoParams : public ::google::protobuf::Message {
+ public:
+  ParetoParams();
+  virtual ~ParetoParams();
+
+  ParetoParams(const ParetoParams& from);
+
+  inline ParetoParams& operator=(const ParetoParams& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const ParetoParams& default_instance();
+
+  void Swap(ParetoParams* other);
+
+  // implements Message ----------------------------------------------
+
+  inline ParetoParams* New() const { return New(NULL); }
+
+  ParetoParams* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const ParetoParams& from);
+  void MergeFrom(const ParetoParams& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(ParetoParams* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional double interarrival_base = 1;
+  void clear_interarrival_base();
+  static const int kInterarrivalBaseFieldNumber = 1;
+  double interarrival_base() const;
+  void set_interarrival_base(double value);
+
+  // optional double alpha = 2;
+  void clear_alpha();
+  static const int kAlphaFieldNumber = 2;
+  double alpha() const;
+  void set_alpha(double value);
+
+  // @@protoc_insertion_point(class_scope:grpc.testing.ParetoParams)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  double interarrival_base_;
+  double alpha_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_qpstest_2eproto();
+  friend void protobuf_AssignDesc_qpstest_2eproto();
+  friend void protobuf_ShutdownFile_qpstest_2eproto();
+
+  void InitAsDefaultInstance();
+  static ParetoParams* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class LoadParams : public ::google::protobuf::Message {
+ public:
+  LoadParams();
+  virtual ~LoadParams();
+
+  LoadParams(const LoadParams& from);
+
+  inline LoadParams& operator=(const LoadParams& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const LoadParams& default_instance();
+
+  enum LoadCase {
+    kPoisson = 1,
+    kUniform = 2,
+    kDeterm = 3,
+    kPareto = 4,
+    LOAD_NOT_SET = 0,
+  };
+
+  void Swap(LoadParams* other);
+
+  // implements Message ----------------------------------------------
+
+  inline LoadParams* New() const { return New(NULL); }
+
+  LoadParams* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const LoadParams& from);
+  void MergeFrom(const LoadParams& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(LoadParams* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .grpc.testing.PoissonParams poisson = 1;
+  bool has_poisson() const;
+  void clear_poisson();
+  static const int kPoissonFieldNumber = 1;
+  const ::grpc::testing::PoissonParams& poisson() const;
+  ::grpc::testing::PoissonParams* mutable_poisson();
+  ::grpc::testing::PoissonParams* release_poisson();
+  void set_allocated_poisson(::grpc::testing::PoissonParams* poisson);
+
+  // optional .grpc.testing.UniformParams uniform = 2;
+  bool has_uniform() const;
+  void clear_uniform();
+  static const int kUniformFieldNumber = 2;
+  const ::grpc::testing::UniformParams& uniform() const;
+  ::grpc::testing::UniformParams* mutable_uniform();
+  ::grpc::testing::UniformParams* release_uniform();
+  void set_allocated_uniform(::grpc::testing::UniformParams* uniform);
+
+  // optional .grpc.testing.DeterministicParams determ = 3;
+  bool has_determ() const;
+  void clear_determ();
+  static const int kDetermFieldNumber = 3;
+  const ::grpc::testing::DeterministicParams& determ() const;
+  ::grpc::testing::DeterministicParams* mutable_determ();
+  ::grpc::testing::DeterministicParams* release_determ();
+  void set_allocated_determ(::grpc::testing::DeterministicParams* determ);
+
+  // optional .grpc.testing.ParetoParams pareto = 4;
+  bool has_pareto() const;
+  void clear_pareto();
+  static const int kParetoFieldNumber = 4;
+  const ::grpc::testing::ParetoParams& pareto() const;
+  ::grpc::testing::ParetoParams* mutable_pareto();
+  ::grpc::testing::ParetoParams* release_pareto();
+  void set_allocated_pareto(::grpc::testing::ParetoParams* pareto);
+
+  LoadCase load_case() const;
+  // @@protoc_insertion_point(class_scope:grpc.testing.LoadParams)
+ private:
+  inline void set_has_poisson();
+  inline void set_has_uniform();
+  inline void set_has_determ();
+  inline void set_has_pareto();
+
+  inline bool has_load() const;
+  void clear_load();
+  inline void clear_has_load();
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  union LoadUnion {
+    LoadUnion() {}
+    ::grpc::testing::PoissonParams* poisson_;
+    ::grpc::testing::UniformParams* uniform_;
+    ::grpc::testing::DeterministicParams* determ_;
+    ::grpc::testing::ParetoParams* pareto_;
+  } load_;
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _oneof_case_[1];
+
+  friend void  protobuf_AddDesc_qpstest_2eproto();
+  friend void protobuf_AssignDesc_qpstest_2eproto();
+  friend void protobuf_ShutdownFile_qpstest_2eproto();
+
+  void InitAsDefaultInstance();
+  static LoadParams* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -592,14 +1018,6 @@ class ClientConfig : public ::google::protobuf::Message {
   inline ClientConfig& operator=(const ClientConfig& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -662,57 +1080,49 @@ class ClientConfig : public ::google::protobuf::Message {
   const ::google::protobuf::RepeatedPtrField< ::std::string>& server_targets() const;
   ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_server_targets();
 
-  // required .grpc.testing.ClientType client_type = 2;
-  bool has_client_type() const;
+  // optional .grpc.testing.ClientType client_type = 2;
   void clear_client_type();
   static const int kClientTypeFieldNumber = 2;
   ::grpc::testing::ClientType client_type() const;
   void set_client_type(::grpc::testing::ClientType value);
 
-  // optional bool enable_ssl = 3 [default = false];
-  bool has_enable_ssl() const;
+  // optional bool enable_ssl = 3;
   void clear_enable_ssl();
   static const int kEnableSslFieldNumber = 3;
   bool enable_ssl() const;
   void set_enable_ssl(bool value);
 
-  // required int32 outstanding_rpcs_per_channel = 4;
-  bool has_outstanding_rpcs_per_channel() const;
+  // optional int32 outstanding_rpcs_per_channel = 4;
   void clear_outstanding_rpcs_per_channel();
   static const int kOutstandingRpcsPerChannelFieldNumber = 4;
   ::google::protobuf::int32 outstanding_rpcs_per_channel() const;
   void set_outstanding_rpcs_per_channel(::google::protobuf::int32 value);
 
-  // required int32 client_channels = 5;
-  bool has_client_channels() const;
+  // optional int32 client_channels = 5;
   void clear_client_channels();
   static const int kClientChannelsFieldNumber = 5;
   ::google::protobuf::int32 client_channels() const;
   void set_client_channels(::google::protobuf::int32 value);
 
-  // required int32 payload_size = 6;
-  bool has_payload_size() const;
+  // optional int32 payload_size = 6;
   void clear_payload_size();
   static const int kPayloadSizeFieldNumber = 6;
   ::google::protobuf::int32 payload_size() const;
   void set_payload_size(::google::protobuf::int32 value);
 
   // optional int32 async_client_threads = 7;
-  bool has_async_client_threads() const;
   void clear_async_client_threads();
   static const int kAsyncClientThreadsFieldNumber = 7;
   ::google::protobuf::int32 async_client_threads() const;
   void set_async_client_threads(::google::protobuf::int32 value);
 
-  // optional .grpc.testing.RpcType rpc_type = 8 [default = UNARY];
-  bool has_rpc_type() const;
+  // optional .grpc.testing.RpcType rpc_type = 8;
   void clear_rpc_type();
   static const int kRpcTypeFieldNumber = 8;
   ::grpc::testing::RpcType rpc_type() const;
   void set_rpc_type(::grpc::testing::RpcType value);
 
   // optional string host = 9;
-  bool has_host() const;
   void clear_host();
   static const int kHostFieldNumber = 9;
   const ::std::string& host() const;
@@ -723,31 +1133,26 @@ class ClientConfig : public ::google::protobuf::Message {
   ::std::string* release_host();
   void set_allocated_host(::std::string* host);
 
+  // optional .grpc.testing.LoadType load_type = 10;
+  void clear_load_type();
+  static const int kLoadTypeFieldNumber = 10;
+  ::grpc::testing::LoadType load_type() const;
+  void set_load_type(::grpc::testing::LoadType value);
+
+  // optional .grpc.testing.LoadParams load_params = 11;
+  bool has_load_params() const;
+  void clear_load_params();
+  static const int kLoadParamsFieldNumber = 11;
+  const ::grpc::testing::LoadParams& load_params() const;
+  ::grpc::testing::LoadParams* mutable_load_params();
+  ::grpc::testing::LoadParams* release_load_params();
+  void set_allocated_load_params(::grpc::testing::LoadParams* load_params);
+
   // @@protoc_insertion_point(class_scope:grpc.testing.ClientConfig)
  private:
-  inline void set_has_client_type();
-  inline void clear_has_client_type();
-  inline void set_has_enable_ssl();
-  inline void clear_has_enable_ssl();
-  inline void set_has_outstanding_rpcs_per_channel();
-  inline void clear_has_outstanding_rpcs_per_channel();
-  inline void set_has_client_channels();
-  inline void clear_has_client_channels();
-  inline void set_has_payload_size();
-  inline void clear_has_payload_size();
-  inline void set_has_async_client_threads();
-  inline void clear_has_async_client_threads();
-  inline void set_has_rpc_type();
-  inline void clear_has_rpc_type();
-  inline void set_has_host();
-  inline void clear_has_host();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::google::protobuf::RepeatedPtrField< ::std::string> server_targets_;
   int client_type_;
   bool enable_ssl_;
@@ -757,6 +1162,9 @@ class ClientConfig : public ::google::protobuf::Message {
   ::google::protobuf::int32 async_client_threads_;
   ::google::protobuf::internal::ArenaStringPtr host_;
   int rpc_type_;
+  int load_type_;
+  ::grpc::testing::LoadParams* load_params_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
   friend void protobuf_ShutdownFile_qpstest_2eproto();
@@ -776,14 +1184,6 @@ class Mark : public ::google::protobuf::Message {
   inline Mark& operator=(const Mark& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -834,7 +1234,7 @@ class Mark : public ::google::protobuf::Message {
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
+  bool _is_default_instance_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
@@ -855,14 +1255,6 @@ class ClientArgs : public ::google::protobuf::Message {
   inline ClientArgs& operator=(const ClientArgs& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -944,13 +1336,13 @@ class ClientArgs : public ::google::protobuf::Message {
   inline void clear_has_argtype();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   union ArgtypeUnion {
     ArgtypeUnion() {}
     ::grpc::testing::ClientConfig* setup_;
     ::grpc::testing::Mark* mark_;
   } argtype_;
+  mutable int _cached_size_;
   ::google::protobuf::uint32 _oneof_case_[1];
 
   friend void  protobuf_AddDesc_qpstest_2eproto();
@@ -972,14 +1364,6 @@ class ClientStats : public ::google::protobuf::Message {
   inline ClientStats& operator=(const ClientStats& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -1026,7 +1410,7 @@ class ClientStats : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .grpc.testing.HistogramData latencies = 1;
+  // optional .grpc.testing.HistogramData latencies = 1;
   bool has_latencies() const;
   void clear_latencies();
   static const int kLatenciesFieldNumber = 1;
@@ -1035,48 +1419,34 @@ class ClientStats : public ::google::protobuf::Message {
   ::grpc::testing::HistogramData* release_latencies();
   void set_allocated_latencies(::grpc::testing::HistogramData* latencies);
 
-  // required double time_elapsed = 3;
-  bool has_time_elapsed() const;
+  // optional double time_elapsed = 2;
   void clear_time_elapsed();
-  static const int kTimeElapsedFieldNumber = 3;
+  static const int kTimeElapsedFieldNumber = 2;
   double time_elapsed() const;
   void set_time_elapsed(double value);
 
-  // required double time_user = 4;
-  bool has_time_user() const;
+  // optional double time_user = 3;
   void clear_time_user();
-  static const int kTimeUserFieldNumber = 4;
+  static const int kTimeUserFieldNumber = 3;
   double time_user() const;
   void set_time_user(double value);
 
-  // required double time_system = 5;
-  bool has_time_system() const;
+  // optional double time_system = 4;
   void clear_time_system();
-  static const int kTimeSystemFieldNumber = 5;
+  static const int kTimeSystemFieldNumber = 4;
   double time_system() const;
   void set_time_system(double value);
 
   // @@protoc_insertion_point(class_scope:grpc.testing.ClientStats)
  private:
-  inline void set_has_latencies();
-  inline void clear_has_latencies();
-  inline void set_has_time_elapsed();
-  inline void clear_has_time_elapsed();
-  inline void set_has_time_user();
-  inline void clear_has_time_user();
-  inline void set_has_time_system();
-  inline void clear_has_time_system();
-
-  // helper for ByteSize()
-  int RequiredFieldsByteSizeFallback() const;
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::grpc::testing::HistogramData* latencies_;
   double time_elapsed_;
   double time_user_;
   double time_system_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
   friend void protobuf_ShutdownFile_qpstest_2eproto();
@@ -1096,14 +1466,6 @@ class ClientStatus : public ::google::protobuf::Message {
   inline ClientStatus& operator=(const ClientStatus& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -1161,13 +1523,11 @@ class ClientStatus : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:grpc.testing.ClientStatus)
  private:
-  inline void set_has_stats();
-  inline void clear_has_stats();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::grpc::testing::ClientStats* stats_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
   friend void protobuf_ShutdownFile_qpstest_2eproto();
@@ -1187,14 +1547,6 @@ class ServerConfig : public ::google::protobuf::Message {
   inline ServerConfig& operator=(const ServerConfig& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -1241,29 +1593,25 @@ class ServerConfig : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .grpc.testing.ServerType server_type = 1;
-  bool has_server_type() const;
+  // optional .grpc.testing.ServerType server_type = 1;
   void clear_server_type();
   static const int kServerTypeFieldNumber = 1;
   ::grpc::testing::ServerType server_type() const;
   void set_server_type(::grpc::testing::ServerType value);
 
-  // optional int32 threads = 2 [default = 1];
-  bool has_threads() const;
+  // optional int32 threads = 2;
   void clear_threads();
   static const int kThreadsFieldNumber = 2;
   ::google::protobuf::int32 threads() const;
   void set_threads(::google::protobuf::int32 value);
 
-  // optional bool enable_ssl = 3 [default = false];
-  bool has_enable_ssl() const;
+  // optional bool enable_ssl = 3;
   void clear_enable_ssl();
   static const int kEnableSslFieldNumber = 3;
   bool enable_ssl() const;
   void set_enable_ssl(bool value);
 
   // optional string host = 4;
-  bool has_host() const;
   void clear_host();
   static const int kHostFieldNumber = 4;
   const ::std::string& host() const;
@@ -1276,22 +1624,14 @@ class ServerConfig : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:grpc.testing.ServerConfig)
  private:
-  inline void set_has_server_type();
-  inline void clear_has_server_type();
-  inline void set_has_threads();
-  inline void clear_has_threads();
-  inline void set_has_enable_ssl();
-  inline void clear_has_enable_ssl();
-  inline void set_has_host();
-  inline void clear_has_host();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   int server_type_;
   ::google::protobuf::int32 threads_;
   ::google::protobuf::internal::ArenaStringPtr host_;
   bool enable_ssl_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
   friend void protobuf_ShutdownFile_qpstest_2eproto();
@@ -1311,14 +1651,6 @@ class ServerArgs : public ::google::protobuf::Message {
   inline ServerArgs& operator=(const ServerArgs& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -1400,13 +1732,13 @@ class ServerArgs : public ::google::protobuf::Message {
   inline void clear_has_argtype();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   union ArgtypeUnion {
     ArgtypeUnion() {}
     ::grpc::testing::ServerConfig* setup_;
     ::grpc::testing::Mark* mark_;
   } argtype_;
+  mutable int _cached_size_;
   ::google::protobuf::uint32 _oneof_case_[1];
 
   friend void  protobuf_AddDesc_qpstest_2eproto();
@@ -1428,14 +1760,6 @@ class ServerStatus : public ::google::protobuf::Message {
   inline ServerStatus& operator=(const ServerStatus& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -1491,8 +1815,7 @@ class ServerStatus : public ::google::protobuf::Message {
   ::grpc::testing::ServerStats* release_stats();
   void set_allocated_stats(::grpc::testing::ServerStats* stats);
 
-  // required int32 port = 2;
-  bool has_port() const;
+  // optional int32 port = 2;
   void clear_port();
   static const int kPortFieldNumber = 2;
   ::google::protobuf::int32 port() const;
@@ -1500,16 +1823,12 @@ class ServerStatus : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:grpc.testing.ServerStatus)
  private:
-  inline void set_has_stats();
-  inline void clear_has_stats();
-  inline void set_has_port();
-  inline void clear_has_port();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::grpc::testing::ServerStats* stats_;
   ::google::protobuf::int32 port_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
   friend void protobuf_ShutdownFile_qpstest_2eproto();
@@ -1529,14 +1848,6 @@ class SimpleRequest : public ::google::protobuf::Message {
   inline SimpleRequest& operator=(const SimpleRequest& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -1583,15 +1894,13 @@ class SimpleRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .grpc.testing.PayloadType response_type = 1 [default = COMPRESSABLE];
-  bool has_response_type() const;
+  // optional .grpc.testing.PayloadType response_type = 1;
   void clear_response_type();
   static const int kResponseTypeFieldNumber = 1;
   ::grpc::testing::PayloadType response_type() const;
   void set_response_type(::grpc::testing::PayloadType value);
 
-  // optional int32 response_size = 2 [default = 0];
-  bool has_response_size() const;
+  // optional int32 response_size = 2;
   void clear_response_size();
   static const int kResponseSizeFieldNumber = 2;
   ::google::protobuf::int32 response_size() const;
@@ -1608,19 +1917,13 @@ class SimpleRequest : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:grpc.testing.SimpleRequest)
  private:
-  inline void set_has_response_type();
-  inline void clear_has_response_type();
-  inline void set_has_response_size();
-  inline void clear_has_response_size();
-  inline void set_has_payload();
-  inline void clear_has_payload();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   int response_type_;
   ::google::protobuf::int32 response_size_;
   ::grpc::testing::Payload* payload_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
   friend void protobuf_ShutdownFile_qpstest_2eproto();
@@ -1640,14 +1943,6 @@ class SimpleResponse : public ::google::protobuf::Message {
   inline SimpleResponse& operator=(const SimpleResponse& from) {
     CopyFrom(from);
     return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields();
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields();
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
@@ -1705,13 +2000,11 @@ class SimpleResponse : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:grpc.testing.SimpleResponse)
  private:
-  inline void set_has_payload();
-  inline void clear_has_payload();
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
+  bool _is_default_instance_;
   ::grpc::testing::Payload* payload_;
+  mutable int _cached_size_;
   friend void  protobuf_AddDesc_qpstest_2eproto();
   friend void protobuf_AssignDesc_qpstest_2eproto();
   friend void protobuf_ShutdownFile_qpstest_2eproto();
@@ -1728,25 +2021,15 @@ class SimpleResponse : public ::google::protobuf::Message {
 // StatsRequest
 
 // optional int32 test_num = 1;
-inline bool StatsRequest::has_test_num() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void StatsRequest::set_has_test_num() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void StatsRequest::clear_has_test_num() {
-  _has_bits_[0] &= ~0x00000001u;
-}
 inline void StatsRequest::clear_test_num() {
   test_num_ = 0;
-  clear_has_test_num();
 }
 inline ::google::protobuf::int32 StatsRequest::test_num() const {
   // @@protoc_insertion_point(field_get:grpc.testing.StatsRequest.test_num)
   return test_num_;
 }
 inline void StatsRequest::set_test_num(::google::protobuf::int32 value) {
-  set_has_test_num();
+  
   test_num_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.StatsRequest.test_num)
 }
@@ -1755,74 +2038,44 @@ inline void StatsRequest::set_test_num(::google::protobuf::int32 value) {
 
 // ServerStats
 
-// required double time_elapsed = 1;
-inline bool ServerStats::has_time_elapsed() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ServerStats::set_has_time_elapsed() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ServerStats::clear_has_time_elapsed() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional double time_elapsed = 1;
 inline void ServerStats::clear_time_elapsed() {
   time_elapsed_ = 0;
-  clear_has_time_elapsed();
 }
 inline double ServerStats::time_elapsed() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerStats.time_elapsed)
   return time_elapsed_;
 }
 inline void ServerStats::set_time_elapsed(double value) {
-  set_has_time_elapsed();
+  
   time_elapsed_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerStats.time_elapsed)
 }
 
-// required double time_user = 2;
-inline bool ServerStats::has_time_user() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ServerStats::set_has_time_user() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ServerStats::clear_has_time_user() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double time_user = 2;
 inline void ServerStats::clear_time_user() {
   time_user_ = 0;
-  clear_has_time_user();
 }
 inline double ServerStats::time_user() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerStats.time_user)
   return time_user_;
 }
 inline void ServerStats::set_time_user(double value) {
-  set_has_time_user();
+  
   time_user_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerStats.time_user)
 }
 
-// required double time_system = 3;
-inline bool ServerStats::has_time_system() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ServerStats::set_has_time_system() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ServerStats::clear_has_time_system() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double time_system = 3;
 inline void ServerStats::clear_time_system() {
   time_system_ = 0;
-  clear_has_time_system();
 }
 inline double ServerStats::time_system() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerStats.time_system)
   return time_system_;
 }
 inline void ServerStats::set_time_system(double value) {
-  set_has_time_system();
+  
   time_system_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerStats.time_system)
 }
@@ -1832,78 +2085,57 @@ inline void ServerStats::set_time_system(double value) {
 // Payload
 
 // optional .grpc.testing.PayloadType type = 1;
-inline bool Payload::has_type() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void Payload::set_has_type() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void Payload::clear_has_type() {
-  _has_bits_[0] &= ~0x00000001u;
-}
 inline void Payload::clear_type() {
-  type_ = 1;
-  clear_has_type();
+  type_ = 0;
 }
 inline ::grpc::testing::PayloadType Payload::type() const {
   // @@protoc_insertion_point(field_get:grpc.testing.Payload.type)
   return static_cast< ::grpc::testing::PayloadType >(type_);
 }
 inline void Payload::set_type(::grpc::testing::PayloadType value) {
-  assert(::grpc::testing::PayloadType_IsValid(value));
-  set_has_type();
+  
   type_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.Payload.type)
 }
 
 // optional bytes body = 2;
-inline bool Payload::has_body() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void Payload::set_has_body() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void Payload::clear_has_body() {
-  _has_bits_[0] &= ~0x00000002u;
-}
 inline void Payload::clear_body() {
   body_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_body();
 }
 inline const ::std::string& Payload::body() const {
   // @@protoc_insertion_point(field_get:grpc.testing.Payload.body)
   return body_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void Payload::set_body(const ::std::string& value) {
-  set_has_body();
+  
   body_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:grpc.testing.Payload.body)
 }
 inline void Payload::set_body(const char* value) {
-  set_has_body();
+  
   body_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:grpc.testing.Payload.body)
 }
 inline void Payload::set_body(const void* value, size_t size) {
-  set_has_body();
+  
   body_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:grpc.testing.Payload.body)
 }
 inline ::std::string* Payload::mutable_body() {
-  set_has_body();
+  
   // @@protoc_insertion_point(field_mutable:grpc.testing.Payload.body)
   return body_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* Payload::release_body() {
-  clear_has_body();
+  
   return body_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void Payload::set_allocated_body(::std::string* body) {
   if (body != NULL) {
-    set_has_body();
+    
   } else {
-    clear_has_body();
+    
   }
   body_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), body);
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.Payload.body)
@@ -1943,126 +2175,373 @@ HistogramData::mutable_bucket() {
   return &bucket_;
 }
 
-// required double min_seen = 2;
-inline bool HistogramData::has_min_seen() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void HistogramData::set_has_min_seen() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void HistogramData::clear_has_min_seen() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double min_seen = 2;
 inline void HistogramData::clear_min_seen() {
   min_seen_ = 0;
-  clear_has_min_seen();
 }
 inline double HistogramData::min_seen() const {
   // @@protoc_insertion_point(field_get:grpc.testing.HistogramData.min_seen)
   return min_seen_;
 }
 inline void HistogramData::set_min_seen(double value) {
-  set_has_min_seen();
+  
   min_seen_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.HistogramData.min_seen)
 }
 
-// required double max_seen = 3;
-inline bool HistogramData::has_max_seen() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void HistogramData::set_has_max_seen() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void HistogramData::clear_has_max_seen() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double max_seen = 3;
 inline void HistogramData::clear_max_seen() {
   max_seen_ = 0;
-  clear_has_max_seen();
 }
 inline double HistogramData::max_seen() const {
   // @@protoc_insertion_point(field_get:grpc.testing.HistogramData.max_seen)
   return max_seen_;
 }
 inline void HistogramData::set_max_seen(double value) {
-  set_has_max_seen();
+  
   max_seen_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.HistogramData.max_seen)
 }
 
-// required double sum = 4;
-inline bool HistogramData::has_sum() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void HistogramData::set_has_sum() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void HistogramData::clear_has_sum() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// optional double sum = 4;
 inline void HistogramData::clear_sum() {
   sum_ = 0;
-  clear_has_sum();
 }
 inline double HistogramData::sum() const {
   // @@protoc_insertion_point(field_get:grpc.testing.HistogramData.sum)
   return sum_;
 }
 inline void HistogramData::set_sum(double value) {
-  set_has_sum();
+  
   sum_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.HistogramData.sum)
 }
 
-// required double sum_of_squares = 5;
-inline bool HistogramData::has_sum_of_squares() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void HistogramData::set_has_sum_of_squares() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void HistogramData::clear_has_sum_of_squares() {
-  _has_bits_[0] &= ~0x00000010u;
-}
+// optional double sum_of_squares = 5;
 inline void HistogramData::clear_sum_of_squares() {
   sum_of_squares_ = 0;
-  clear_has_sum_of_squares();
 }
 inline double HistogramData::sum_of_squares() const {
   // @@protoc_insertion_point(field_get:grpc.testing.HistogramData.sum_of_squares)
   return sum_of_squares_;
 }
 inline void HistogramData::set_sum_of_squares(double value) {
-  set_has_sum_of_squares();
+  
   sum_of_squares_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.HistogramData.sum_of_squares)
 }
 
-// required double count = 6;
-inline bool HistogramData::has_count() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void HistogramData::set_has_count() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void HistogramData::clear_has_count() {
-  _has_bits_[0] &= ~0x00000020u;
-}
+// optional double count = 6;
 inline void HistogramData::clear_count() {
   count_ = 0;
-  clear_has_count();
 }
 inline double HistogramData::count() const {
   // @@protoc_insertion_point(field_get:grpc.testing.HistogramData.count)
   return count_;
 }
 inline void HistogramData::set_count(double value) {
-  set_has_count();
+  
   count_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.HistogramData.count)
 }
 
+// -------------------------------------------------------------------
+
+// PoissonParams
+
+// optional double offered_load = 1;
+inline void PoissonParams::clear_offered_load() {
+  offered_load_ = 0;
+}
+inline double PoissonParams::offered_load() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.PoissonParams.offered_load)
+  return offered_load_;
+}
+inline void PoissonParams::set_offered_load(double value) {
+  
+  offered_load_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.PoissonParams.offered_load)
+}
+
+// -------------------------------------------------------------------
+
+// UniformParams
+
+// optional double interarrival_lo = 1;
+inline void UniformParams::clear_interarrival_lo() {
+  interarrival_lo_ = 0;
+}
+inline double UniformParams::interarrival_lo() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.UniformParams.interarrival_lo)
+  return interarrival_lo_;
+}
+inline void UniformParams::set_interarrival_lo(double value) {
+  
+  interarrival_lo_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.UniformParams.interarrival_lo)
+}
+
+// optional double interarrival_hi = 2;
+inline void UniformParams::clear_interarrival_hi() {
+  interarrival_hi_ = 0;
+}
+inline double UniformParams::interarrival_hi() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.UniformParams.interarrival_hi)
+  return interarrival_hi_;
+}
+inline void UniformParams::set_interarrival_hi(double value) {
+  
+  interarrival_hi_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.UniformParams.interarrival_hi)
+}
+
+// -------------------------------------------------------------------
+
+// DeterministicParams
+
+// optional double offered_load = 1;
+inline void DeterministicParams::clear_offered_load() {
+  offered_load_ = 0;
+}
+inline double DeterministicParams::offered_load() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.DeterministicParams.offered_load)
+  return offered_load_;
+}
+inline void DeterministicParams::set_offered_load(double value) {
+  
+  offered_load_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.DeterministicParams.offered_load)
+}
+
+// -------------------------------------------------------------------
+
+// ParetoParams
+
+// optional double interarrival_base = 1;
+inline void ParetoParams::clear_interarrival_base() {
+  interarrival_base_ = 0;
+}
+inline double ParetoParams::interarrival_base() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.ParetoParams.interarrival_base)
+  return interarrival_base_;
+}
+inline void ParetoParams::set_interarrival_base(double value) {
+  
+  interarrival_base_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.ParetoParams.interarrival_base)
+}
+
+// optional double alpha = 2;
+inline void ParetoParams::clear_alpha() {
+  alpha_ = 0;
+}
+inline double ParetoParams::alpha() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.ParetoParams.alpha)
+  return alpha_;
+}
+inline void ParetoParams::set_alpha(double value) {
+  
+  alpha_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.ParetoParams.alpha)
+}
+
+// -------------------------------------------------------------------
+
+// LoadParams
+
+// optional .grpc.testing.PoissonParams poisson = 1;
+inline bool LoadParams::has_poisson() const {
+  return load_case() == kPoisson;
+}
+inline void LoadParams::set_has_poisson() {
+  _oneof_case_[0] = kPoisson;
+}
+inline void LoadParams::clear_poisson() {
+  if (has_poisson()) {
+    delete load_.poisson_;
+    clear_has_load();
+  }
+}
+inline const ::grpc::testing::PoissonParams& LoadParams::poisson() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.LoadParams.poisson)
+  return has_poisson() ? *load_.poisson_
+                      : ::grpc::testing::PoissonParams::default_instance();
+}
+inline ::grpc::testing::PoissonParams* LoadParams::mutable_poisson() {
+  if (!has_poisson()) {
+    clear_load();
+    set_has_poisson();
+    load_.poisson_ = new ::grpc::testing::PoissonParams;
+  }
+  // @@protoc_insertion_point(field_mutable:grpc.testing.LoadParams.poisson)
+  return load_.poisson_;
+}
+inline ::grpc::testing::PoissonParams* LoadParams::release_poisson() {
+  if (has_poisson()) {
+    clear_has_load();
+    ::grpc::testing::PoissonParams* temp = load_.poisson_;
+    load_.poisson_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline void LoadParams::set_allocated_poisson(::grpc::testing::PoissonParams* poisson) {
+  clear_load();
+  if (poisson) {
+    set_has_poisson();
+    load_.poisson_ = poisson;
+  }
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.LoadParams.poisson)
+}
+
+// optional .grpc.testing.UniformParams uniform = 2;
+inline bool LoadParams::has_uniform() const {
+  return load_case() == kUniform;
+}
+inline void LoadParams::set_has_uniform() {
+  _oneof_case_[0] = kUniform;
+}
+inline void LoadParams::clear_uniform() {
+  if (has_uniform()) {
+    delete load_.uniform_;
+    clear_has_load();
+  }
+}
+inline const ::grpc::testing::UniformParams& LoadParams::uniform() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.LoadParams.uniform)
+  return has_uniform() ? *load_.uniform_
+                      : ::grpc::testing::UniformParams::default_instance();
+}
+inline ::grpc::testing::UniformParams* LoadParams::mutable_uniform() {
+  if (!has_uniform()) {
+    clear_load();
+    set_has_uniform();
+    load_.uniform_ = new ::grpc::testing::UniformParams;
+  }
+  // @@protoc_insertion_point(field_mutable:grpc.testing.LoadParams.uniform)
+  return load_.uniform_;
+}
+inline ::grpc::testing::UniformParams* LoadParams::release_uniform() {
+  if (has_uniform()) {
+    clear_has_load();
+    ::grpc::testing::UniformParams* temp = load_.uniform_;
+    load_.uniform_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline void LoadParams::set_allocated_uniform(::grpc::testing::UniformParams* uniform) {
+  clear_load();
+  if (uniform) {
+    set_has_uniform();
+    load_.uniform_ = uniform;
+  }
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.LoadParams.uniform)
+}
+
+// optional .grpc.testing.DeterministicParams determ = 3;
+inline bool LoadParams::has_determ() const {
+  return load_case() == kDeterm;
+}
+inline void LoadParams::set_has_determ() {
+  _oneof_case_[0] = kDeterm;
+}
+inline void LoadParams::clear_determ() {
+  if (has_determ()) {
+    delete load_.determ_;
+    clear_has_load();
+  }
+}
+inline const ::grpc::testing::DeterministicParams& LoadParams::determ() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.LoadParams.determ)
+  return has_determ() ? *load_.determ_
+                      : ::grpc::testing::DeterministicParams::default_instance();
+}
+inline ::grpc::testing::DeterministicParams* LoadParams::mutable_determ() {
+  if (!has_determ()) {
+    clear_load();
+    set_has_determ();
+    load_.determ_ = new ::grpc::testing::DeterministicParams;
+  }
+  // @@protoc_insertion_point(field_mutable:grpc.testing.LoadParams.determ)
+  return load_.determ_;
+}
+inline ::grpc::testing::DeterministicParams* LoadParams::release_determ() {
+  if (has_determ()) {
+    clear_has_load();
+    ::grpc::testing::DeterministicParams* temp = load_.determ_;
+    load_.determ_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline void LoadParams::set_allocated_determ(::grpc::testing::DeterministicParams* determ) {
+  clear_load();
+  if (determ) {
+    set_has_determ();
+    load_.determ_ = determ;
+  }
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.LoadParams.determ)
+}
+
+// optional .grpc.testing.ParetoParams pareto = 4;
+inline bool LoadParams::has_pareto() const {
+  return load_case() == kPareto;
+}
+inline void LoadParams::set_has_pareto() {
+  _oneof_case_[0] = kPareto;
+}
+inline void LoadParams::clear_pareto() {
+  if (has_pareto()) {
+    delete load_.pareto_;
+    clear_has_load();
+  }
+}
+inline const ::grpc::testing::ParetoParams& LoadParams::pareto() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.LoadParams.pareto)
+  return has_pareto() ? *load_.pareto_
+                      : ::grpc::testing::ParetoParams::default_instance();
+}
+inline ::grpc::testing::ParetoParams* LoadParams::mutable_pareto() {
+  if (!has_pareto()) {
+    clear_load();
+    set_has_pareto();
+    load_.pareto_ = new ::grpc::testing::ParetoParams;
+  }
+  // @@protoc_insertion_point(field_mutable:grpc.testing.LoadParams.pareto)
+  return load_.pareto_;
+}
+inline ::grpc::testing::ParetoParams* LoadParams::release_pareto() {
+  if (has_pareto()) {
+    clear_has_load();
+    ::grpc::testing::ParetoParams* temp = load_.pareto_;
+    load_.pareto_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+inline void LoadParams::set_allocated_pareto(::grpc::testing::ParetoParams* pareto) {
+  clear_load();
+  if (pareto) {
+    set_has_pareto();
+    load_.pareto_ = pareto;
+  }
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.LoadParams.pareto)
+}
+
+inline bool LoadParams::has_load() const {
+  return load_case() != LOAD_NOT_SET;
+}
+inline void LoadParams::clear_has_load() {
+  _oneof_case_[0] = LOAD_NOT_SET;
+}
+inline LoadParams::LoadCase LoadParams::load_case() const {
+  return LoadParams::LoadCase(_oneof_case_[0]);
+}
 // -------------------------------------------------------------------
 
 // ClientConfig
@@ -2121,227 +2600,196 @@ ClientConfig::mutable_server_targets() {
   return &server_targets_;
 }
 
-// required .grpc.testing.ClientType client_type = 2;
-inline bool ClientConfig::has_client_type() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ClientConfig::set_has_client_type() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ClientConfig::clear_has_client_type() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional .grpc.testing.ClientType client_type = 2;
 inline void ClientConfig::clear_client_type() {
-  client_type_ = 1;
-  clear_has_client_type();
+  client_type_ = 0;
 }
 inline ::grpc::testing::ClientType ClientConfig::client_type() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.client_type)
   return static_cast< ::grpc::testing::ClientType >(client_type_);
 }
 inline void ClientConfig::set_client_type(::grpc::testing::ClientType value) {
-  assert(::grpc::testing::ClientType_IsValid(value));
-  set_has_client_type();
+  
   client_type_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.client_type)
 }
 
-// optional bool enable_ssl = 3 [default = false];
-inline bool ClientConfig::has_enable_ssl() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ClientConfig::set_has_enable_ssl() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ClientConfig::clear_has_enable_ssl() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional bool enable_ssl = 3;
 inline void ClientConfig::clear_enable_ssl() {
   enable_ssl_ = false;
-  clear_has_enable_ssl();
 }
 inline bool ClientConfig::enable_ssl() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.enable_ssl)
   return enable_ssl_;
 }
 inline void ClientConfig::set_enable_ssl(bool value) {
-  set_has_enable_ssl();
+  
   enable_ssl_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.enable_ssl)
 }
 
-// required int32 outstanding_rpcs_per_channel = 4;
-inline bool ClientConfig::has_outstanding_rpcs_per_channel() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ClientConfig::set_has_outstanding_rpcs_per_channel() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ClientConfig::clear_has_outstanding_rpcs_per_channel() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// optional int32 outstanding_rpcs_per_channel = 4;
 inline void ClientConfig::clear_outstanding_rpcs_per_channel() {
   outstanding_rpcs_per_channel_ = 0;
-  clear_has_outstanding_rpcs_per_channel();
 }
 inline ::google::protobuf::int32 ClientConfig::outstanding_rpcs_per_channel() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.outstanding_rpcs_per_channel)
   return outstanding_rpcs_per_channel_;
 }
 inline void ClientConfig::set_outstanding_rpcs_per_channel(::google::protobuf::int32 value) {
-  set_has_outstanding_rpcs_per_channel();
+  
   outstanding_rpcs_per_channel_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.outstanding_rpcs_per_channel)
 }
 
-// required int32 client_channels = 5;
-inline bool ClientConfig::has_client_channels() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-inline void ClientConfig::set_has_client_channels() {
-  _has_bits_[0] |= 0x00000010u;
-}
-inline void ClientConfig::clear_has_client_channels() {
-  _has_bits_[0] &= ~0x00000010u;
-}
+// optional int32 client_channels = 5;
 inline void ClientConfig::clear_client_channels() {
   client_channels_ = 0;
-  clear_has_client_channels();
 }
 inline ::google::protobuf::int32 ClientConfig::client_channels() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.client_channels)
   return client_channels_;
 }
 inline void ClientConfig::set_client_channels(::google::protobuf::int32 value) {
-  set_has_client_channels();
+  
   client_channels_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.client_channels)
 }
 
-// required int32 payload_size = 6;
-inline bool ClientConfig::has_payload_size() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-inline void ClientConfig::set_has_payload_size() {
-  _has_bits_[0] |= 0x00000020u;
-}
-inline void ClientConfig::clear_has_payload_size() {
-  _has_bits_[0] &= ~0x00000020u;
-}
+// optional int32 payload_size = 6;
 inline void ClientConfig::clear_payload_size() {
   payload_size_ = 0;
-  clear_has_payload_size();
 }
 inline ::google::protobuf::int32 ClientConfig::payload_size() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.payload_size)
   return payload_size_;
 }
 inline void ClientConfig::set_payload_size(::google::protobuf::int32 value) {
-  set_has_payload_size();
+  
   payload_size_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.payload_size)
 }
 
 // optional int32 async_client_threads = 7;
-inline bool ClientConfig::has_async_client_threads() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-inline void ClientConfig::set_has_async_client_threads() {
-  _has_bits_[0] |= 0x00000040u;
-}
-inline void ClientConfig::clear_has_async_client_threads() {
-  _has_bits_[0] &= ~0x00000040u;
-}
 inline void ClientConfig::clear_async_client_threads() {
   async_client_threads_ = 0;
-  clear_has_async_client_threads();
 }
 inline ::google::protobuf::int32 ClientConfig::async_client_threads() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.async_client_threads)
   return async_client_threads_;
 }
 inline void ClientConfig::set_async_client_threads(::google::protobuf::int32 value) {
-  set_has_async_client_threads();
+  
   async_client_threads_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.async_client_threads)
 }
 
-// optional .grpc.testing.RpcType rpc_type = 8 [default = UNARY];
-inline bool ClientConfig::has_rpc_type() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void ClientConfig::set_has_rpc_type() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void ClientConfig::clear_has_rpc_type() {
-  _has_bits_[0] &= ~0x00000080u;
-}
+// optional .grpc.testing.RpcType rpc_type = 8;
 inline void ClientConfig::clear_rpc_type() {
-  rpc_type_ = 1;
-  clear_has_rpc_type();
+  rpc_type_ = 0;
 }
 inline ::grpc::testing::RpcType ClientConfig::rpc_type() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.rpc_type)
   return static_cast< ::grpc::testing::RpcType >(rpc_type_);
 }
 inline void ClientConfig::set_rpc_type(::grpc::testing::RpcType value) {
-  assert(::grpc::testing::RpcType_IsValid(value));
-  set_has_rpc_type();
+  
   rpc_type_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.rpc_type)
 }
 
 // optional string host = 9;
-inline bool ClientConfig::has_host() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-inline void ClientConfig::set_has_host() {
-  _has_bits_[0] |= 0x00000100u;
-}
-inline void ClientConfig::clear_has_host() {
-  _has_bits_[0] &= ~0x00000100u;
-}
 inline void ClientConfig::clear_host() {
   host_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_host();
 }
 inline const ::std::string& ClientConfig::host() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.host)
   return host_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void ClientConfig::set_host(const ::std::string& value) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.host)
 }
 inline void ClientConfig::set_host(const char* value) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:grpc.testing.ClientConfig.host)
 }
 inline void ClientConfig::set_host(const char* value, size_t size) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:grpc.testing.ClientConfig.host)
 }
 inline ::std::string* ClientConfig::mutable_host() {
-  set_has_host();
+  
   // @@protoc_insertion_point(field_mutable:grpc.testing.ClientConfig.host)
   return host_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* ClientConfig::release_host() {
-  clear_has_host();
+  
   return host_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void ClientConfig::set_allocated_host(::std::string* host) {
   if (host != NULL) {
-    set_has_host();
+    
   } else {
-    clear_has_host();
+    
   }
   host_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), host);
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.ClientConfig.host)
+}
+
+// optional .grpc.testing.LoadType load_type = 10;
+inline void ClientConfig::clear_load_type() {
+  load_type_ = 0;
+}
+inline ::grpc::testing::LoadType ClientConfig::load_type() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.load_type)
+  return static_cast< ::grpc::testing::LoadType >(load_type_);
+}
+inline void ClientConfig::set_load_type(::grpc::testing::LoadType value) {
+  
+  load_type_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.load_type)
+}
+
+// optional .grpc.testing.LoadParams load_params = 11;
+inline bool ClientConfig::has_load_params() const {
+  return !_is_default_instance_ && load_params_ != NULL;
+}
+inline void ClientConfig::clear_load_params() {
+  if (GetArenaNoVirtual() == NULL && load_params_ != NULL) delete load_params_;
+  load_params_ = NULL;
+}
+inline const ::grpc::testing::LoadParams& ClientConfig::load_params() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.load_params)
+  return load_params_ != NULL ? *load_params_ : *default_instance_->load_params_;
+}
+inline ::grpc::testing::LoadParams* ClientConfig::mutable_load_params() {
+  
+  if (load_params_ == NULL) {
+    load_params_ = new ::grpc::testing::LoadParams;
+  }
+  // @@protoc_insertion_point(field_mutable:grpc.testing.ClientConfig.load_params)
+  return load_params_;
+}
+inline ::grpc::testing::LoadParams* ClientConfig::release_load_params() {
+  
+  ::grpc::testing::LoadParams* temp = load_params_;
+  load_params_ = NULL;
+  return temp;
+}
+inline void ClientConfig::set_allocated_load_params(::grpc::testing::LoadParams* load_params) {
+  delete load_params_;
+  load_params_ = load_params;
+  if (load_params) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.ClientConfig.load_params)
 }
 
 // -------------------------------------------------------------------
@@ -2457,26 +2905,20 @@ inline ClientArgs::ArgtypeCase ClientArgs::argtype_case() const {
 
 // ClientStats
 
-// required .grpc.testing.HistogramData latencies = 1;
+// optional .grpc.testing.HistogramData latencies = 1;
 inline bool ClientStats::has_latencies() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ClientStats::set_has_latencies() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ClientStats::clear_has_latencies() {
-  _has_bits_[0] &= ~0x00000001u;
+  return !_is_default_instance_ && latencies_ != NULL;
 }
 inline void ClientStats::clear_latencies() {
-  if (latencies_ != NULL) latencies_->::grpc::testing::HistogramData::Clear();
-  clear_has_latencies();
+  if (GetArenaNoVirtual() == NULL && latencies_ != NULL) delete latencies_;
+  latencies_ = NULL;
 }
 inline const ::grpc::testing::HistogramData& ClientStats::latencies() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientStats.latencies)
   return latencies_ != NULL ? *latencies_ : *default_instance_->latencies_;
 }
 inline ::grpc::testing::HistogramData* ClientStats::mutable_latencies() {
-  set_has_latencies();
+  
   if (latencies_ == NULL) {
     latencies_ = new ::grpc::testing::HistogramData;
   }
@@ -2484,7 +2926,7 @@ inline ::grpc::testing::HistogramData* ClientStats::mutable_latencies() {
   return latencies_;
 }
 inline ::grpc::testing::HistogramData* ClientStats::release_latencies() {
-  clear_has_latencies();
+  
   ::grpc::testing::HistogramData* temp = latencies_;
   latencies_ = NULL;
   return temp;
@@ -2493,81 +2935,51 @@ inline void ClientStats::set_allocated_latencies(::grpc::testing::HistogramData*
   delete latencies_;
   latencies_ = latencies;
   if (latencies) {
-    set_has_latencies();
+    
   } else {
-    clear_has_latencies();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.ClientStats.latencies)
 }
 
-// required double time_elapsed = 3;
-inline bool ClientStats::has_time_elapsed() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ClientStats::set_has_time_elapsed() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ClientStats::clear_has_time_elapsed() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double time_elapsed = 2;
 inline void ClientStats::clear_time_elapsed() {
   time_elapsed_ = 0;
-  clear_has_time_elapsed();
 }
 inline double ClientStats::time_elapsed() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientStats.time_elapsed)
   return time_elapsed_;
 }
 inline void ClientStats::set_time_elapsed(double value) {
-  set_has_time_elapsed();
+  
   time_elapsed_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientStats.time_elapsed)
 }
 
-// required double time_user = 4;
-inline bool ClientStats::has_time_user() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ClientStats::set_has_time_user() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ClientStats::clear_has_time_user() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double time_user = 3;
 inline void ClientStats::clear_time_user() {
   time_user_ = 0;
-  clear_has_time_user();
 }
 inline double ClientStats::time_user() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientStats.time_user)
   return time_user_;
 }
 inline void ClientStats::set_time_user(double value) {
-  set_has_time_user();
+  
   time_user_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientStats.time_user)
 }
 
-// required double time_system = 5;
-inline bool ClientStats::has_time_system() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ClientStats::set_has_time_system() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ClientStats::clear_has_time_system() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// optional double time_system = 4;
 inline void ClientStats::clear_time_system() {
   time_system_ = 0;
-  clear_has_time_system();
 }
 inline double ClientStats::time_system() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientStats.time_system)
   return time_system_;
 }
 inline void ClientStats::set_time_system(double value) {
-  set_has_time_system();
+  
   time_system_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientStats.time_system)
 }
@@ -2578,24 +2990,18 @@ inline void ClientStats::set_time_system(double value) {
 
 // optional .grpc.testing.ClientStats stats = 1;
 inline bool ClientStatus::has_stats() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ClientStatus::set_has_stats() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ClientStatus::clear_has_stats() {
-  _has_bits_[0] &= ~0x00000001u;
+  return !_is_default_instance_ && stats_ != NULL;
 }
 inline void ClientStatus::clear_stats() {
-  if (stats_ != NULL) stats_->::grpc::testing::ClientStats::Clear();
-  clear_has_stats();
+  if (GetArenaNoVirtual() == NULL && stats_ != NULL) delete stats_;
+  stats_ = NULL;
 }
 inline const ::grpc::testing::ClientStats& ClientStatus::stats() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientStatus.stats)
   return stats_ != NULL ? *stats_ : *default_instance_->stats_;
 }
 inline ::grpc::testing::ClientStats* ClientStatus::mutable_stats() {
-  set_has_stats();
+  
   if (stats_ == NULL) {
     stats_ = new ::grpc::testing::ClientStats;
   }
@@ -2603,7 +3009,7 @@ inline ::grpc::testing::ClientStats* ClientStatus::mutable_stats() {
   return stats_;
 }
 inline ::grpc::testing::ClientStats* ClientStatus::release_stats() {
-  clear_has_stats();
+  
   ::grpc::testing::ClientStats* temp = stats_;
   stats_ = NULL;
   return temp;
@@ -2612,9 +3018,9 @@ inline void ClientStatus::set_allocated_stats(::grpc::testing::ClientStats* stat
   delete stats_;
   stats_ = stats;
   if (stats) {
-    set_has_stats();
+    
   } else {
-    clear_has_stats();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.ClientStatus.stats)
 }
@@ -2623,127 +3029,86 @@ inline void ClientStatus::set_allocated_stats(::grpc::testing::ClientStats* stat
 
 // ServerConfig
 
-// required .grpc.testing.ServerType server_type = 1;
-inline bool ServerConfig::has_server_type() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ServerConfig::set_has_server_type() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ServerConfig::clear_has_server_type() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional .grpc.testing.ServerType server_type = 1;
 inline void ServerConfig::clear_server_type() {
-  server_type_ = 1;
-  clear_has_server_type();
+  server_type_ = 0;
 }
 inline ::grpc::testing::ServerType ServerConfig::server_type() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerConfig.server_type)
   return static_cast< ::grpc::testing::ServerType >(server_type_);
 }
 inline void ServerConfig::set_server_type(::grpc::testing::ServerType value) {
-  assert(::grpc::testing::ServerType_IsValid(value));
-  set_has_server_type();
+  
   server_type_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerConfig.server_type)
 }
 
-// optional int32 threads = 2 [default = 1];
-inline bool ServerConfig::has_threads() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ServerConfig::set_has_threads() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ServerConfig::clear_has_threads() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional int32 threads = 2;
 inline void ServerConfig::clear_threads() {
-  threads_ = 1;
-  clear_has_threads();
+  threads_ = 0;
 }
 inline ::google::protobuf::int32 ServerConfig::threads() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerConfig.threads)
   return threads_;
 }
 inline void ServerConfig::set_threads(::google::protobuf::int32 value) {
-  set_has_threads();
+  
   threads_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerConfig.threads)
 }
 
-// optional bool enable_ssl = 3 [default = false];
-inline bool ServerConfig::has_enable_ssl() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void ServerConfig::set_has_enable_ssl() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void ServerConfig::clear_has_enable_ssl() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional bool enable_ssl = 3;
 inline void ServerConfig::clear_enable_ssl() {
   enable_ssl_ = false;
-  clear_has_enable_ssl();
 }
 inline bool ServerConfig::enable_ssl() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerConfig.enable_ssl)
   return enable_ssl_;
 }
 inline void ServerConfig::set_enable_ssl(bool value) {
-  set_has_enable_ssl();
+  
   enable_ssl_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerConfig.enable_ssl)
 }
 
 // optional string host = 4;
-inline bool ServerConfig::has_host() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-inline void ServerConfig::set_has_host() {
-  _has_bits_[0] |= 0x00000008u;
-}
-inline void ServerConfig::clear_has_host() {
-  _has_bits_[0] &= ~0x00000008u;
-}
 inline void ServerConfig::clear_host() {
   host_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_host();
 }
 inline const ::std::string& ServerConfig::host() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerConfig.host)
   return host_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void ServerConfig::set_host(const ::std::string& value) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:grpc.testing.ServerConfig.host)
 }
 inline void ServerConfig::set_host(const char* value) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:grpc.testing.ServerConfig.host)
 }
 inline void ServerConfig::set_host(const char* value, size_t size) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:grpc.testing.ServerConfig.host)
 }
 inline ::std::string* ServerConfig::mutable_host() {
-  set_has_host();
+  
   // @@protoc_insertion_point(field_mutable:grpc.testing.ServerConfig.host)
   return host_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline ::std::string* ServerConfig::release_host() {
-  clear_has_host();
+  
   return host_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 inline void ServerConfig::set_allocated_host(::std::string* host) {
   if (host != NULL) {
-    set_has_host();
+    
   } else {
-    clear_has_host();
+    
   }
   host_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), host);
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.ServerConfig.host)
@@ -2860,24 +3225,18 @@ inline ServerArgs::ArgtypeCase ServerArgs::argtype_case() const {
 
 // optional .grpc.testing.ServerStats stats = 1;
 inline bool ServerStatus::has_stats() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void ServerStatus::set_has_stats() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void ServerStatus::clear_has_stats() {
-  _has_bits_[0] &= ~0x00000001u;
+  return !_is_default_instance_ && stats_ != NULL;
 }
 inline void ServerStatus::clear_stats() {
-  if (stats_ != NULL) stats_->::grpc::testing::ServerStats::Clear();
-  clear_has_stats();
+  if (GetArenaNoVirtual() == NULL && stats_ != NULL) delete stats_;
+  stats_ = NULL;
 }
 inline const ::grpc::testing::ServerStats& ServerStatus::stats() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerStatus.stats)
   return stats_ != NULL ? *stats_ : *default_instance_->stats_;
 }
 inline ::grpc::testing::ServerStats* ServerStatus::mutable_stats() {
-  set_has_stats();
+  
   if (stats_ == NULL) {
     stats_ = new ::grpc::testing::ServerStats;
   }
@@ -2885,7 +3244,7 @@ inline ::grpc::testing::ServerStats* ServerStatus::mutable_stats() {
   return stats_;
 }
 inline ::grpc::testing::ServerStats* ServerStatus::release_stats() {
-  clear_has_stats();
+  
   ::grpc::testing::ServerStats* temp = stats_;
   stats_ = NULL;
   return temp;
@@ -2894,33 +3253,23 @@ inline void ServerStatus::set_allocated_stats(::grpc::testing::ServerStats* stat
   delete stats_;
   stats_ = stats;
   if (stats) {
-    set_has_stats();
+    
   } else {
-    clear_has_stats();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.ServerStatus.stats)
 }
 
-// required int32 port = 2;
-inline bool ServerStatus::has_port() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void ServerStatus::set_has_port() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void ServerStatus::clear_has_port() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional int32 port = 2;
 inline void ServerStatus::clear_port() {
   port_ = 0;
-  clear_has_port();
 }
 inline ::google::protobuf::int32 ServerStatus::port() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerStatus.port)
   return port_;
 }
 inline void ServerStatus::set_port(::google::protobuf::int32 value) {
-  set_has_port();
+  
   port_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerStatus.port)
 }
@@ -2929,75 +3278,48 @@ inline void ServerStatus::set_port(::google::protobuf::int32 value) {
 
 // SimpleRequest
 
-// optional .grpc.testing.PayloadType response_type = 1 [default = COMPRESSABLE];
-inline bool SimpleRequest::has_response_type() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void SimpleRequest::set_has_response_type() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void SimpleRequest::clear_has_response_type() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional .grpc.testing.PayloadType response_type = 1;
 inline void SimpleRequest::clear_response_type() {
-  response_type_ = 1;
-  clear_has_response_type();
+  response_type_ = 0;
 }
 inline ::grpc::testing::PayloadType SimpleRequest::response_type() const {
   // @@protoc_insertion_point(field_get:grpc.testing.SimpleRequest.response_type)
   return static_cast< ::grpc::testing::PayloadType >(response_type_);
 }
 inline void SimpleRequest::set_response_type(::grpc::testing::PayloadType value) {
-  assert(::grpc::testing::PayloadType_IsValid(value));
-  set_has_response_type();
+  
   response_type_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.SimpleRequest.response_type)
 }
 
-// optional int32 response_size = 2 [default = 0];
-inline bool SimpleRequest::has_response_size() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void SimpleRequest::set_has_response_size() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void SimpleRequest::clear_has_response_size() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional int32 response_size = 2;
 inline void SimpleRequest::clear_response_size() {
   response_size_ = 0;
-  clear_has_response_size();
 }
 inline ::google::protobuf::int32 SimpleRequest::response_size() const {
   // @@protoc_insertion_point(field_get:grpc.testing.SimpleRequest.response_size)
   return response_size_;
 }
 inline void SimpleRequest::set_response_size(::google::protobuf::int32 value) {
-  set_has_response_size();
+  
   response_size_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.SimpleRequest.response_size)
 }
 
 // optional .grpc.testing.Payload payload = 3;
 inline bool SimpleRequest::has_payload() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-inline void SimpleRequest::set_has_payload() {
-  _has_bits_[0] |= 0x00000004u;
-}
-inline void SimpleRequest::clear_has_payload() {
-  _has_bits_[0] &= ~0x00000004u;
+  return !_is_default_instance_ && payload_ != NULL;
 }
 inline void SimpleRequest::clear_payload() {
-  if (payload_ != NULL) payload_->::grpc::testing::Payload::Clear();
-  clear_has_payload();
+  if (GetArenaNoVirtual() == NULL && payload_ != NULL) delete payload_;
+  payload_ = NULL;
 }
 inline const ::grpc::testing::Payload& SimpleRequest::payload() const {
   // @@protoc_insertion_point(field_get:grpc.testing.SimpleRequest.payload)
   return payload_ != NULL ? *payload_ : *default_instance_->payload_;
 }
 inline ::grpc::testing::Payload* SimpleRequest::mutable_payload() {
-  set_has_payload();
+  
   if (payload_ == NULL) {
     payload_ = new ::grpc::testing::Payload;
   }
@@ -3005,7 +3327,7 @@ inline ::grpc::testing::Payload* SimpleRequest::mutable_payload() {
   return payload_;
 }
 inline ::grpc::testing::Payload* SimpleRequest::release_payload() {
-  clear_has_payload();
+  
   ::grpc::testing::Payload* temp = payload_;
   payload_ = NULL;
   return temp;
@@ -3014,9 +3336,9 @@ inline void SimpleRequest::set_allocated_payload(::grpc::testing::Payload* paylo
   delete payload_;
   payload_ = payload;
   if (payload) {
-    set_has_payload();
+    
   } else {
-    clear_has_payload();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.SimpleRequest.payload)
 }
@@ -3027,24 +3349,18 @@ inline void SimpleRequest::set_allocated_payload(::grpc::testing::Payload* paylo
 
 // optional .grpc.testing.Payload payload = 1;
 inline bool SimpleResponse::has_payload() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void SimpleResponse::set_has_payload() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void SimpleResponse::clear_has_payload() {
-  _has_bits_[0] &= ~0x00000001u;
+  return !_is_default_instance_ && payload_ != NULL;
 }
 inline void SimpleResponse::clear_payload() {
-  if (payload_ != NULL) payload_->::grpc::testing::Payload::Clear();
-  clear_has_payload();
+  if (GetArenaNoVirtual() == NULL && payload_ != NULL) delete payload_;
+  payload_ = NULL;
 }
 inline const ::grpc::testing::Payload& SimpleResponse::payload() const {
   // @@protoc_insertion_point(field_get:grpc.testing.SimpleResponse.payload)
   return payload_ != NULL ? *payload_ : *default_instance_->payload_;
 }
 inline ::grpc::testing::Payload* SimpleResponse::mutable_payload() {
-  set_has_payload();
+  
   if (payload_ == NULL) {
     payload_ = new ::grpc::testing::Payload;
   }
@@ -3052,7 +3368,7 @@ inline ::grpc::testing::Payload* SimpleResponse::mutable_payload() {
   return payload_;
 }
 inline ::grpc::testing::Payload* SimpleResponse::release_payload() {
-  clear_has_payload();
+  
   ::grpc::testing::Payload* temp = payload_;
   payload_ = NULL;
   return temp;
@@ -3061,14 +3377,24 @@ inline void SimpleResponse::set_allocated_payload(::grpc::testing::Payload* payl
   delete payload_;
   payload_ = payload;
   if (payload) {
-    set_has_payload();
+    
   } else {
-    clear_has_payload();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.SimpleResponse.payload)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -3124,6 +3450,11 @@ template <> struct is_proto_enum< ::grpc::testing::RpcType> : ::google::protobuf
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::grpc::testing::RpcType>() {
   return ::grpc::testing::RpcType_descriptor();
+}
+template <> struct is_proto_enum< ::grpc::testing::LoadType> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::grpc::testing::LoadType>() {
+  return ::grpc::testing::LoadType_descriptor();
 }
 
 }  // namespace protobuf

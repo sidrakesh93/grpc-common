@@ -33,6 +33,27 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* HistogramData_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   HistogramData_reflection_ = NULL;
+const ::google::protobuf::Descriptor* PoissonParams_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  PoissonParams_reflection_ = NULL;
+const ::google::protobuf::Descriptor* UniformParams_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  UniformParams_reflection_ = NULL;
+const ::google::protobuf::Descriptor* DeterministicParams_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  DeterministicParams_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ParetoParams_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  ParetoParams_reflection_ = NULL;
+const ::google::protobuf::Descriptor* LoadParams_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  LoadParams_reflection_ = NULL;
+struct LoadParamsOneofInstance {
+  const ::grpc::testing::PoissonParams* poisson_;
+  const ::grpc::testing::UniformParams* uniform_;
+  const ::grpc::testing::DeterministicParams* determ_;
+  const ::grpc::testing::ParetoParams* pareto_;
+}* LoadParams_default_oneof_instance_ = NULL;
 const ::google::protobuf::Descriptor* ClientConfig_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ClientConfig_reflection_ = NULL;
@@ -75,6 +96,7 @@ const ::google::protobuf::EnumDescriptor* PayloadType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ClientType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* ServerType_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* RpcType_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* LoadType_descriptor_ = NULL;
 
 }  // namespace
 
@@ -94,12 +116,12 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       StatsRequest_descriptor_,
       StatsRequest::default_instance_,
       StatsRequest_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(StatsRequest, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(StatsRequest),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(StatsRequest, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(StatsRequest, _is_default_instance_));
   ServerStats_descriptor_ = file->message_type(1);
   static const int ServerStats_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerStats, time_elapsed_),
@@ -111,12 +133,12 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       ServerStats_descriptor_,
       ServerStats::default_instance_,
       ServerStats_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerStats, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(ServerStats),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerStats, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerStats, _is_default_instance_));
   Payload_descriptor_ = file->message_type(2);
   static const int Payload_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Payload, type_),
@@ -127,12 +149,12 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       Payload_descriptor_,
       Payload::default_instance_,
       Payload_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Payload, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(Payload),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Payload, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Payload, _is_default_instance_));
   HistogramData_descriptor_ = file->message_type(3);
   static const int HistogramData_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HistogramData, bucket_),
@@ -147,14 +169,97 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       HistogramData_descriptor_,
       HistogramData::default_instance_,
       HistogramData_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HistogramData, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(HistogramData),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HistogramData, _internal_metadata_),
-      -1);
-  ClientConfig_descriptor_ = file->message_type(4);
-  static const int ClientConfig_offsets_[9] = {
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HistogramData, _is_default_instance_));
+  PoissonParams_descriptor_ = file->message_type(4);
+  static const int PoissonParams_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PoissonParams, offered_load_),
+  };
+  PoissonParams_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      PoissonParams_descriptor_,
+      PoissonParams::default_instance_,
+      PoissonParams_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(PoissonParams),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PoissonParams, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PoissonParams, _is_default_instance_));
+  UniformParams_descriptor_ = file->message_type(5);
+  static const int UniformParams_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UniformParams, interarrival_lo_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UniformParams, interarrival_hi_),
+  };
+  UniformParams_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      UniformParams_descriptor_,
+      UniformParams::default_instance_,
+      UniformParams_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(UniformParams),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UniformParams, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(UniformParams, _is_default_instance_));
+  DeterministicParams_descriptor_ = file->message_type(6);
+  static const int DeterministicParams_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeterministicParams, offered_load_),
+  };
+  DeterministicParams_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      DeterministicParams_descriptor_,
+      DeterministicParams::default_instance_,
+      DeterministicParams_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(DeterministicParams),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeterministicParams, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DeterministicParams, _is_default_instance_));
+  ParetoParams_descriptor_ = file->message_type(7);
+  static const int ParetoParams_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParetoParams, interarrival_base_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParetoParams, alpha_),
+  };
+  ParetoParams_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      ParetoParams_descriptor_,
+      ParetoParams::default_instance_,
+      ParetoParams_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(ParetoParams),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParetoParams, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ParetoParams, _is_default_instance_));
+  LoadParams_descriptor_ = file->message_type(8);
+  static const int LoadParams_offsets_[5] = {
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(LoadParams_default_oneof_instance_, poisson_),
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(LoadParams_default_oneof_instance_, uniform_),
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(LoadParams_default_oneof_instance_, determ_),
+    PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(LoadParams_default_oneof_instance_, pareto_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoadParams, load_),
+  };
+  LoadParams_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      LoadParams_descriptor_,
+      LoadParams::default_instance_,
+      LoadParams_offsets_,
+      -1,
+      -1,
+      -1,
+      LoadParams_default_oneof_instance_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoadParams, _oneof_case_[0]),
+      sizeof(LoadParams),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoadParams, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LoadParams, _is_default_instance_));
+  ClientConfig_descriptor_ = file->message_type(9);
+  static const int ClientConfig_offsets_[11] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfig, server_targets_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfig, client_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfig, enable_ssl_),
@@ -164,19 +269,21 @@ void protobuf_AssignDesc_qpstest_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfig, async_client_threads_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfig, rpc_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfig, host_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfig, load_type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfig, load_params_),
   };
   ClientConfig_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       ClientConfig_descriptor_,
       ClientConfig::default_instance_,
       ClientConfig_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfig, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(ClientConfig),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfig, _internal_metadata_),
-      -1);
-  Mark_descriptor_ = file->message_type(5);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfig, _is_default_instance_));
+  Mark_descriptor_ = file->message_type(10);
   static const int Mark_offsets_[1] = {
   };
   Mark_reflection_ =
@@ -184,13 +291,13 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       Mark_descriptor_,
       Mark::default_instance_,
       Mark_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mark, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(Mark),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mark, _internal_metadata_),
-      -1);
-  ClientArgs_descriptor_ = file->message_type(6);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mark, _is_default_instance_));
+  ClientArgs_descriptor_ = file->message_type(11);
   static const int ClientArgs_offsets_[3] = {
     PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(ClientArgs_default_oneof_instance_, setup_),
     PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(ClientArgs_default_oneof_instance_, mark_),
@@ -201,15 +308,15 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       ClientArgs_descriptor_,
       ClientArgs::default_instance_,
       ClientArgs_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientArgs, _has_bits_[0]),
+      -1,
       -1,
       -1,
       ClientArgs_default_oneof_instance_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientArgs, _oneof_case_[0]),
       sizeof(ClientArgs),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientArgs, _internal_metadata_),
-      -1);
-  ClientStats_descriptor_ = file->message_type(7);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientArgs, _is_default_instance_));
+  ClientStats_descriptor_ = file->message_type(12);
   static const int ClientStats_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientStats, latencies_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientStats, time_elapsed_),
@@ -221,13 +328,13 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       ClientStats_descriptor_,
       ClientStats::default_instance_,
       ClientStats_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientStats, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(ClientStats),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientStats, _internal_metadata_),
-      -1);
-  ClientStatus_descriptor_ = file->message_type(8);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientStats, _is_default_instance_));
+  ClientStatus_descriptor_ = file->message_type(13);
   static const int ClientStatus_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientStatus, stats_),
   };
@@ -236,13 +343,13 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       ClientStatus_descriptor_,
       ClientStatus::default_instance_,
       ClientStatus_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientStatus, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(ClientStatus),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientStatus, _internal_metadata_),
-      -1);
-  ServerConfig_descriptor_ = file->message_type(9);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientStatus, _is_default_instance_));
+  ServerConfig_descriptor_ = file->message_type(14);
   static const int ServerConfig_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerConfig, server_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerConfig, threads_),
@@ -254,13 +361,13 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       ServerConfig_descriptor_,
       ServerConfig::default_instance_,
       ServerConfig_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerConfig, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(ServerConfig),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerConfig, _internal_metadata_),
-      -1);
-  ServerArgs_descriptor_ = file->message_type(10);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerConfig, _is_default_instance_));
+  ServerArgs_descriptor_ = file->message_type(15);
   static const int ServerArgs_offsets_[3] = {
     PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(ServerArgs_default_oneof_instance_, setup_),
     PROTO2_GENERATED_DEFAULT_ONEOF_FIELD_OFFSET(ServerArgs_default_oneof_instance_, mark_),
@@ -271,15 +378,15 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       ServerArgs_descriptor_,
       ServerArgs::default_instance_,
       ServerArgs_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerArgs, _has_bits_[0]),
+      -1,
       -1,
       -1,
       ServerArgs_default_oneof_instance_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerArgs, _oneof_case_[0]),
       sizeof(ServerArgs),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerArgs, _internal_metadata_),
-      -1);
-  ServerStatus_descriptor_ = file->message_type(11);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerArgs, _is_default_instance_));
+  ServerStatus_descriptor_ = file->message_type(16);
   static const int ServerStatus_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerStatus, stats_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerStatus, port_),
@@ -289,13 +396,13 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       ServerStatus_descriptor_,
       ServerStatus::default_instance_,
       ServerStatus_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerStatus, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(ServerStatus),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerStatus, _internal_metadata_),
-      -1);
-  SimpleRequest_descriptor_ = file->message_type(12);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ServerStatus, _is_default_instance_));
+  SimpleRequest_descriptor_ = file->message_type(17);
   static const int SimpleRequest_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleRequest, response_type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleRequest, response_size_),
@@ -306,13 +413,13 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       SimpleRequest_descriptor_,
       SimpleRequest::default_instance_,
       SimpleRequest_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleRequest, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(SimpleRequest),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleRequest, _internal_metadata_),
-      -1);
-  SimpleResponse_descriptor_ = file->message_type(13);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleRequest, _is_default_instance_));
+  SimpleResponse_descriptor_ = file->message_type(18);
   static const int SimpleResponse_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleResponse, payload_),
   };
@@ -321,16 +428,17 @@ void protobuf_AssignDesc_qpstest_2eproto() {
       SimpleResponse_descriptor_,
       SimpleResponse::default_instance_,
       SimpleResponse_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleResponse, _has_bits_[0]),
+      -1,
       -1,
       -1,
       sizeof(SimpleResponse),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleResponse, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SimpleResponse, _is_default_instance_));
   PayloadType_descriptor_ = file->enum_type(0);
   ClientType_descriptor_ = file->enum_type(1);
   ServerType_descriptor_ = file->enum_type(2);
   RpcType_descriptor_ = file->enum_type(3);
+  LoadType_descriptor_ = file->enum_type(4);
 }
 
 namespace {
@@ -351,6 +459,16 @@ void protobuf_RegisterTypes(const ::std::string&) {
       Payload_descriptor_, &Payload::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       HistogramData_descriptor_, &HistogramData::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      PoissonParams_descriptor_, &PoissonParams::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      UniformParams_descriptor_, &UniformParams::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      DeterministicParams_descriptor_, &DeterministicParams::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      ParetoParams_descriptor_, &ParetoParams::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      LoadParams_descriptor_, &LoadParams::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       ClientConfig_descriptor_, &ClientConfig::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -384,6 +502,17 @@ void protobuf_ShutdownFile_qpstest_2eproto() {
   delete Payload_reflection_;
   delete HistogramData::default_instance_;
   delete HistogramData_reflection_;
+  delete PoissonParams::default_instance_;
+  delete PoissonParams_reflection_;
+  delete UniformParams::default_instance_;
+  delete UniformParams_reflection_;
+  delete DeterministicParams::default_instance_;
+  delete DeterministicParams_reflection_;
+  delete ParetoParams::default_instance_;
+  delete ParetoParams_reflection_;
+  delete LoadParams::default_instance_;
+  delete LoadParams_default_oneof_instance_;
+  delete LoadParams_reflection_;
   delete ClientConfig::default_instance_;
   delete ClientConfig_reflection_;
   delete Mark::default_instance_;
@@ -417,59 +546,80 @@ void protobuf_AddDesc_qpstest_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\rqpstest.proto\022\014grpc.testing\" \n\014StatsRe"
     "quest\022\020\n\010test_num\030\001 \001(\005\"K\n\013ServerStats\022\024"
-    "\n\014time_elapsed\030\001 \002(\001\022\021\n\ttime_user\030\002 \002(\001\022"
-    "\023\n\013time_system\030\003 \002(\001\"@\n\007Payload\022\'\n\004type\030"
+    "\n\014time_elapsed\030\001 \001(\001\022\021\n\ttime_user\030\002 \001(\001\022"
+    "\023\n\013time_system\030\003 \001(\001\"@\n\007Payload\022\'\n\004type\030"
     "\001 \001(\0162\031.grpc.testing.PayloadType\022\014\n\004body"
     "\030\002 \001(\014\"w\n\rHistogramData\022\016\n\006bucket\030\001 \003(\r\022"
-    "\020\n\010min_seen\030\002 \002(\001\022\020\n\010max_seen\030\003 \002(\001\022\013\n\003s"
-    "um\030\004 \002(\001\022\026\n\016sum_of_squares\030\005 \002(\001\022\r\n\005coun"
-    "t\030\006 \002(\001\"\241\002\n\014ClientConfig\022\026\n\016server_targe"
-    "ts\030\001 \003(\t\022-\n\013client_type\030\002 \002(\0162\030.grpc.tes"
-    "ting.ClientType\022\031\n\nenable_ssl\030\003 \001(\010:\005fal"
-    "se\022$\n\034outstanding_rpcs_per_channel\030\004 \002(\005"
-    "\022\027\n\017client_channels\030\005 \002(\005\022\024\n\014payload_siz"
-    "e\030\006 \002(\005\022\034\n\024async_client_threads\030\007 \001(\005\022.\n"
-    "\010rpc_type\030\010 \001(\0162\025.grpc.testing.RpcType:\005"
-    "UNARY\022\014\n\004host\030\t \001(\t\"\006\n\004Mark\"h\n\nClientArg"
-    "s\022+\n\005setup\030\001 \001(\0132\032.grpc.testing.ClientCo"
-    "nfigH\000\022\"\n\004mark\030\002 \001(\0132\022.grpc.testing.Mark"
-    "H\000B\t\n\007argtype\"{\n\013ClientStats\022.\n\tlatencie"
-    "s\030\001 \002(\0132\033.grpc.testing.HistogramData\022\024\n\014"
-    "time_elapsed\030\003 \002(\001\022\021\n\ttime_user\030\004 \002(\001\022\023\n"
-    "\013time_system\030\005 \002(\001\"8\n\014ClientStatus\022(\n\005st"
-    "ats\030\001 \001(\0132\031.grpc.testing.ClientStats\"z\n\014"
-    "ServerConfig\022-\n\013server_type\030\001 \002(\0162\030.grpc"
-    ".testing.ServerType\022\022\n\007threads\030\002 \001(\005:\0011\022"
-    "\031\n\nenable_ssl\030\003 \001(\010:\005false\022\014\n\004host\030\004 \001(\t"
-    "\"h\n\nServerArgs\022+\n\005setup\030\001 \001(\0132\032.grpc.tes"
-    "ting.ServerConfigH\000\022\"\n\004mark\030\002 \001(\0132\022.grpc"
-    ".testing.MarkH\000B\t\n\007argtype\"F\n\014ServerStat"
-    "us\022(\n\005stats\030\001 \001(\0132\031.grpc.testing.ServerS"
-    "tats\022\014\n\004port\030\002 \002(\005\"\221\001\n\rSimpleRequest\022>\n\r"
-    "response_type\030\001 \001(\0162\031.grpc.testing.Paylo"
-    "adType:\014COMPRESSABLE\022\030\n\rresponse_size\030\002 "
-    "\001(\005:\0010\022&\n\007payload\030\003 \001(\0132\025.grpc.testing.P"
-    "ayload\"8\n\016SimpleResponse\022&\n\007payload\030\001 \001("
-    "\0132\025.grpc.testing.Payload*\?\n\013PayloadType\022"
-    "\020\n\014COMPRESSABLE\020\001\022\022\n\016UNCOMPRESSABLE\020\002\022\n\n"
-    "\006RANDOM\020\003*6\n\nClientType\022\026\n\022SYNCHRONOUS_C"
-    "LIENT\020\001\022\020\n\014ASYNC_CLIENT\020\002*6\n\nServerType\022"
-    "\026\n\022SYNCHRONOUS_SERVER\020\001\022\020\n\014ASYNC_SERVER\020"
-    "\002*#\n\007RpcType\022\t\n\005UNARY\020\001\022\r\n\tSTREAMING\020\0022\245"
-    "\001\n\013TestService\022F\n\tUnaryCall\022\033.grpc.testi"
-    "ng.SimpleRequest\032\034.grpc.testing.SimpleRe"
-    "sponse\022N\n\rStreamingCall\022\033.grpc.testing.S"
-    "impleRequest\032\034.grpc.testing.SimpleRespon"
-    "se(\0010\0012\224\001\n\006Worker\022C\n\007RunTest\022\030.grpc.test"
-    "ing.ClientArgs\032\032.grpc.testing.ClientStat"
-    "us(\0010\001\022E\n\tRunServer\022\030.grpc.testing.Serve"
-    "rArgs\032\032.grpc.testing.ServerStatus(\0010\001", 1957);
+    "\020\n\010min_seen\030\002 \001(\001\022\020\n\010max_seen\030\003 \001(\001\022\013\n\003s"
+    "um\030\004 \001(\001\022\026\n\016sum_of_squares\030\005 \001(\001\022\r\n\005coun"
+    "t\030\006 \001(\001\"%\n\rPoissonParams\022\024\n\014offered_load"
+    "\030\001 \001(\001\"A\n\rUniformParams\022\027\n\017interarrival_"
+    "lo\030\001 \001(\001\022\027\n\017interarrival_hi\030\002 \001(\001\"+\n\023Det"
+    "erministicParams\022\024\n\014offered_load\030\001 \001(\001\"8"
+    "\n\014ParetoParams\022\031\n\021interarrival_base\030\001 \001("
+    "\001\022\r\n\005alpha\030\002 \001(\001\"\327\001\n\nLoadParams\022.\n\007poiss"
+    "on\030\001 \001(\0132\033.grpc.testing.PoissonParamsH\000\022"
+    ".\n\007uniform\030\002 \001(\0132\033.grpc.testing.UniformP"
+    "aramsH\000\0223\n\006determ\030\003 \001(\0132!.grpc.testing.D"
+    "eterministicParamsH\000\022,\n\006pareto\030\004 \001(\0132\032.g"
+    "rpc.testing.ParetoParamsH\000B\006\n\004load\"\355\002\n\014C"
+    "lientConfig\022\026\n\016server_targets\030\001 \003(\t\022-\n\013c"
+    "lient_type\030\002 \001(\0162\030.grpc.testing.ClientTy"
+    "pe\022\022\n\nenable_ssl\030\003 \001(\010\022$\n\034outstanding_rp"
+    "cs_per_channel\030\004 \001(\005\022\027\n\017client_channels\030"
+    "\005 \001(\005\022\024\n\014payload_size\030\006 \001(\005\022\034\n\024async_cli"
+    "ent_threads\030\007 \001(\005\022\'\n\010rpc_type\030\010 \001(\0162\025.gr"
+    "pc.testing.RpcType\022\014\n\004host\030\t \001(\t\022)\n\tload"
+    "_type\030\n \001(\0162\026.grpc.testing.LoadType\022-\n\013l"
+    "oad_params\030\013 \001(\0132\030.grpc.testing.LoadPara"
+    "ms\"\006\n\004Mark\"h\n\nClientArgs\022+\n\005setup\030\001 \001(\0132"
+    "\032.grpc.testing.ClientConfigH\000\022\"\n\004mark\030\002 "
+    "\001(\0132\022.grpc.testing.MarkH\000B\t\n\007argtype\"{\n\013"
+    "ClientStats\022.\n\tlatencies\030\001 \001(\0132\033.grpc.te"
+    "sting.HistogramData\022\024\n\014time_elapsed\030\002 \001("
+    "\001\022\021\n\ttime_user\030\003 \001(\001\022\023\n\013time_system\030\004 \001("
+    "\001\"8\n\014ClientStatus\022(\n\005stats\030\001 \001(\0132\031.grpc."
+    "testing.ClientStats\"p\n\014ServerConfig\022-\n\013s"
+    "erver_type\030\001 \001(\0162\030.grpc.testing.ServerTy"
+    "pe\022\017\n\007threads\030\002 \001(\005\022\022\n\nenable_ssl\030\003 \001(\010\022"
+    "\014\n\004host\030\004 \001(\t\"h\n\nServerArgs\022+\n\005setup\030\001 \001"
+    "(\0132\032.grpc.testing.ServerConfigH\000\022\"\n\004mark"
+    "\030\002 \001(\0132\022.grpc.testing.MarkH\000B\t\n\007argtype\""
+    "F\n\014ServerStatus\022(\n\005stats\030\001 \001(\0132\031.grpc.te"
+    "sting.ServerStats\022\014\n\004port\030\002 \001(\005\"\200\001\n\rSimp"
+    "leRequest\0220\n\rresponse_type\030\001 \001(\0162\031.grpc."
+    "testing.PayloadType\022\025\n\rresponse_size\030\002 \001"
+    "(\005\022&\n\007payload\030\003 \001(\0132\025.grpc.testing.Paylo"
+    "ad\"8\n\016SimpleResponse\022&\n\007payload\030\001 \001(\0132\025."
+    "grpc.testing.Payload*\?\n\013PayloadType\022\020\n\014C"
+    "OMPRESSABLE\020\000\022\022\n\016UNCOMPRESSABLE\020\001\022\n\n\006RAN"
+    "DOM\020\002*6\n\nClientType\022\026\n\022SYNCHRONOUS_CLIEN"
+    "T\020\000\022\020\n\014ASYNC_CLIENT\020\001*6\n\nServerType\022\026\n\022S"
+    "YNCHRONOUS_SERVER\020\000\022\020\n\014ASYNC_SERVER\020\001*#\n"
+    "\007RpcType\022\t\n\005UNARY\020\000\022\r\n\tSTREAMING\020\001*T\n\010Lo"
+    "adType\022\017\n\013CLOSED_LOOP\020\000\022\013\n\007POISSON\020\001\022\013\n\007"
+    "UNIFORM\020\002\022\021\n\rDETERMINISTIC\020\003\022\n\n\006PARETO\020\004"
+    "2\245\001\n\013TestService\022F\n\tUnaryCall\022\033.grpc.tes"
+    "ting.SimpleRequest\032\034.grpc.testing.Simple"
+    "Response\022N\n\rStreamingCall\022\033.grpc.testing"
+    ".SimpleRequest\032\034.grpc.testing.SimpleResp"
+    "onse(\0010\0012\224\001\n\006Worker\022C\n\007RunTest\022\030.grpc.te"
+    "sting.ClientArgs\032\032.grpc.testing.ClientSt"
+    "atus(\0010\001\022E\n\tRunServer\022\030.grpc.testing.Ser"
+    "verArgs\032\032.grpc.testing.ServerStatus(\0010\001b"
+    "\006proto3", 2527);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "qpstest.proto", &protobuf_RegisterTypes);
   StatsRequest::default_instance_ = new StatsRequest();
   ServerStats::default_instance_ = new ServerStats();
   Payload::default_instance_ = new Payload();
   HistogramData::default_instance_ = new HistogramData();
+  PoissonParams::default_instance_ = new PoissonParams();
+  UniformParams::default_instance_ = new UniformParams();
+  DeterministicParams::default_instance_ = new DeterministicParams();
+  ParetoParams::default_instance_ = new ParetoParams();
+  LoadParams::default_instance_ = new LoadParams();
+  LoadParams_default_oneof_instance_ = new LoadParamsOneofInstance();
   ClientConfig::default_instance_ = new ClientConfig();
   Mark::default_instance_ = new Mark();
   ClientArgs::default_instance_ = new ClientArgs();
@@ -486,6 +636,11 @@ void protobuf_AddDesc_qpstest_2eproto() {
   ServerStats::default_instance_->InitAsDefaultInstance();
   Payload::default_instance_->InitAsDefaultInstance();
   HistogramData::default_instance_->InitAsDefaultInstance();
+  PoissonParams::default_instance_->InitAsDefaultInstance();
+  UniformParams::default_instance_->InitAsDefaultInstance();
+  DeterministicParams::default_instance_->InitAsDefaultInstance();
+  ParetoParams::default_instance_->InitAsDefaultInstance();
+  LoadParams::default_instance_->InitAsDefaultInstance();
   ClientConfig::default_instance_->InitAsDefaultInstance();
   Mark::default_instance_->InitAsDefaultInstance();
   ClientArgs::default_instance_->InitAsDefaultInstance();
@@ -511,9 +666,9 @@ const ::google::protobuf::EnumDescriptor* PayloadType_descriptor() {
 }
 bool PayloadType_IsValid(int value) {
   switch(value) {
+    case 0:
     case 1:
     case 2:
-    case 3:
       return true;
     default:
       return false;
@@ -526,8 +681,8 @@ const ::google::protobuf::EnumDescriptor* ClientType_descriptor() {
 }
 bool ClientType_IsValid(int value) {
   switch(value) {
+    case 0:
     case 1:
-    case 2:
       return true;
     default:
       return false;
@@ -540,8 +695,8 @@ const ::google::protobuf::EnumDescriptor* ServerType_descriptor() {
 }
 bool ServerType_IsValid(int value) {
   switch(value) {
+    case 0:
     case 1:
-    case 2:
       return true;
     default:
       return false;
@@ -554,8 +709,25 @@ const ::google::protobuf::EnumDescriptor* RpcType_descriptor() {
 }
 bool RpcType_IsValid(int value) {
   switch(value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::google::protobuf::EnumDescriptor* LoadType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return LoadType_descriptor_;
+}
+bool LoadType_IsValid(int value) {
+  switch(value) {
+    case 0:
     case 1:
     case 2:
+    case 3:
+    case 4:
       return true;
     default:
       return false;
@@ -586,6 +758,7 @@ StatsRequest::StatsRequest()
 }
 
 void StatsRequest::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 StatsRequest::StatsRequest(const StatsRequest& from)
@@ -597,9 +770,9 @@ StatsRequest::StatsRequest(const StatsRequest& from)
 }
 
 void StatsRequest::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   test_num_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 StatsRequest::~StatsRequest() {
@@ -639,10 +812,6 @@ StatsRequest* StatsRequest::New(::google::protobuf::Arena* arena) const {
 
 void StatsRequest::Clear() {
   test_num_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool StatsRequest::MergePartialFromCodedStream(
@@ -661,7 +830,7 @@ bool StatsRequest::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &test_num_)));
-          set_has_test_num();
+
         } else {
           goto handle_unusual;
         }
@@ -676,8 +845,7 @@ bool StatsRequest::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -695,14 +863,10 @@ void StatsRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:grpc.testing.StatsRequest)
   // optional int32 test_num = 1;
-  if (has_test_num()) {
+  if (this->test_num() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->test_num(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.StatsRequest)
 }
 
@@ -710,14 +874,10 @@ void StatsRequest::SerializeWithCachedSizes(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.StatsRequest)
   // optional int32 test_num = 1;
-  if (has_test_num()) {
+  if (this->test_num() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->test_num(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.StatsRequest)
   return target;
 }
@@ -726,17 +886,12 @@ int StatsRequest::ByteSize() const {
   int total_size = 0;
 
   // optional int32 test_num = 1;
-  if (has_test_num()) {
+  if (this->test_num() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->test_num());
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -757,13 +912,8 @@ void StatsRequest::MergeFrom(const ::google::protobuf::Message& from) {
 
 void StatsRequest::MergeFrom(const StatsRequest& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_test_num()) {
-      set_test_num(from.test_num());
-    }
-  }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.test_num() != 0) {
+    set_test_num(from.test_num());
   }
 }
 
@@ -790,7 +940,6 @@ void StatsRequest::Swap(StatsRequest* other) {
 }
 void StatsRequest::InternalSwap(StatsRequest* other) {
   std::swap(test_num_, other->test_num_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -807,25 +956,15 @@ void StatsRequest::InternalSwap(StatsRequest* other) {
 // StatsRequest
 
 // optional int32 test_num = 1;
-bool StatsRequest::has_test_num() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void StatsRequest::set_has_test_num() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void StatsRequest::clear_has_test_num() {
-  _has_bits_[0] &= ~0x00000001u;
-}
 void StatsRequest::clear_test_num() {
   test_num_ = 0;
-  clear_has_test_num();
 }
  ::google::protobuf::int32 StatsRequest::test_num() const {
   // @@protoc_insertion_point(field_get:grpc.testing.StatsRequest.test_num)
   return test_num_;
 }
  void StatsRequest::set_test_num(::google::protobuf::int32 value) {
-  set_has_test_num();
+  
   test_num_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.StatsRequest.test_num)
 }
@@ -847,6 +986,7 @@ ServerStats::ServerStats()
 }
 
 void ServerStats::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 ServerStats::ServerStats(const ServerStats& from)
@@ -858,11 +998,11 @@ ServerStats::ServerStats(const ServerStats& from)
 }
 
 void ServerStats::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   time_elapsed_ = 0;
   time_user_ = 0;
   time_system_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 ServerStats::~ServerStats() {
@@ -914,10 +1054,6 @@ void ServerStats::Clear() {
 #undef ZR_HELPER_
 #undef ZR_
 
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool ServerStats::MergePartialFromCodedStream(
@@ -930,13 +1066,13 @@ bool ServerStats::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required double time_elapsed = 1;
+      // optional double time_elapsed = 1;
       case 1: {
         if (tag == 9) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &time_elapsed_)));
-          set_has_time_elapsed();
+
         } else {
           goto handle_unusual;
         }
@@ -944,14 +1080,14 @@ bool ServerStats::MergePartialFromCodedStream(
         break;
       }
 
-      // required double time_user = 2;
+      // optional double time_user = 2;
       case 2: {
         if (tag == 17) {
          parse_time_user:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &time_user_)));
-          set_has_time_user();
+
         } else {
           goto handle_unusual;
         }
@@ -959,14 +1095,14 @@ bool ServerStats::MergePartialFromCodedStream(
         break;
       }
 
-      // required double time_system = 3;
+      // optional double time_system = 3;
       case 3: {
         if (tag == 25) {
          parse_time_system:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &time_system_)));
-          set_has_time_system();
+
         } else {
           goto handle_unusual;
         }
@@ -981,8 +1117,7 @@ bool ServerStats::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -999,95 +1134,64 @@ failure:
 void ServerStats::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:grpc.testing.ServerStats)
-  // required double time_elapsed = 1;
-  if (has_time_elapsed()) {
+  // optional double time_elapsed = 1;
+  if (this->time_elapsed() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->time_elapsed(), output);
   }
 
-  // required double time_user = 2;
-  if (has_time_user()) {
+  // optional double time_user = 2;
+  if (this->time_user() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->time_user(), output);
   }
 
-  // required double time_system = 3;
-  if (has_time_system()) {
+  // optional double time_system = 3;
+  if (this->time_system() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->time_system(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.ServerStats)
 }
 
 ::google::protobuf::uint8* ServerStats::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.ServerStats)
-  // required double time_elapsed = 1;
-  if (has_time_elapsed()) {
+  // optional double time_elapsed = 1;
+  if (this->time_elapsed() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->time_elapsed(), target);
   }
 
-  // required double time_user = 2;
-  if (has_time_user()) {
+  // optional double time_user = 2;
+  if (this->time_user() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->time_user(), target);
   }
 
-  // required double time_system = 3;
-  if (has_time_system()) {
+  // optional double time_system = 3;
+  if (this->time_system() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->time_system(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.ServerStats)
   return target;
 }
 
-int ServerStats::RequiredFieldsByteSizeFallback() const {
-  int total_size = 0;
-
-  if (has_time_elapsed()) {
-    // required double time_elapsed = 1;
-    total_size += 1 + 8;
-  }
-
-  if (has_time_user()) {
-    // required double time_user = 2;
-    total_size += 1 + 8;
-  }
-
-  if (has_time_system()) {
-    // required double time_system = 3;
-    total_size += 1 + 8;
-  }
-
-  return total_size;
-}
 int ServerStats::ByteSize() const {
   int total_size = 0;
 
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required double time_elapsed = 1;
+  // optional double time_elapsed = 1;
+  if (this->time_elapsed() != 0) {
     total_size += 1 + 8;
-
-    // required double time_user = 2;
-    total_size += 1 + 8;
-
-    // required double time_system = 3;
-    total_size += 1 + 8;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+
+  // optional double time_user = 2;
+  if (this->time_user() != 0) {
+    total_size += 1 + 8;
   }
+
+  // optional double time_system = 3;
+  if (this->time_system() != 0) {
+    total_size += 1 + 8;
+  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -1108,19 +1212,14 @@ void ServerStats::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ServerStats::MergeFrom(const ServerStats& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_time_elapsed()) {
-      set_time_elapsed(from.time_elapsed());
-    }
-    if (from.has_time_user()) {
-      set_time_user(from.time_user());
-    }
-    if (from.has_time_system()) {
-      set_time_system(from.time_system());
-    }
+  if (from.time_elapsed() != 0) {
+    set_time_elapsed(from.time_elapsed());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.time_user() != 0) {
+    set_time_user(from.time_user());
+  }
+  if (from.time_system() != 0) {
+    set_time_system(from.time_system());
   }
 }
 
@@ -1137,7 +1236,6 @@ void ServerStats::CopyFrom(const ServerStats& from) {
 }
 
 bool ServerStats::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -1150,7 +1248,6 @@ void ServerStats::InternalSwap(ServerStats* other) {
   std::swap(time_elapsed_, other->time_elapsed_);
   std::swap(time_user_, other->time_user_);
   std::swap(time_system_, other->time_system_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1166,74 +1263,44 @@ void ServerStats::InternalSwap(ServerStats* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // ServerStats
 
-// required double time_elapsed = 1;
-bool ServerStats::has_time_elapsed() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void ServerStats::set_has_time_elapsed() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void ServerStats::clear_has_time_elapsed() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional double time_elapsed = 1;
 void ServerStats::clear_time_elapsed() {
   time_elapsed_ = 0;
-  clear_has_time_elapsed();
 }
  double ServerStats::time_elapsed() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerStats.time_elapsed)
   return time_elapsed_;
 }
  void ServerStats::set_time_elapsed(double value) {
-  set_has_time_elapsed();
+  
   time_elapsed_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerStats.time_elapsed)
 }
 
-// required double time_user = 2;
-bool ServerStats::has_time_user() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void ServerStats::set_has_time_user() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void ServerStats::clear_has_time_user() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double time_user = 2;
 void ServerStats::clear_time_user() {
   time_user_ = 0;
-  clear_has_time_user();
 }
  double ServerStats::time_user() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerStats.time_user)
   return time_user_;
 }
  void ServerStats::set_time_user(double value) {
-  set_has_time_user();
+  
   time_user_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerStats.time_user)
 }
 
-// required double time_system = 3;
-bool ServerStats::has_time_system() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void ServerStats::set_has_time_system() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void ServerStats::clear_has_time_system() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double time_system = 3;
 void ServerStats::clear_time_system() {
   time_system_ = 0;
-  clear_has_time_system();
 }
  double ServerStats::time_system() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerStats.time_system)
   return time_system_;
 }
  void ServerStats::set_time_system(double value) {
-  set_has_time_system();
+  
   time_system_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerStats.time_system)
 }
@@ -1254,6 +1321,7 @@ Payload::Payload()
 }
 
 void Payload::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 Payload::Payload(const Payload& from)
@@ -1265,11 +1333,11 @@ Payload::Payload(const Payload& from)
 }
 
 void Payload::SharedCtor() {
+    _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  type_ = 1;
+  type_ = 0;
   body_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 Payload::~Payload() {
@@ -1309,16 +1377,8 @@ Payload* Payload::New(::google::protobuf::Arena* arena) const {
 }
 
 void Payload::Clear() {
-  if (_has_bits_[0 / 32] & 3u) {
-    type_ = 1;
-    if (has_body()) {
-      body_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    }
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
+  type_ = 0;
+  body_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 bool Payload::MergePartialFromCodedStream(
@@ -1338,11 +1398,7 @@ bool Payload::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::grpc::testing::PayloadType_IsValid(value)) {
-            set_type(static_cast< ::grpc::testing::PayloadType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
+          set_type(static_cast< ::grpc::testing::PayloadType >(value));
         } else {
           goto handle_unusual;
         }
@@ -1370,8 +1426,7 @@ bool Payload::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -1389,21 +1444,17 @@ void Payload::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:grpc.testing.Payload)
   // optional .grpc.testing.PayloadType type = 1;
-  if (has_type()) {
+  if (this->type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
   }
 
   // optional bytes body = 2;
-  if (has_body()) {
+  if (this->body().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
       2, this->body(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.Payload)
 }
 
@@ -1411,22 +1462,18 @@ void Payload::SerializeWithCachedSizes(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.Payload)
   // optional .grpc.testing.PayloadType type = 1;
-  if (has_type()) {
+  if (this->type() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
   }
 
   // optional bytes body = 2;
-  if (has_body()) {
+  if (this->body().size() > 0) {
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         2, this->body(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.Payload)
   return target;
 }
@@ -1434,26 +1481,19 @@ void Payload::SerializeWithCachedSizes(
 int Payload::ByteSize() const {
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & 3) {
-    // optional .grpc.testing.PayloadType type = 1;
-    if (has_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
-    }
-
-    // optional bytes body = 2;
-    if (has_body()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->body());
-    }
-
+  // optional .grpc.testing.PayloadType type = 1;
+  if (this->type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
   }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+
+  // optional bytes body = 2;
+  if (this->body().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->body());
   }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -1474,17 +1514,12 @@ void Payload::MergeFrom(const ::google::protobuf::Message& from) {
 
 void Payload::MergeFrom(const Payload& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_type()) {
-      set_type(from.type());
-    }
-    if (from.has_body()) {
-      set_has_body();
-      body_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.body_);
-    }
+  if (from.type() != 0) {
+    set_type(from.type());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.body().size() > 0) {
+
+    body_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.body_);
   }
 }
 
@@ -1512,7 +1547,6 @@ void Payload::Swap(Payload* other) {
 void Payload::InternalSwap(Payload* other) {
   std::swap(type_, other->type_);
   body_.Swap(&other->body_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -1529,78 +1563,57 @@ void Payload::InternalSwap(Payload* other) {
 // Payload
 
 // optional .grpc.testing.PayloadType type = 1;
-bool Payload::has_type() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void Payload::set_has_type() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void Payload::clear_has_type() {
-  _has_bits_[0] &= ~0x00000001u;
-}
 void Payload::clear_type() {
-  type_ = 1;
-  clear_has_type();
+  type_ = 0;
 }
  ::grpc::testing::PayloadType Payload::type() const {
   // @@protoc_insertion_point(field_get:grpc.testing.Payload.type)
   return static_cast< ::grpc::testing::PayloadType >(type_);
 }
  void Payload::set_type(::grpc::testing::PayloadType value) {
-  assert(::grpc::testing::PayloadType_IsValid(value));
-  set_has_type();
+  
   type_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.Payload.type)
 }
 
 // optional bytes body = 2;
-bool Payload::has_body() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void Payload::set_has_body() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void Payload::clear_has_body() {
-  _has_bits_[0] &= ~0x00000002u;
-}
 void Payload::clear_body() {
   body_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_body();
 }
  const ::std::string& Payload::body() const {
   // @@protoc_insertion_point(field_get:grpc.testing.Payload.body)
   return body_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  void Payload::set_body(const ::std::string& value) {
-  set_has_body();
+  
   body_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:grpc.testing.Payload.body)
 }
  void Payload::set_body(const char* value) {
-  set_has_body();
+  
   body_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:grpc.testing.Payload.body)
 }
  void Payload::set_body(const void* value, size_t size) {
-  set_has_body();
+  
   body_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:grpc.testing.Payload.body)
 }
  ::std::string* Payload::mutable_body() {
-  set_has_body();
+  
   // @@protoc_insertion_point(field_mutable:grpc.testing.Payload.body)
   return body_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* Payload::release_body() {
-  clear_has_body();
+  
   return body_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  void Payload::set_allocated_body(::std::string* body) {
   if (body != NULL) {
-    set_has_body();
+    
   } else {
-    clear_has_body();
+    
   }
   body_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), body);
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.Payload.body)
@@ -1626,6 +1639,7 @@ HistogramData::HistogramData()
 }
 
 void HistogramData::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 HistogramData::HistogramData(const HistogramData& from)
@@ -1637,13 +1651,13 @@ HistogramData::HistogramData(const HistogramData& from)
 }
 
 void HistogramData::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   min_seen_ = 0;
   max_seen_ = 0;
   sum_ = 0;
   sum_of_squares_ = 0;
   count_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 HistogramData::~HistogramData() {
@@ -1690,18 +1704,12 @@ void HistogramData::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  if (_has_bits_[0 / 32] & 62u) {
-    ZR_(min_seen_, count_);
-  }
+  ZR_(min_seen_, count_);
 
 #undef ZR_HELPER_
 #undef ZR_
 
   bucket_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool HistogramData::MergePartialFromCodedStream(
@@ -1718,11 +1726,11 @@ bool HistogramData::MergePartialFromCodedStream(
       case 1: {
         if (tag == 8) {
          parse_bucket:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  1, 8, input, this->mutable_bucket())));
         } else if (tag == 10) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, this->mutable_bucket())));
         } else {
@@ -1733,14 +1741,14 @@ bool HistogramData::MergePartialFromCodedStream(
         break;
       }
 
-      // required double min_seen = 2;
+      // optional double min_seen = 2;
       case 2: {
         if (tag == 17) {
          parse_min_seen:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &min_seen_)));
-          set_has_min_seen();
+
         } else {
           goto handle_unusual;
         }
@@ -1748,14 +1756,14 @@ bool HistogramData::MergePartialFromCodedStream(
         break;
       }
 
-      // required double max_seen = 3;
+      // optional double max_seen = 3;
       case 3: {
         if (tag == 25) {
          parse_max_seen:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &max_seen_)));
-          set_has_max_seen();
+
         } else {
           goto handle_unusual;
         }
@@ -1763,14 +1771,14 @@ bool HistogramData::MergePartialFromCodedStream(
         break;
       }
 
-      // required double sum = 4;
+      // optional double sum = 4;
       case 4: {
         if (tag == 33) {
          parse_sum:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &sum_)));
-          set_has_sum();
+
         } else {
           goto handle_unusual;
         }
@@ -1778,14 +1786,14 @@ bool HistogramData::MergePartialFromCodedStream(
         break;
       }
 
-      // required double sum_of_squares = 5;
+      // optional double sum_of_squares = 5;
       case 5: {
         if (tag == 41) {
          parse_sum_of_squares:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &sum_of_squares_)));
-          set_has_sum_of_squares();
+
         } else {
           goto handle_unusual;
         }
@@ -1793,14 +1801,14 @@ bool HistogramData::MergePartialFromCodedStream(
         break;
       }
 
-      // required double count = 6;
+      // optional double count = 6;
       case 6: {
         if (tag == 49) {
          parse_count:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &count_)));
-          set_has_count();
+
         } else {
           goto handle_unusual;
         }
@@ -1815,8 +1823,7 @@ bool HistogramData::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -1834,40 +1841,40 @@ void HistogramData::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:grpc.testing.HistogramData)
   // repeated uint32 bucket = 1;
+  if (this->bucket_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(1, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(_bucket_cached_byte_size_);
+  }
   for (int i = 0; i < this->bucket_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(
-      1, this->bucket(i), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32NoTag(
+      this->bucket(i), output);
   }
 
-  // required double min_seen = 2;
-  if (has_min_seen()) {
+  // optional double min_seen = 2;
+  if (this->min_seen() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->min_seen(), output);
   }
 
-  // required double max_seen = 3;
-  if (has_max_seen()) {
+  // optional double max_seen = 3;
+  if (this->max_seen() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->max_seen(), output);
   }
 
-  // required double sum = 4;
-  if (has_sum()) {
+  // optional double sum = 4;
+  if (this->sum() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->sum(), output);
   }
 
-  // required double sum_of_squares = 5;
-  if (has_sum_of_squares()) {
+  // optional double sum_of_squares = 5;
+  if (this->sum_of_squares() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->sum_of_squares(), output);
   }
 
-  // required double count = 6;
-  if (has_count()) {
+  // optional double count = 6;
+  if (this->count() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteDouble(6, this->count(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.HistogramData)
 }
 
@@ -1875,96 +1882,76 @@ void HistogramData::SerializeWithCachedSizes(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.HistogramData)
   // repeated uint32 bucket = 1;
+  if (this->bucket_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      1,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+      _bucket_cached_byte_size_, target);
+  }
   for (int i = 0; i < this->bucket_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteUInt32ToArray(1, this->bucket(i), target);
+      WriteUInt32NoTagToArray(this->bucket(i), target);
   }
 
-  // required double min_seen = 2;
-  if (has_min_seen()) {
+  // optional double min_seen = 2;
+  if (this->min_seen() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->min_seen(), target);
   }
 
-  // required double max_seen = 3;
-  if (has_max_seen()) {
+  // optional double max_seen = 3;
+  if (this->max_seen() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->max_seen(), target);
   }
 
-  // required double sum = 4;
-  if (has_sum()) {
+  // optional double sum = 4;
+  if (this->sum() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->sum(), target);
   }
 
-  // required double sum_of_squares = 5;
-  if (has_sum_of_squares()) {
+  // optional double sum_of_squares = 5;
+  if (this->sum_of_squares() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->sum_of_squares(), target);
   }
 
-  // required double count = 6;
-  if (has_count()) {
+  // optional double count = 6;
+  if (this->count() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(6, this->count(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.HistogramData)
   return target;
 }
 
-int HistogramData::RequiredFieldsByteSizeFallback() const {
-  int total_size = 0;
-
-  if (has_min_seen()) {
-    // required double min_seen = 2;
-    total_size += 1 + 8;
-  }
-
-  if (has_max_seen()) {
-    // required double max_seen = 3;
-    total_size += 1 + 8;
-  }
-
-  if (has_sum()) {
-    // required double sum = 4;
-    total_size += 1 + 8;
-  }
-
-  if (has_sum_of_squares()) {
-    // required double sum_of_squares = 5;
-    total_size += 1 + 8;
-  }
-
-  if (has_count()) {
-    // required double count = 6;
-    total_size += 1 + 8;
-  }
-
-  return total_size;
-}
 int HistogramData::ByteSize() const {
   int total_size = 0;
 
-  if (((_has_bits_[0] & 0x0000003e) ^ 0x0000003e) == 0) {  // All required fields are present.
-    // required double min_seen = 2;
+  // optional double min_seen = 2;
+  if (this->min_seen() != 0) {
     total_size += 1 + 8;
-
-    // required double max_seen = 3;
-    total_size += 1 + 8;
-
-    // required double sum = 4;
-    total_size += 1 + 8;
-
-    // required double sum_of_squares = 5;
-    total_size += 1 + 8;
-
-    // required double count = 6;
-    total_size += 1 + 8;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
+
+  // optional double max_seen = 3;
+  if (this->max_seen() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // optional double sum = 4;
+  if (this->sum() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // optional double sum_of_squares = 5;
+  if (this->sum_of_squares() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // optional double count = 6;
+  if (this->count() != 0) {
+    total_size += 1 + 8;
+  }
+
   // repeated uint32 bucket = 1;
   {
     int data_size = 0;
@@ -1972,14 +1959,16 @@ int HistogramData::ByteSize() const {
       data_size += ::google::protobuf::internal::WireFormatLite::
         UInt32Size(this->bucket(i));
     }
-    total_size += 1 * this->bucket_size() + data_size;
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(data_size);
+    }
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _bucket_cached_byte_size_ = data_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -2001,25 +1990,20 @@ void HistogramData::MergeFrom(const ::google::protobuf::Message& from) {
 void HistogramData::MergeFrom(const HistogramData& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   bucket_.MergeFrom(from.bucket_);
-  if (from._has_bits_[1 / 32] & (0xffu << (1 % 32))) {
-    if (from.has_min_seen()) {
-      set_min_seen(from.min_seen());
-    }
-    if (from.has_max_seen()) {
-      set_max_seen(from.max_seen());
-    }
-    if (from.has_sum()) {
-      set_sum(from.sum());
-    }
-    if (from.has_sum_of_squares()) {
-      set_sum_of_squares(from.sum_of_squares());
-    }
-    if (from.has_count()) {
-      set_count(from.count());
-    }
+  if (from.min_seen() != 0) {
+    set_min_seen(from.min_seen());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.max_seen() != 0) {
+    set_max_seen(from.max_seen());
+  }
+  if (from.sum() != 0) {
+    set_sum(from.sum());
+  }
+  if (from.sum_of_squares() != 0) {
+    set_sum_of_squares(from.sum_of_squares());
+  }
+  if (from.count() != 0) {
+    set_count(from.count());
   }
 }
 
@@ -2036,7 +2020,6 @@ void HistogramData::CopyFrom(const HistogramData& from) {
 }
 
 bool HistogramData::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003e) != 0x0000003e) return false;
 
   return true;
 }
@@ -2052,7 +2035,6 @@ void HistogramData::InternalSwap(HistogramData* other) {
   std::swap(sum_, other->sum_);
   std::swap(sum_of_squares_, other->sum_of_squares_);
   std::swap(count_, other->count_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -2098,126 +2080,1661 @@ HistogramData::mutable_bucket() {
   return &bucket_;
 }
 
-// required double min_seen = 2;
-bool HistogramData::has_min_seen() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void HistogramData::set_has_min_seen() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void HistogramData::clear_has_min_seen() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double min_seen = 2;
 void HistogramData::clear_min_seen() {
   min_seen_ = 0;
-  clear_has_min_seen();
 }
  double HistogramData::min_seen() const {
   // @@protoc_insertion_point(field_get:grpc.testing.HistogramData.min_seen)
   return min_seen_;
 }
  void HistogramData::set_min_seen(double value) {
-  set_has_min_seen();
+  
   min_seen_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.HistogramData.min_seen)
 }
 
-// required double max_seen = 3;
-bool HistogramData::has_max_seen() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void HistogramData::set_has_max_seen() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void HistogramData::clear_has_max_seen() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double max_seen = 3;
 void HistogramData::clear_max_seen() {
   max_seen_ = 0;
-  clear_has_max_seen();
 }
  double HistogramData::max_seen() const {
   // @@protoc_insertion_point(field_get:grpc.testing.HistogramData.max_seen)
   return max_seen_;
 }
  void HistogramData::set_max_seen(double value) {
-  set_has_max_seen();
+  
   max_seen_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.HistogramData.max_seen)
 }
 
-// required double sum = 4;
-bool HistogramData::has_sum() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-void HistogramData::set_has_sum() {
-  _has_bits_[0] |= 0x00000008u;
-}
-void HistogramData::clear_has_sum() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// optional double sum = 4;
 void HistogramData::clear_sum() {
   sum_ = 0;
-  clear_has_sum();
 }
  double HistogramData::sum() const {
   // @@protoc_insertion_point(field_get:grpc.testing.HistogramData.sum)
   return sum_;
 }
  void HistogramData::set_sum(double value) {
-  set_has_sum();
+  
   sum_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.HistogramData.sum)
 }
 
-// required double sum_of_squares = 5;
-bool HistogramData::has_sum_of_squares() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-void HistogramData::set_has_sum_of_squares() {
-  _has_bits_[0] |= 0x00000010u;
-}
-void HistogramData::clear_has_sum_of_squares() {
-  _has_bits_[0] &= ~0x00000010u;
-}
+// optional double sum_of_squares = 5;
 void HistogramData::clear_sum_of_squares() {
   sum_of_squares_ = 0;
-  clear_has_sum_of_squares();
 }
  double HistogramData::sum_of_squares() const {
   // @@protoc_insertion_point(field_get:grpc.testing.HistogramData.sum_of_squares)
   return sum_of_squares_;
 }
  void HistogramData::set_sum_of_squares(double value) {
-  set_has_sum_of_squares();
+  
   sum_of_squares_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.HistogramData.sum_of_squares)
 }
 
-// required double count = 6;
-bool HistogramData::has_count() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-void HistogramData::set_has_count() {
-  _has_bits_[0] |= 0x00000020u;
-}
-void HistogramData::clear_has_count() {
-  _has_bits_[0] &= ~0x00000020u;
-}
+// optional double count = 6;
 void HistogramData::clear_count() {
   count_ = 0;
-  clear_has_count();
 }
  double HistogramData::count() const {
   // @@protoc_insertion_point(field_get:grpc.testing.HistogramData.count)
   return count_;
 }
  void HistogramData::set_count(double value) {
-  set_has_count();
+  
   count_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.HistogramData.count)
 }
 
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int PoissonParams::kOfferedLoadFieldNumber;
+#endif  // !_MSC_VER
+
+PoissonParams::PoissonParams()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:grpc.testing.PoissonParams)
+}
+
+void PoissonParams::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+PoissonParams::PoissonParams(const PoissonParams& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:grpc.testing.PoissonParams)
+}
+
+void PoissonParams::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  offered_load_ = 0;
+}
+
+PoissonParams::~PoissonParams() {
+  // @@protoc_insertion_point(destructor:grpc.testing.PoissonParams)
+  SharedDtor();
+}
+
+void PoissonParams::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void PoissonParams::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* PoissonParams::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PoissonParams_descriptor_;
+}
+
+const PoissonParams& PoissonParams::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_qpstest_2eproto();
+  return *default_instance_;
+}
+
+PoissonParams* PoissonParams::default_instance_ = NULL;
+
+PoissonParams* PoissonParams::New(::google::protobuf::Arena* arena) const {
+  PoissonParams* n = new PoissonParams;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void PoissonParams::Clear() {
+  offered_load_ = 0;
+}
+
+bool PoissonParams::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:grpc.testing.PoissonParams)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional double offered_load = 1;
+      case 1: {
+        if (tag == 9) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &offered_load_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:grpc.testing.PoissonParams)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:grpc.testing.PoissonParams)
+  return false;
+#undef DO_
+}
+
+void PoissonParams::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:grpc.testing.PoissonParams)
+  // optional double offered_load = 1;
+  if (this->offered_load() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->offered_load(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:grpc.testing.PoissonParams)
+}
+
+::google::protobuf::uint8* PoissonParams::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.PoissonParams)
+  // optional double offered_load = 1;
+  if (this->offered_load() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->offered_load(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.PoissonParams)
+  return target;
+}
+
+int PoissonParams::ByteSize() const {
+  int total_size = 0;
+
+  // optional double offered_load = 1;
+  if (this->offered_load() != 0) {
+    total_size += 1 + 8;
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void PoissonParams::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const PoissonParams* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const PoissonParams>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void PoissonParams::MergeFrom(const PoissonParams& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from.offered_load() != 0) {
+    set_offered_load(from.offered_load());
+  }
+}
+
+void PoissonParams::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PoissonParams::CopyFrom(const PoissonParams& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PoissonParams::IsInitialized() const {
+
+  return true;
+}
+
+void PoissonParams::Swap(PoissonParams* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void PoissonParams::InternalSwap(PoissonParams* other) {
+  std::swap(offered_load_, other->offered_load_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata PoissonParams::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = PoissonParams_descriptor_;
+  metadata.reflection = PoissonParams_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// PoissonParams
+
+// optional double offered_load = 1;
+void PoissonParams::clear_offered_load() {
+  offered_load_ = 0;
+}
+ double PoissonParams::offered_load() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.PoissonParams.offered_load)
+  return offered_load_;
+}
+ void PoissonParams::set_offered_load(double value) {
+  
+  offered_load_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.PoissonParams.offered_load)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int UniformParams::kInterarrivalLoFieldNumber;
+const int UniformParams::kInterarrivalHiFieldNumber;
+#endif  // !_MSC_VER
+
+UniformParams::UniformParams()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:grpc.testing.UniformParams)
+}
+
+void UniformParams::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+UniformParams::UniformParams(const UniformParams& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:grpc.testing.UniformParams)
+}
+
+void UniformParams::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  interarrival_lo_ = 0;
+  interarrival_hi_ = 0;
+}
+
+UniformParams::~UniformParams() {
+  // @@protoc_insertion_point(destructor:grpc.testing.UniformParams)
+  SharedDtor();
+}
+
+void UniformParams::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void UniformParams::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* UniformParams::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return UniformParams_descriptor_;
+}
+
+const UniformParams& UniformParams::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_qpstest_2eproto();
+  return *default_instance_;
+}
+
+UniformParams* UniformParams::default_instance_ = NULL;
+
+UniformParams* UniformParams::New(::google::protobuf::Arena* arena) const {
+  UniformParams* n = new UniformParams;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void UniformParams::Clear() {
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<UniformParams*>(16)->f)
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(interarrival_lo_, interarrival_hi_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
+}
+
+bool UniformParams::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:grpc.testing.UniformParams)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional double interarrival_lo = 1;
+      case 1: {
+        if (tag == 9) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &interarrival_lo_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(17)) goto parse_interarrival_hi;
+        break;
+      }
+
+      // optional double interarrival_hi = 2;
+      case 2: {
+        if (tag == 17) {
+         parse_interarrival_hi:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &interarrival_hi_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:grpc.testing.UniformParams)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:grpc.testing.UniformParams)
+  return false;
+#undef DO_
+}
+
+void UniformParams::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:grpc.testing.UniformParams)
+  // optional double interarrival_lo = 1;
+  if (this->interarrival_lo() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->interarrival_lo(), output);
+  }
+
+  // optional double interarrival_hi = 2;
+  if (this->interarrival_hi() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->interarrival_hi(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:grpc.testing.UniformParams)
+}
+
+::google::protobuf::uint8* UniformParams::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.UniformParams)
+  // optional double interarrival_lo = 1;
+  if (this->interarrival_lo() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->interarrival_lo(), target);
+  }
+
+  // optional double interarrival_hi = 2;
+  if (this->interarrival_hi() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->interarrival_hi(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.UniformParams)
+  return target;
+}
+
+int UniformParams::ByteSize() const {
+  int total_size = 0;
+
+  // optional double interarrival_lo = 1;
+  if (this->interarrival_lo() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // optional double interarrival_hi = 2;
+  if (this->interarrival_hi() != 0) {
+    total_size += 1 + 8;
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void UniformParams::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const UniformParams* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const UniformParams>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void UniformParams::MergeFrom(const UniformParams& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from.interarrival_lo() != 0) {
+    set_interarrival_lo(from.interarrival_lo());
+  }
+  if (from.interarrival_hi() != 0) {
+    set_interarrival_hi(from.interarrival_hi());
+  }
+}
+
+void UniformParams::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void UniformParams::CopyFrom(const UniformParams& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool UniformParams::IsInitialized() const {
+
+  return true;
+}
+
+void UniformParams::Swap(UniformParams* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void UniformParams::InternalSwap(UniformParams* other) {
+  std::swap(interarrival_lo_, other->interarrival_lo_);
+  std::swap(interarrival_hi_, other->interarrival_hi_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata UniformParams::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = UniformParams_descriptor_;
+  metadata.reflection = UniformParams_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// UniformParams
+
+// optional double interarrival_lo = 1;
+void UniformParams::clear_interarrival_lo() {
+  interarrival_lo_ = 0;
+}
+ double UniformParams::interarrival_lo() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.UniformParams.interarrival_lo)
+  return interarrival_lo_;
+}
+ void UniformParams::set_interarrival_lo(double value) {
+  
+  interarrival_lo_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.UniformParams.interarrival_lo)
+}
+
+// optional double interarrival_hi = 2;
+void UniformParams::clear_interarrival_hi() {
+  interarrival_hi_ = 0;
+}
+ double UniformParams::interarrival_hi() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.UniformParams.interarrival_hi)
+  return interarrival_hi_;
+}
+ void UniformParams::set_interarrival_hi(double value) {
+  
+  interarrival_hi_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.UniformParams.interarrival_hi)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int DeterministicParams::kOfferedLoadFieldNumber;
+#endif  // !_MSC_VER
+
+DeterministicParams::DeterministicParams()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:grpc.testing.DeterministicParams)
+}
+
+void DeterministicParams::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+DeterministicParams::DeterministicParams(const DeterministicParams& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:grpc.testing.DeterministicParams)
+}
+
+void DeterministicParams::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  offered_load_ = 0;
+}
+
+DeterministicParams::~DeterministicParams() {
+  // @@protoc_insertion_point(destructor:grpc.testing.DeterministicParams)
+  SharedDtor();
+}
+
+void DeterministicParams::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void DeterministicParams::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* DeterministicParams::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return DeterministicParams_descriptor_;
+}
+
+const DeterministicParams& DeterministicParams::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_qpstest_2eproto();
+  return *default_instance_;
+}
+
+DeterministicParams* DeterministicParams::default_instance_ = NULL;
+
+DeterministicParams* DeterministicParams::New(::google::protobuf::Arena* arena) const {
+  DeterministicParams* n = new DeterministicParams;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void DeterministicParams::Clear() {
+  offered_load_ = 0;
+}
+
+bool DeterministicParams::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:grpc.testing.DeterministicParams)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional double offered_load = 1;
+      case 1: {
+        if (tag == 9) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &offered_load_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:grpc.testing.DeterministicParams)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:grpc.testing.DeterministicParams)
+  return false;
+#undef DO_
+}
+
+void DeterministicParams::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:grpc.testing.DeterministicParams)
+  // optional double offered_load = 1;
+  if (this->offered_load() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->offered_load(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:grpc.testing.DeterministicParams)
+}
+
+::google::protobuf::uint8* DeterministicParams::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.DeterministicParams)
+  // optional double offered_load = 1;
+  if (this->offered_load() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->offered_load(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.DeterministicParams)
+  return target;
+}
+
+int DeterministicParams::ByteSize() const {
+  int total_size = 0;
+
+  // optional double offered_load = 1;
+  if (this->offered_load() != 0) {
+    total_size += 1 + 8;
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void DeterministicParams::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const DeterministicParams* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const DeterministicParams>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void DeterministicParams::MergeFrom(const DeterministicParams& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from.offered_load() != 0) {
+    set_offered_load(from.offered_load());
+  }
+}
+
+void DeterministicParams::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void DeterministicParams::CopyFrom(const DeterministicParams& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool DeterministicParams::IsInitialized() const {
+
+  return true;
+}
+
+void DeterministicParams::Swap(DeterministicParams* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void DeterministicParams::InternalSwap(DeterministicParams* other) {
+  std::swap(offered_load_, other->offered_load_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata DeterministicParams::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = DeterministicParams_descriptor_;
+  metadata.reflection = DeterministicParams_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// DeterministicParams
+
+// optional double offered_load = 1;
+void DeterministicParams::clear_offered_load() {
+  offered_load_ = 0;
+}
+ double DeterministicParams::offered_load() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.DeterministicParams.offered_load)
+  return offered_load_;
+}
+ void DeterministicParams::set_offered_load(double value) {
+  
+  offered_load_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.DeterministicParams.offered_load)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ParetoParams::kInterarrivalBaseFieldNumber;
+const int ParetoParams::kAlphaFieldNumber;
+#endif  // !_MSC_VER
+
+ParetoParams::ParetoParams()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:grpc.testing.ParetoParams)
+}
+
+void ParetoParams::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+}
+
+ParetoParams::ParetoParams(const ParetoParams& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:grpc.testing.ParetoParams)
+}
+
+void ParetoParams::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  interarrival_base_ = 0;
+  alpha_ = 0;
+}
+
+ParetoParams::~ParetoParams() {
+  // @@protoc_insertion_point(destructor:grpc.testing.ParetoParams)
+  SharedDtor();
+}
+
+void ParetoParams::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ParetoParams::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ParetoParams::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ParetoParams_descriptor_;
+}
+
+const ParetoParams& ParetoParams::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_qpstest_2eproto();
+  return *default_instance_;
+}
+
+ParetoParams* ParetoParams::default_instance_ = NULL;
+
+ParetoParams* ParetoParams::New(::google::protobuf::Arena* arena) const {
+  ParetoParams* n = new ParetoParams;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void ParetoParams::Clear() {
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<ParetoParams*>(16)->f)
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(interarrival_base_, alpha_);
+
+#undef ZR_HELPER_
+#undef ZR_
+
+}
+
+bool ParetoParams::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:grpc.testing.ParetoParams)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional double interarrival_base = 1;
+      case 1: {
+        if (tag == 9) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &interarrival_base_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(17)) goto parse_alpha;
+        break;
+      }
+
+      // optional double alpha = 2;
+      case 2: {
+        if (tag == 17) {
+         parse_alpha:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &alpha_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:grpc.testing.ParetoParams)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:grpc.testing.ParetoParams)
+  return false;
+#undef DO_
+}
+
+void ParetoParams::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:grpc.testing.ParetoParams)
+  // optional double interarrival_base = 1;
+  if (this->interarrival_base() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->interarrival_base(), output);
+  }
+
+  // optional double alpha = 2;
+  if (this->alpha() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->alpha(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:grpc.testing.ParetoParams)
+}
+
+::google::protobuf::uint8* ParetoParams::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.ParetoParams)
+  // optional double interarrival_base = 1;
+  if (this->interarrival_base() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->interarrival_base(), target);
+  }
+
+  // optional double alpha = 2;
+  if (this->alpha() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->alpha(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.ParetoParams)
+  return target;
+}
+
+int ParetoParams::ByteSize() const {
+  int total_size = 0;
+
+  // optional double interarrival_base = 1;
+  if (this->interarrival_base() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // optional double alpha = 2;
+  if (this->alpha() != 0) {
+    total_size += 1 + 8;
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ParetoParams::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const ParetoParams* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const ParetoParams>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ParetoParams::MergeFrom(const ParetoParams& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  if (from.interarrival_base() != 0) {
+    set_interarrival_base(from.interarrival_base());
+  }
+  if (from.alpha() != 0) {
+    set_alpha(from.alpha());
+  }
+}
+
+void ParetoParams::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ParetoParams::CopyFrom(const ParetoParams& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ParetoParams::IsInitialized() const {
+
+  return true;
+}
+
+void ParetoParams::Swap(ParetoParams* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void ParetoParams::InternalSwap(ParetoParams* other) {
+  std::swap(interarrival_base_, other->interarrival_base_);
+  std::swap(alpha_, other->alpha_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata ParetoParams::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ParetoParams_descriptor_;
+  metadata.reflection = ParetoParams_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// ParetoParams
+
+// optional double interarrival_base = 1;
+void ParetoParams::clear_interarrival_base() {
+  interarrival_base_ = 0;
+}
+ double ParetoParams::interarrival_base() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.ParetoParams.interarrival_base)
+  return interarrival_base_;
+}
+ void ParetoParams::set_interarrival_base(double value) {
+  
+  interarrival_base_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.ParetoParams.interarrival_base)
+}
+
+// optional double alpha = 2;
+void ParetoParams::clear_alpha() {
+  alpha_ = 0;
+}
+ double ParetoParams::alpha() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.ParetoParams.alpha)
+  return alpha_;
+}
+ void ParetoParams::set_alpha(double value) {
+  
+  alpha_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.ParetoParams.alpha)
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int LoadParams::kPoissonFieldNumber;
+const int LoadParams::kUniformFieldNumber;
+const int LoadParams::kDetermFieldNumber;
+const int LoadParams::kParetoFieldNumber;
+#endif  // !_MSC_VER
+
+LoadParams::LoadParams()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:grpc.testing.LoadParams)
+}
+
+void LoadParams::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+  LoadParams_default_oneof_instance_->poisson_ = const_cast< ::grpc::testing::PoissonParams*>(&::grpc::testing::PoissonParams::default_instance());
+  LoadParams_default_oneof_instance_->uniform_ = const_cast< ::grpc::testing::UniformParams*>(&::grpc::testing::UniformParams::default_instance());
+  LoadParams_default_oneof_instance_->determ_ = const_cast< ::grpc::testing::DeterministicParams*>(&::grpc::testing::DeterministicParams::default_instance());
+  LoadParams_default_oneof_instance_->pareto_ = const_cast< ::grpc::testing::ParetoParams*>(&::grpc::testing::ParetoParams::default_instance());
+}
+
+LoadParams::LoadParams(const LoadParams& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:grpc.testing.LoadParams)
+}
+
+void LoadParams::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  clear_has_load();
+}
+
+LoadParams::~LoadParams() {
+  // @@protoc_insertion_point(destructor:grpc.testing.LoadParams)
+  SharedDtor();
+}
+
+void LoadParams::SharedDtor() {
+  if (has_load()) {
+    clear_load();
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void LoadParams::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* LoadParams::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return LoadParams_descriptor_;
+}
+
+const LoadParams& LoadParams::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_qpstest_2eproto();
+  return *default_instance_;
+}
+
+LoadParams* LoadParams::default_instance_ = NULL;
+
+LoadParams* LoadParams::New(::google::protobuf::Arena* arena) const {
+  LoadParams* n = new LoadParams;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void LoadParams::clear_load() {
+  switch(load_case()) {
+    case kPoisson: {
+      delete load_.poisson_;
+      break;
+    }
+    case kUniform: {
+      delete load_.uniform_;
+      break;
+    }
+    case kDeterm: {
+      delete load_.determ_;
+      break;
+    }
+    case kPareto: {
+      delete load_.pareto_;
+      break;
+    }
+    case LOAD_NOT_SET: {
+      break;
+    }
+  }
+  _oneof_case_[0] = LOAD_NOT_SET;
+}
+
+
+void LoadParams::Clear() {
+  clear_load();
+}
+
+bool LoadParams::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:grpc.testing.LoadParams)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .grpc.testing.PoissonParams poisson = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_poisson()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_uniform;
+        break;
+      }
+
+      // optional .grpc.testing.UniformParams uniform = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_uniform:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_uniform()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_determ;
+        break;
+      }
+
+      // optional .grpc.testing.DeterministicParams determ = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_determ:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_determ()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_pareto;
+        break;
+      }
+
+      // optional .grpc.testing.ParetoParams pareto = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_pareto:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_pareto()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:grpc.testing.LoadParams)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:grpc.testing.LoadParams)
+  return false;
+#undef DO_
+}
+
+void LoadParams::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:grpc.testing.LoadParams)
+  // optional .grpc.testing.PoissonParams poisson = 1;
+  if (has_poisson()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, *load_.poisson_, output);
+  }
+
+  // optional .grpc.testing.UniformParams uniform = 2;
+  if (has_uniform()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, *load_.uniform_, output);
+  }
+
+  // optional .grpc.testing.DeterministicParams determ = 3;
+  if (has_determ()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, *load_.determ_, output);
+  }
+
+  // optional .grpc.testing.ParetoParams pareto = 4;
+  if (has_pareto()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, *load_.pareto_, output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:grpc.testing.LoadParams)
+}
+
+::google::protobuf::uint8* LoadParams::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.LoadParams)
+  // optional .grpc.testing.PoissonParams poisson = 1;
+  if (has_poisson()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, *load_.poisson_, target);
+  }
+
+  // optional .grpc.testing.UniformParams uniform = 2;
+  if (has_uniform()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, *load_.uniform_, target);
+  }
+
+  // optional .grpc.testing.DeterministicParams determ = 3;
+  if (has_determ()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, *load_.determ_, target);
+  }
+
+  // optional .grpc.testing.ParetoParams pareto = 4;
+  if (has_pareto()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, *load_.pareto_, target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.LoadParams)
+  return target;
+}
+
+int LoadParams::ByteSize() const {
+  int total_size = 0;
+
+  switch (load_case()) {
+    // optional .grpc.testing.PoissonParams poisson = 1;
+    case kPoisson: {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *load_.poisson_);
+      break;
+    }
+    // optional .grpc.testing.UniformParams uniform = 2;
+    case kUniform: {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *load_.uniform_);
+      break;
+    }
+    // optional .grpc.testing.DeterministicParams determ = 3;
+    case kDeterm: {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *load_.determ_);
+      break;
+    }
+    // optional .grpc.testing.ParetoParams pareto = 4;
+    case kPareto: {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          *load_.pareto_);
+      break;
+    }
+    case LOAD_NOT_SET: {
+      break;
+    }
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void LoadParams::MergeFrom(const ::google::protobuf::Message& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const LoadParams* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const LoadParams>(
+          &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void LoadParams::MergeFrom(const LoadParams& from) {
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  switch (from.load_case()) {
+    case kPoisson: {
+      mutable_poisson()->::grpc::testing::PoissonParams::MergeFrom(from.poisson());
+      break;
+    }
+    case kUniform: {
+      mutable_uniform()->::grpc::testing::UniformParams::MergeFrom(from.uniform());
+      break;
+    }
+    case kDeterm: {
+      mutable_determ()->::grpc::testing::DeterministicParams::MergeFrom(from.determ());
+      break;
+    }
+    case kPareto: {
+      mutable_pareto()->::grpc::testing::ParetoParams::MergeFrom(from.pareto());
+      break;
+    }
+    case LOAD_NOT_SET: {
+      break;
+    }
+  }
+}
+
+void LoadParams::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void LoadParams::CopyFrom(const LoadParams& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LoadParams::IsInitialized() const {
+
+  return true;
+}
+
+void LoadParams::Swap(LoadParams* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void LoadParams::InternalSwap(LoadParams* other) {
+  std::swap(load_, other->load_);
+  std::swap(_oneof_case_[0], other->_oneof_case_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata LoadParams::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = LoadParams_descriptor_;
+  metadata.reflection = LoadParams_reflection_;
+  return metadata;
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// LoadParams
+
+// optional .grpc.testing.PoissonParams poisson = 1;
+bool LoadParams::has_poisson() const {
+  return load_case() == kPoisson;
+}
+void LoadParams::set_has_poisson() {
+  _oneof_case_[0] = kPoisson;
+}
+void LoadParams::clear_poisson() {
+  if (has_poisson()) {
+    delete load_.poisson_;
+    clear_has_load();
+  }
+}
+ const ::grpc::testing::PoissonParams& LoadParams::poisson() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.LoadParams.poisson)
+  return has_poisson() ? *load_.poisson_
+                      : ::grpc::testing::PoissonParams::default_instance();
+}
+ ::grpc::testing::PoissonParams* LoadParams::mutable_poisson() {
+  if (!has_poisson()) {
+    clear_load();
+    set_has_poisson();
+    load_.poisson_ = new ::grpc::testing::PoissonParams;
+  }
+  // @@protoc_insertion_point(field_mutable:grpc.testing.LoadParams.poisson)
+  return load_.poisson_;
+}
+ ::grpc::testing::PoissonParams* LoadParams::release_poisson() {
+  if (has_poisson()) {
+    clear_has_load();
+    ::grpc::testing::PoissonParams* temp = load_.poisson_;
+    load_.poisson_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+ void LoadParams::set_allocated_poisson(::grpc::testing::PoissonParams* poisson) {
+  clear_load();
+  if (poisson) {
+    set_has_poisson();
+    load_.poisson_ = poisson;
+  }
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.LoadParams.poisson)
+}
+
+// optional .grpc.testing.UniformParams uniform = 2;
+bool LoadParams::has_uniform() const {
+  return load_case() == kUniform;
+}
+void LoadParams::set_has_uniform() {
+  _oneof_case_[0] = kUniform;
+}
+void LoadParams::clear_uniform() {
+  if (has_uniform()) {
+    delete load_.uniform_;
+    clear_has_load();
+  }
+}
+ const ::grpc::testing::UniformParams& LoadParams::uniform() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.LoadParams.uniform)
+  return has_uniform() ? *load_.uniform_
+                      : ::grpc::testing::UniformParams::default_instance();
+}
+ ::grpc::testing::UniformParams* LoadParams::mutable_uniform() {
+  if (!has_uniform()) {
+    clear_load();
+    set_has_uniform();
+    load_.uniform_ = new ::grpc::testing::UniformParams;
+  }
+  // @@protoc_insertion_point(field_mutable:grpc.testing.LoadParams.uniform)
+  return load_.uniform_;
+}
+ ::grpc::testing::UniformParams* LoadParams::release_uniform() {
+  if (has_uniform()) {
+    clear_has_load();
+    ::grpc::testing::UniformParams* temp = load_.uniform_;
+    load_.uniform_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+ void LoadParams::set_allocated_uniform(::grpc::testing::UniformParams* uniform) {
+  clear_load();
+  if (uniform) {
+    set_has_uniform();
+    load_.uniform_ = uniform;
+  }
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.LoadParams.uniform)
+}
+
+// optional .grpc.testing.DeterministicParams determ = 3;
+bool LoadParams::has_determ() const {
+  return load_case() == kDeterm;
+}
+void LoadParams::set_has_determ() {
+  _oneof_case_[0] = kDeterm;
+}
+void LoadParams::clear_determ() {
+  if (has_determ()) {
+    delete load_.determ_;
+    clear_has_load();
+  }
+}
+ const ::grpc::testing::DeterministicParams& LoadParams::determ() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.LoadParams.determ)
+  return has_determ() ? *load_.determ_
+                      : ::grpc::testing::DeterministicParams::default_instance();
+}
+ ::grpc::testing::DeterministicParams* LoadParams::mutable_determ() {
+  if (!has_determ()) {
+    clear_load();
+    set_has_determ();
+    load_.determ_ = new ::grpc::testing::DeterministicParams;
+  }
+  // @@protoc_insertion_point(field_mutable:grpc.testing.LoadParams.determ)
+  return load_.determ_;
+}
+ ::grpc::testing::DeterministicParams* LoadParams::release_determ() {
+  if (has_determ()) {
+    clear_has_load();
+    ::grpc::testing::DeterministicParams* temp = load_.determ_;
+    load_.determ_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+ void LoadParams::set_allocated_determ(::grpc::testing::DeterministicParams* determ) {
+  clear_load();
+  if (determ) {
+    set_has_determ();
+    load_.determ_ = determ;
+  }
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.LoadParams.determ)
+}
+
+// optional .grpc.testing.ParetoParams pareto = 4;
+bool LoadParams::has_pareto() const {
+  return load_case() == kPareto;
+}
+void LoadParams::set_has_pareto() {
+  _oneof_case_[0] = kPareto;
+}
+void LoadParams::clear_pareto() {
+  if (has_pareto()) {
+    delete load_.pareto_;
+    clear_has_load();
+  }
+}
+ const ::grpc::testing::ParetoParams& LoadParams::pareto() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.LoadParams.pareto)
+  return has_pareto() ? *load_.pareto_
+                      : ::grpc::testing::ParetoParams::default_instance();
+}
+ ::grpc::testing::ParetoParams* LoadParams::mutable_pareto() {
+  if (!has_pareto()) {
+    clear_load();
+    set_has_pareto();
+    load_.pareto_ = new ::grpc::testing::ParetoParams;
+  }
+  // @@protoc_insertion_point(field_mutable:grpc.testing.LoadParams.pareto)
+  return load_.pareto_;
+}
+ ::grpc::testing::ParetoParams* LoadParams::release_pareto() {
+  if (has_pareto()) {
+    clear_has_load();
+    ::grpc::testing::ParetoParams* temp = load_.pareto_;
+    load_.pareto_ = NULL;
+    return temp;
+  } else {
+    return NULL;
+  }
+}
+ void LoadParams::set_allocated_pareto(::grpc::testing::ParetoParams* pareto) {
+  clear_load();
+  if (pareto) {
+    set_has_pareto();
+    load_.pareto_ = pareto;
+  }
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.LoadParams.pareto)
+}
+
+bool LoadParams::has_load() const {
+  return load_case() != LOAD_NOT_SET;
+}
+void LoadParams::clear_has_load() {
+  _oneof_case_[0] = LOAD_NOT_SET;
+}
+LoadParams::LoadCase LoadParams::load_case() const {
+  return LoadParams::LoadCase(_oneof_case_[0]);
+}
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
@@ -2232,6 +3749,8 @@ const int ClientConfig::kPayloadSizeFieldNumber;
 const int ClientConfig::kAsyncClientThreadsFieldNumber;
 const int ClientConfig::kRpcTypeFieldNumber;
 const int ClientConfig::kHostFieldNumber;
+const int ClientConfig::kLoadTypeFieldNumber;
+const int ClientConfig::kLoadParamsFieldNumber;
 #endif  // !_MSC_VER
 
 ClientConfig::ClientConfig()
@@ -2241,6 +3760,8 @@ ClientConfig::ClientConfig()
 }
 
 void ClientConfig::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+  load_params_ = const_cast< ::grpc::testing::LoadParams*>(&::grpc::testing::LoadParams::default_instance());
 }
 
 ClientConfig::ClientConfig(const ClientConfig& from)
@@ -2252,17 +3773,19 @@ ClientConfig::ClientConfig(const ClientConfig& from)
 }
 
 void ClientConfig::SharedCtor() {
+    _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  client_type_ = 1;
+  client_type_ = 0;
   enable_ssl_ = false;
   outstanding_rpcs_per_channel_ = 0;
   client_channels_ = 0;
   payload_size_ = 0;
   async_client_threads_ = 0;
-  rpc_type_ = 1;
+  rpc_type_ = 0;
   host_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  load_type_ = 0;
+  load_params_ = NULL;
 }
 
 ClientConfig::~ClientConfig() {
@@ -2273,6 +3796,7 @@ ClientConfig::~ClientConfig() {
 void ClientConfig::SharedDtor() {
   host_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
+    delete load_params_;
   }
 }
 
@@ -2310,23 +3834,17 @@ void ClientConfig::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  if (_has_bits_[0 / 32] & 254u) {
-    ZR_(enable_ssl_, async_client_threads_);
-    client_type_ = 1;
-    rpc_type_ = 1;
-  }
-  if (has_host()) {
-    host_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  }
+  ZR_(client_type_, async_client_threads_);
+  rpc_type_ = 0;
+  host_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  load_type_ = 0;
+  if (GetArenaNoVirtual() == NULL && load_params_ != NULL) delete load_params_;
+  load_params_ = NULL;
 
 #undef ZR_HELPER_
 #undef ZR_
 
   server_targets_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool ClientConfig::MergePartialFromCodedStream(
@@ -2358,7 +3876,7 @@ bool ClientConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // required .grpc.testing.ClientType client_type = 2;
+      // optional .grpc.testing.ClientType client_type = 2;
       case 2: {
         if (tag == 16) {
          parse_client_type:
@@ -2366,11 +3884,7 @@ bool ClientConfig::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::grpc::testing::ClientType_IsValid(value)) {
-            set_client_type(static_cast< ::grpc::testing::ClientType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(2, value);
-          }
+          set_client_type(static_cast< ::grpc::testing::ClientType >(value));
         } else {
           goto handle_unusual;
         }
@@ -2378,14 +3892,14 @@ bool ClientConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bool enable_ssl = 3 [default = false];
+      // optional bool enable_ssl = 3;
       case 3: {
         if (tag == 24) {
          parse_enable_ssl:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &enable_ssl_)));
-          set_has_enable_ssl();
+
         } else {
           goto handle_unusual;
         }
@@ -2393,14 +3907,14 @@ bool ClientConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 outstanding_rpcs_per_channel = 4;
+      // optional int32 outstanding_rpcs_per_channel = 4;
       case 4: {
         if (tag == 32) {
          parse_outstanding_rpcs_per_channel:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &outstanding_rpcs_per_channel_)));
-          set_has_outstanding_rpcs_per_channel();
+
         } else {
           goto handle_unusual;
         }
@@ -2408,14 +3922,14 @@ bool ClientConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 client_channels = 5;
+      // optional int32 client_channels = 5;
       case 5: {
         if (tag == 40) {
          parse_client_channels:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &client_channels_)));
-          set_has_client_channels();
+
         } else {
           goto handle_unusual;
         }
@@ -2423,14 +3937,14 @@ bool ClientConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 payload_size = 6;
+      // optional int32 payload_size = 6;
       case 6: {
         if (tag == 48) {
          parse_payload_size:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &payload_size_)));
-          set_has_payload_size();
+
         } else {
           goto handle_unusual;
         }
@@ -2445,7 +3959,7 @@ bool ClientConfig::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &async_client_threads_)));
-          set_has_async_client_threads();
+
         } else {
           goto handle_unusual;
         }
@@ -2453,7 +3967,7 @@ bool ClientConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .grpc.testing.RpcType rpc_type = 8 [default = UNARY];
+      // optional .grpc.testing.RpcType rpc_type = 8;
       case 8: {
         if (tag == 64) {
          parse_rpc_type:
@@ -2461,11 +3975,7 @@ bool ClientConfig::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::grpc::testing::RpcType_IsValid(value)) {
-            set_rpc_type(static_cast< ::grpc::testing::RpcType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(8, value);
-          }
+          set_rpc_type(static_cast< ::grpc::testing::RpcType >(value));
         } else {
           goto handle_unusual;
         }
@@ -2486,6 +3996,35 @@ bool ClientConfig::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(80)) goto parse_load_type;
+        break;
+      }
+
+      // optional .grpc.testing.LoadType load_type = 10;
+      case 10: {
+        if (tag == 80) {
+         parse_load_type:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_load_type(static_cast< ::grpc::testing::LoadType >(value));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(90)) goto parse_load_params;
+        break;
+      }
+
+      // optional .grpc.testing.LoadParams load_params = 11;
+      case 11: {
+        if (tag == 90) {
+         parse_load_params:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_load_params()));
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -2497,8 +4036,7 @@ bool ClientConfig::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -2525,45 +4063,45 @@ void ClientConfig::SerializeWithCachedSizes(
       1, this->server_targets(i), output);
   }
 
-  // required .grpc.testing.ClientType client_type = 2;
-  if (has_client_type()) {
+  // optional .grpc.testing.ClientType client_type = 2;
+  if (this->client_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       2, this->client_type(), output);
   }
 
-  // optional bool enable_ssl = 3 [default = false];
-  if (has_enable_ssl()) {
+  // optional bool enable_ssl = 3;
+  if (this->enable_ssl() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->enable_ssl(), output);
   }
 
-  // required int32 outstanding_rpcs_per_channel = 4;
-  if (has_outstanding_rpcs_per_channel()) {
+  // optional int32 outstanding_rpcs_per_channel = 4;
+  if (this->outstanding_rpcs_per_channel() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->outstanding_rpcs_per_channel(), output);
   }
 
-  // required int32 client_channels = 5;
-  if (has_client_channels()) {
+  // optional int32 client_channels = 5;
+  if (this->client_channels() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->client_channels(), output);
   }
 
-  // required int32 payload_size = 6;
-  if (has_payload_size()) {
+  // optional int32 payload_size = 6;
+  if (this->payload_size() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->payload_size(), output);
   }
 
   // optional int32 async_client_threads = 7;
-  if (has_async_client_threads()) {
+  if (this->async_client_threads() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->async_client_threads(), output);
   }
 
-  // optional .grpc.testing.RpcType rpc_type = 8 [default = UNARY];
-  if (has_rpc_type()) {
+  // optional .grpc.testing.RpcType rpc_type = 8;
+  if (this->rpc_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       8, this->rpc_type(), output);
   }
 
   // optional string host = 9;
-  if (has_host()) {
+  if (this->host().size() > 0) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->host().data(), this->host().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2572,10 +4110,18 @@ void ClientConfig::SerializeWithCachedSizes(
       9, this->host(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
+  // optional .grpc.testing.LoadType load_type = 10;
+  if (this->load_type() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      10, this->load_type(), output);
   }
+
+  // optional .grpc.testing.LoadParams load_params = 11;
+  if (this->has_load_params()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, *this->load_params_, output);
+  }
+
   // @@protoc_insertion_point(serialize_end:grpc.testing.ClientConfig)
 }
 
@@ -2592,45 +4138,45 @@ void ClientConfig::SerializeWithCachedSizes(
       WriteStringToArray(1, this->server_targets(i), target);
   }
 
-  // required .grpc.testing.ClientType client_type = 2;
-  if (has_client_type()) {
+  // optional .grpc.testing.ClientType client_type = 2;
+  if (this->client_type() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       2, this->client_type(), target);
   }
 
-  // optional bool enable_ssl = 3 [default = false];
-  if (has_enable_ssl()) {
+  // optional bool enable_ssl = 3;
+  if (this->enable_ssl() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->enable_ssl(), target);
   }
 
-  // required int32 outstanding_rpcs_per_channel = 4;
-  if (has_outstanding_rpcs_per_channel()) {
+  // optional int32 outstanding_rpcs_per_channel = 4;
+  if (this->outstanding_rpcs_per_channel() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->outstanding_rpcs_per_channel(), target);
   }
 
-  // required int32 client_channels = 5;
-  if (has_client_channels()) {
+  // optional int32 client_channels = 5;
+  if (this->client_channels() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->client_channels(), target);
   }
 
-  // required int32 payload_size = 6;
-  if (has_payload_size()) {
+  // optional int32 payload_size = 6;
+  if (this->payload_size() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->payload_size(), target);
   }
 
   // optional int32 async_client_threads = 7;
-  if (has_async_client_threads()) {
+  if (this->async_client_threads() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->async_client_threads(), target);
   }
 
-  // optional .grpc.testing.RpcType rpc_type = 8 [default = UNARY];
-  if (has_rpc_type()) {
+  // optional .grpc.testing.RpcType rpc_type = 8;
+  if (this->rpc_type() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       8, this->rpc_type(), target);
   }
 
   // optional string host = 9;
-  if (has_host()) {
+  if (this->host().size() > 0) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->host().data(), this->host().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2640,97 +4186,89 @@ void ClientConfig::SerializeWithCachedSizes(
         9, this->host(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
+  // optional .grpc.testing.LoadType load_type = 10;
+  if (this->load_type() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      10, this->load_type(), target);
   }
+
+  // optional .grpc.testing.LoadParams load_params = 11;
+  if (this->has_load_params()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        11, *this->load_params_, target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.ClientConfig)
   return target;
 }
 
-int ClientConfig::RequiredFieldsByteSizeFallback() const {
-  int total_size = 0;
-
-  if (has_client_type()) {
-    // required .grpc.testing.ClientType client_type = 2;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->client_type());
-  }
-
-  if (has_outstanding_rpcs_per_channel()) {
-    // required int32 outstanding_rpcs_per_channel = 4;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->outstanding_rpcs_per_channel());
-  }
-
-  if (has_client_channels()) {
-    // required int32 client_channels = 5;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->client_channels());
-  }
-
-  if (has_payload_size()) {
-    // required int32 payload_size = 6;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->payload_size());
-  }
-
-  return total_size;
-}
 int ClientConfig::ByteSize() const {
   int total_size = 0;
 
-  if (((_has_bits_[0] & 0x0000003a) ^ 0x0000003a) == 0) {  // All required fields are present.
-    // required .grpc.testing.ClientType client_type = 2;
+  // optional .grpc.testing.ClientType client_type = 2;
+  if (this->client_type() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->client_type());
+  }
 
-    // required int32 outstanding_rpcs_per_channel = 4;
+  // optional bool enable_ssl = 3;
+  if (this->enable_ssl() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // optional int32 outstanding_rpcs_per_channel = 4;
+  if (this->outstanding_rpcs_per_channel() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->outstanding_rpcs_per_channel());
+  }
 
-    // required int32 client_channels = 5;
+  // optional int32 client_channels = 5;
+  if (this->client_channels() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->client_channels());
+  }
 
-    // required int32 payload_size = 6;
+  // optional int32 payload_size = 6;
+  if (this->payload_size() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int32Size(
         this->payload_size());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
-  if (_has_bits_[2 / 32] & 196) {
-    // optional bool enable_ssl = 3 [default = false];
-    if (has_enable_ssl()) {
-      total_size += 1 + 1;
-    }
 
-    // optional int32 async_client_threads = 7;
-    if (has_async_client_threads()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->async_client_threads());
-    }
-
-    // optional .grpc.testing.RpcType rpc_type = 8 [default = UNARY];
-    if (has_rpc_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->rpc_type());
-    }
-
+  // optional int32 async_client_threads = 7;
+  if (this->async_client_threads() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->async_client_threads());
   }
+
+  // optional .grpc.testing.RpcType rpc_type = 8;
+  if (this->rpc_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->rpc_type());
+  }
+
   // optional string host = 9;
-  if (has_host()) {
+  if (this->host().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->host());
+  }
+
+  // optional .grpc.testing.LoadType load_type = 10;
+  if (this->load_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->load_type());
+  }
+
+  // optional .grpc.testing.LoadParams load_params = 11;
+  if (this->has_load_params()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->load_params_);
   }
 
   // repeated string server_targets = 1;
@@ -2740,11 +4278,6 @@ int ClientConfig::ByteSize() const {
       this->server_targets(i));
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -2766,37 +4299,36 @@ void ClientConfig::MergeFrom(const ::google::protobuf::Message& from) {
 void ClientConfig::MergeFrom(const ClientConfig& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   server_targets_.MergeFrom(from.server_targets_);
-  if (from._has_bits_[1 / 32] & (0xffu << (1 % 32))) {
-    if (from.has_client_type()) {
-      set_client_type(from.client_type());
-    }
-    if (from.has_enable_ssl()) {
-      set_enable_ssl(from.enable_ssl());
-    }
-    if (from.has_outstanding_rpcs_per_channel()) {
-      set_outstanding_rpcs_per_channel(from.outstanding_rpcs_per_channel());
-    }
-    if (from.has_client_channels()) {
-      set_client_channels(from.client_channels());
-    }
-    if (from.has_payload_size()) {
-      set_payload_size(from.payload_size());
-    }
-    if (from.has_async_client_threads()) {
-      set_async_client_threads(from.async_client_threads());
-    }
-    if (from.has_rpc_type()) {
-      set_rpc_type(from.rpc_type());
-    }
+  if (from.client_type() != 0) {
+    set_client_type(from.client_type());
   }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    if (from.has_host()) {
-      set_has_host();
-      host_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.host_);
-    }
+  if (from.enable_ssl() != 0) {
+    set_enable_ssl(from.enable_ssl());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.outstanding_rpcs_per_channel() != 0) {
+    set_outstanding_rpcs_per_channel(from.outstanding_rpcs_per_channel());
+  }
+  if (from.client_channels() != 0) {
+    set_client_channels(from.client_channels());
+  }
+  if (from.payload_size() != 0) {
+    set_payload_size(from.payload_size());
+  }
+  if (from.async_client_threads() != 0) {
+    set_async_client_threads(from.async_client_threads());
+  }
+  if (from.rpc_type() != 0) {
+    set_rpc_type(from.rpc_type());
+  }
+  if (from.host().size() > 0) {
+
+    host_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.host_);
+  }
+  if (from.load_type() != 0) {
+    set_load_type(from.load_type());
+  }
+  if (from.has_load_params()) {
+    mutable_load_params()->::grpc::testing::LoadParams::MergeFrom(from.load_params());
   }
 }
 
@@ -2813,7 +4345,6 @@ void ClientConfig::CopyFrom(const ClientConfig& from) {
 }
 
 bool ClientConfig::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003a) != 0x0000003a) return false;
 
   return true;
 }
@@ -2832,7 +4363,8 @@ void ClientConfig::InternalSwap(ClientConfig* other) {
   std::swap(async_client_threads_, other->async_client_threads_);
   std::swap(rpc_type_, other->rpc_type_);
   host_.Swap(&other->host_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  std::swap(load_type_, other->load_type_);
+  std::swap(load_params_, other->load_params_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -2902,227 +4434,196 @@ ClientConfig::mutable_server_targets() {
   return &server_targets_;
 }
 
-// required .grpc.testing.ClientType client_type = 2;
-bool ClientConfig::has_client_type() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void ClientConfig::set_has_client_type() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void ClientConfig::clear_has_client_type() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional .grpc.testing.ClientType client_type = 2;
 void ClientConfig::clear_client_type() {
-  client_type_ = 1;
-  clear_has_client_type();
+  client_type_ = 0;
 }
  ::grpc::testing::ClientType ClientConfig::client_type() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.client_type)
   return static_cast< ::grpc::testing::ClientType >(client_type_);
 }
  void ClientConfig::set_client_type(::grpc::testing::ClientType value) {
-  assert(::grpc::testing::ClientType_IsValid(value));
-  set_has_client_type();
+  
   client_type_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.client_type)
 }
 
-// optional bool enable_ssl = 3 [default = false];
-bool ClientConfig::has_enable_ssl() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void ClientConfig::set_has_enable_ssl() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void ClientConfig::clear_has_enable_ssl() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional bool enable_ssl = 3;
 void ClientConfig::clear_enable_ssl() {
   enable_ssl_ = false;
-  clear_has_enable_ssl();
 }
  bool ClientConfig::enable_ssl() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.enable_ssl)
   return enable_ssl_;
 }
  void ClientConfig::set_enable_ssl(bool value) {
-  set_has_enable_ssl();
+  
   enable_ssl_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.enable_ssl)
 }
 
-// required int32 outstanding_rpcs_per_channel = 4;
-bool ClientConfig::has_outstanding_rpcs_per_channel() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-void ClientConfig::set_has_outstanding_rpcs_per_channel() {
-  _has_bits_[0] |= 0x00000008u;
-}
-void ClientConfig::clear_has_outstanding_rpcs_per_channel() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// optional int32 outstanding_rpcs_per_channel = 4;
 void ClientConfig::clear_outstanding_rpcs_per_channel() {
   outstanding_rpcs_per_channel_ = 0;
-  clear_has_outstanding_rpcs_per_channel();
 }
  ::google::protobuf::int32 ClientConfig::outstanding_rpcs_per_channel() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.outstanding_rpcs_per_channel)
   return outstanding_rpcs_per_channel_;
 }
  void ClientConfig::set_outstanding_rpcs_per_channel(::google::protobuf::int32 value) {
-  set_has_outstanding_rpcs_per_channel();
+  
   outstanding_rpcs_per_channel_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.outstanding_rpcs_per_channel)
 }
 
-// required int32 client_channels = 5;
-bool ClientConfig::has_client_channels() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
-}
-void ClientConfig::set_has_client_channels() {
-  _has_bits_[0] |= 0x00000010u;
-}
-void ClientConfig::clear_has_client_channels() {
-  _has_bits_[0] &= ~0x00000010u;
-}
+// optional int32 client_channels = 5;
 void ClientConfig::clear_client_channels() {
   client_channels_ = 0;
-  clear_has_client_channels();
 }
  ::google::protobuf::int32 ClientConfig::client_channels() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.client_channels)
   return client_channels_;
 }
  void ClientConfig::set_client_channels(::google::protobuf::int32 value) {
-  set_has_client_channels();
+  
   client_channels_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.client_channels)
 }
 
-// required int32 payload_size = 6;
-bool ClientConfig::has_payload_size() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
-}
-void ClientConfig::set_has_payload_size() {
-  _has_bits_[0] |= 0x00000020u;
-}
-void ClientConfig::clear_has_payload_size() {
-  _has_bits_[0] &= ~0x00000020u;
-}
+// optional int32 payload_size = 6;
 void ClientConfig::clear_payload_size() {
   payload_size_ = 0;
-  clear_has_payload_size();
 }
  ::google::protobuf::int32 ClientConfig::payload_size() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.payload_size)
   return payload_size_;
 }
  void ClientConfig::set_payload_size(::google::protobuf::int32 value) {
-  set_has_payload_size();
+  
   payload_size_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.payload_size)
 }
 
 // optional int32 async_client_threads = 7;
-bool ClientConfig::has_async_client_threads() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
-}
-void ClientConfig::set_has_async_client_threads() {
-  _has_bits_[0] |= 0x00000040u;
-}
-void ClientConfig::clear_has_async_client_threads() {
-  _has_bits_[0] &= ~0x00000040u;
-}
 void ClientConfig::clear_async_client_threads() {
   async_client_threads_ = 0;
-  clear_has_async_client_threads();
 }
  ::google::protobuf::int32 ClientConfig::async_client_threads() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.async_client_threads)
   return async_client_threads_;
 }
  void ClientConfig::set_async_client_threads(::google::protobuf::int32 value) {
-  set_has_async_client_threads();
+  
   async_client_threads_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.async_client_threads)
 }
 
-// optional .grpc.testing.RpcType rpc_type = 8 [default = UNARY];
-bool ClientConfig::has_rpc_type() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-void ClientConfig::set_has_rpc_type() {
-  _has_bits_[0] |= 0x00000080u;
-}
-void ClientConfig::clear_has_rpc_type() {
-  _has_bits_[0] &= ~0x00000080u;
-}
+// optional .grpc.testing.RpcType rpc_type = 8;
 void ClientConfig::clear_rpc_type() {
-  rpc_type_ = 1;
-  clear_has_rpc_type();
+  rpc_type_ = 0;
 }
  ::grpc::testing::RpcType ClientConfig::rpc_type() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.rpc_type)
   return static_cast< ::grpc::testing::RpcType >(rpc_type_);
 }
  void ClientConfig::set_rpc_type(::grpc::testing::RpcType value) {
-  assert(::grpc::testing::RpcType_IsValid(value));
-  set_has_rpc_type();
+  
   rpc_type_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.rpc_type)
 }
 
 // optional string host = 9;
-bool ClientConfig::has_host() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
-}
-void ClientConfig::set_has_host() {
-  _has_bits_[0] |= 0x00000100u;
-}
-void ClientConfig::clear_has_host() {
-  _has_bits_[0] &= ~0x00000100u;
-}
 void ClientConfig::clear_host() {
   host_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_host();
 }
  const ::std::string& ClientConfig::host() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.host)
   return host_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  void ClientConfig::set_host(const ::std::string& value) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.host)
 }
  void ClientConfig::set_host(const char* value) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:grpc.testing.ClientConfig.host)
 }
  void ClientConfig::set_host(const char* value, size_t size) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:grpc.testing.ClientConfig.host)
 }
  ::std::string* ClientConfig::mutable_host() {
-  set_has_host();
+  
   // @@protoc_insertion_point(field_mutable:grpc.testing.ClientConfig.host)
   return host_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* ClientConfig::release_host() {
-  clear_has_host();
+  
   return host_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  void ClientConfig::set_allocated_host(::std::string* host) {
   if (host != NULL) {
-    set_has_host();
+    
   } else {
-    clear_has_host();
+    
   }
   host_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), host);
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.ClientConfig.host)
+}
+
+// optional .grpc.testing.LoadType load_type = 10;
+void ClientConfig::clear_load_type() {
+  load_type_ = 0;
+}
+ ::grpc::testing::LoadType ClientConfig::load_type() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.load_type)
+  return static_cast< ::grpc::testing::LoadType >(load_type_);
+}
+ void ClientConfig::set_load_type(::grpc::testing::LoadType value) {
+  
+  load_type_ = value;
+  // @@protoc_insertion_point(field_set:grpc.testing.ClientConfig.load_type)
+}
+
+// optional .grpc.testing.LoadParams load_params = 11;
+bool ClientConfig::has_load_params() const {
+  return !_is_default_instance_ && load_params_ != NULL;
+}
+void ClientConfig::clear_load_params() {
+  if (GetArenaNoVirtual() == NULL && load_params_ != NULL) delete load_params_;
+  load_params_ = NULL;
+}
+ const ::grpc::testing::LoadParams& ClientConfig::load_params() const {
+  // @@protoc_insertion_point(field_get:grpc.testing.ClientConfig.load_params)
+  return load_params_ != NULL ? *load_params_ : *default_instance_->load_params_;
+}
+ ::grpc::testing::LoadParams* ClientConfig::mutable_load_params() {
+  
+  if (load_params_ == NULL) {
+    load_params_ = new ::grpc::testing::LoadParams;
+  }
+  // @@protoc_insertion_point(field_mutable:grpc.testing.ClientConfig.load_params)
+  return load_params_;
+}
+ ::grpc::testing::LoadParams* ClientConfig::release_load_params() {
+  
+  ::grpc::testing::LoadParams* temp = load_params_;
+  load_params_ = NULL;
+  return temp;
+}
+ void ClientConfig::set_allocated_load_params(::grpc::testing::LoadParams* load_params) {
+  delete load_params_;
+  load_params_ = load_params;
+  if (load_params) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:grpc.testing.ClientConfig.load_params)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -3139,6 +4640,7 @@ Mark::Mark()
 }
 
 void Mark::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 Mark::Mark(const Mark& from)
@@ -3150,8 +4652,8 @@ Mark::Mark(const Mark& from)
 }
 
 void Mark::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 Mark::~Mark() {
@@ -3190,10 +4692,6 @@ Mark* Mark::New(::google::protobuf::Arena* arena) const {
 }
 
 void Mark::Clear() {
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool Mark::MergePartialFromCodedStream(
@@ -3211,8 +4709,7 @@ bool Mark::MergePartialFromCodedStream(
         ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
       goto success;
     }
-    DO_(::google::protobuf::internal::WireFormat::SkipField(
-          input, tag, mutable_unknown_fields()));
+    DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
   }
 success:
   // @@protoc_insertion_point(parse_success:grpc.testing.Mark)
@@ -3226,20 +4723,12 @@ failure:
 void Mark::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:grpc.testing.Mark)
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.Mark)
 }
 
 ::google::protobuf::uint8* Mark::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.Mark)
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.Mark)
   return target;
 }
@@ -3247,11 +4736,6 @@ void Mark::SerializeWithCachedSizes(
 int Mark::ByteSize() const {
   int total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -3272,9 +4756,6 @@ void Mark::MergeFrom(const ::google::protobuf::Message& from) {
 
 void Mark::MergeFrom(const Mark& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-  }
 }
 
 void Mark::CopyFrom(const ::google::protobuf::Message& from) {
@@ -3330,6 +4811,7 @@ ClientArgs::ClientArgs()
 }
 
 void ClientArgs::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
   ClientArgs_default_oneof_instance_->setup_ = const_cast< ::grpc::testing::ClientConfig*>(&::grpc::testing::ClientConfig::default_instance());
   ClientArgs_default_oneof_instance_->mark_ = const_cast< ::grpc::testing::Mark*>(&::grpc::testing::Mark::default_instance());
 }
@@ -3343,8 +4825,8 @@ ClientArgs::ClientArgs(const ClientArgs& from)
 }
 
 void ClientArgs::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
   clear_has_argtype();
 }
 
@@ -3406,10 +4888,6 @@ void ClientArgs::clear_argtype() {
 
 void ClientArgs::Clear() {
   clear_argtype();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool ClientArgs::MergePartialFromCodedStream(
@@ -3454,8 +4932,7 @@ bool ClientArgs::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -3484,10 +4961,6 @@ void ClientArgs::SerializeWithCachedSizes(
       2, *argtype_.mark_, output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.ClientArgs)
 }
 
@@ -3508,10 +4981,6 @@ void ClientArgs::SerializeWithCachedSizes(
         2, *argtype_.mark_, target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.ClientArgs)
   return target;
 }
@@ -3537,11 +5006,6 @@ int ClientArgs::ByteSize() const {
     case ARGTYPE_NOT_SET: {
       break;
     }
-  }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
   }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
@@ -3576,9 +5040,6 @@ void ClientArgs::MergeFrom(const ClientArgs& from) {
       break;
     }
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-  }
 }
 
 void ClientArgs::CopyFrom(const ::google::protobuf::Message& from) {
@@ -3595,9 +5056,6 @@ void ClientArgs::CopyFrom(const ClientArgs& from) {
 
 bool ClientArgs::IsInitialized() const {
 
-  if (has_setup()) {
-    if (!this->setup().IsInitialized()) return false;
-  }
   return true;
 }
 
@@ -3608,7 +5066,6 @@ void ClientArgs::Swap(ClientArgs* other) {
 void ClientArgs::InternalSwap(ClientArgs* other) {
   std::swap(argtype_, other->argtype_);
   std::swap(_oneof_case_[0], other->_oneof_case_[0]);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -3743,6 +5200,7 @@ ClientStats::ClientStats()
 }
 
 void ClientStats::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
   latencies_ = const_cast< ::grpc::testing::HistogramData*>(&::grpc::testing::HistogramData::default_instance());
 }
 
@@ -3755,12 +5213,12 @@ ClientStats::ClientStats(const ClientStats& from)
 }
 
 void ClientStats::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   latencies_ = NULL;
   time_elapsed_ = 0;
   time_user_ = 0;
   time_system_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 ClientStats::~ClientStats() {
@@ -3808,20 +5266,13 @@ void ClientStats::Clear() {
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
-  if (_has_bits_[0 / 32] & 15u) {
-    ZR_(time_elapsed_, time_system_);
-    if (has_latencies()) {
-      if (latencies_ != NULL) latencies_->::grpc::testing::HistogramData::Clear();
-    }
-  }
+  ZR_(time_elapsed_, time_system_);
+  if (GetArenaNoVirtual() == NULL && latencies_ != NULL) delete latencies_;
+  latencies_ = NULL;
 
 #undef ZR_HELPER_
 #undef ZR_
 
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool ClientStats::MergePartialFromCodedStream(
@@ -3834,7 +5285,7 @@ bool ClientStats::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .grpc.testing.HistogramData latencies = 1;
+      // optional .grpc.testing.HistogramData latencies = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -3842,48 +5293,48 @@ bool ClientStats::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(25)) goto parse_time_elapsed;
+        if (input->ExpectTag(17)) goto parse_time_elapsed;
         break;
       }
 
-      // required double time_elapsed = 3;
-      case 3: {
-        if (tag == 25) {
+      // optional double time_elapsed = 2;
+      case 2: {
+        if (tag == 17) {
          parse_time_elapsed:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &time_elapsed_)));
-          set_has_time_elapsed();
+
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(33)) goto parse_time_user;
+        if (input->ExpectTag(25)) goto parse_time_user;
         break;
       }
 
-      // required double time_user = 4;
-      case 4: {
-        if (tag == 33) {
+      // optional double time_user = 3;
+      case 3: {
+        if (tag == 25) {
          parse_time_user:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &time_user_)));
-          set_has_time_user();
+
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(41)) goto parse_time_system;
+        if (input->ExpectTag(33)) goto parse_time_system;
         break;
       }
 
-      // required double time_system = 5;
-      case 5: {
-        if (tag == 41) {
+      // optional double time_system = 4;
+      case 4: {
+        if (tag == 33) {
          parse_time_system:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
                  input, &time_system_)));
-          set_has_time_system();
+
         } else {
           goto handle_unusual;
         }
@@ -3898,8 +5349,7 @@ bool ClientStats::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -3916,120 +5366,84 @@ failure:
 void ClientStats::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:grpc.testing.ClientStats)
-  // required .grpc.testing.HistogramData latencies = 1;
-  if (has_latencies()) {
+  // optional .grpc.testing.HistogramData latencies = 1;
+  if (this->has_latencies()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, *this->latencies_, output);
   }
 
-  // required double time_elapsed = 3;
-  if (has_time_elapsed()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->time_elapsed(), output);
+  // optional double time_elapsed = 2;
+  if (this->time_elapsed() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->time_elapsed(), output);
   }
 
-  // required double time_user = 4;
-  if (has_time_user()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->time_user(), output);
+  // optional double time_user = 3;
+  if (this->time_user() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->time_user(), output);
   }
 
-  // required double time_system = 5;
-  if (has_time_system()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(5, this->time_system(), output);
+  // optional double time_system = 4;
+  if (this->time_system() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(4, this->time_system(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.ClientStats)
 }
 
 ::google::protobuf::uint8* ClientStats::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.ClientStats)
-  // required .grpc.testing.HistogramData latencies = 1;
-  if (has_latencies()) {
+  // optional .grpc.testing.HistogramData latencies = 1;
+  if (this->has_latencies()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, *this->latencies_, target);
   }
 
-  // required double time_elapsed = 3;
-  if (has_time_elapsed()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->time_elapsed(), target);
+  // optional double time_elapsed = 2;
+  if (this->time_elapsed() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->time_elapsed(), target);
   }
 
-  // required double time_user = 4;
-  if (has_time_user()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->time_user(), target);
+  // optional double time_user = 3;
+  if (this->time_user() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->time_user(), target);
   }
 
-  // required double time_system = 5;
-  if (has_time_system()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(5, this->time_system(), target);
+  // optional double time_system = 4;
+  if (this->time_system() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(4, this->time_system(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.ClientStats)
   return target;
 }
 
-int ClientStats::RequiredFieldsByteSizeFallback() const {
-  int total_size = 0;
-
-  if (has_latencies()) {
-    // required .grpc.testing.HistogramData latencies = 1;
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->latencies_);
-  }
-
-  if (has_time_elapsed()) {
-    // required double time_elapsed = 3;
-    total_size += 1 + 8;
-  }
-
-  if (has_time_user()) {
-    // required double time_user = 4;
-    total_size += 1 + 8;
-  }
-
-  if (has_time_system()) {
-    // required double time_system = 5;
-    total_size += 1 + 8;
-  }
-
-  return total_size;
-}
 int ClientStats::ByteSize() const {
   int total_size = 0;
 
-  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
-    // required .grpc.testing.HistogramData latencies = 1;
+  // optional .grpc.testing.HistogramData latencies = 1;
+  if (this->has_latencies()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->latencies_);
-
-    // required double time_elapsed = 3;
-    total_size += 1 + 8;
-
-    // required double time_user = 4;
-    total_size += 1 + 8;
-
-    // required double time_system = 5;
-    total_size += 1 + 8;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
   }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+
+  // optional double time_elapsed = 2;
+  if (this->time_elapsed() != 0) {
+    total_size += 1 + 8;
   }
+
+  // optional double time_user = 3;
+  if (this->time_user() != 0) {
+    total_size += 1 + 8;
+  }
+
+  // optional double time_system = 4;
+  if (this->time_system() != 0) {
+    total_size += 1 + 8;
+  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -4050,22 +5464,17 @@ void ClientStats::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ClientStats::MergeFrom(const ClientStats& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_latencies()) {
-      mutable_latencies()->::grpc::testing::HistogramData::MergeFrom(from.latencies());
-    }
-    if (from.has_time_elapsed()) {
-      set_time_elapsed(from.time_elapsed());
-    }
-    if (from.has_time_user()) {
-      set_time_user(from.time_user());
-    }
-    if (from.has_time_system()) {
-      set_time_system(from.time_system());
-    }
+  if (from.has_latencies()) {
+    mutable_latencies()->::grpc::testing::HistogramData::MergeFrom(from.latencies());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.time_elapsed() != 0) {
+    set_time_elapsed(from.time_elapsed());
+  }
+  if (from.time_user() != 0) {
+    set_time_user(from.time_user());
+  }
+  if (from.time_system() != 0) {
+    set_time_system(from.time_system());
   }
 }
 
@@ -4082,11 +5491,7 @@ void ClientStats::CopyFrom(const ClientStats& from) {
 }
 
 bool ClientStats::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
 
-  if (has_latencies()) {
-    if (!this->latencies_->IsInitialized()) return false;
-  }
   return true;
 }
 
@@ -4099,7 +5504,6 @@ void ClientStats::InternalSwap(ClientStats* other) {
   std::swap(time_elapsed_, other->time_elapsed_);
   std::swap(time_user_, other->time_user_);
   std::swap(time_system_, other->time_system_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -4115,26 +5519,20 @@ void ClientStats::InternalSwap(ClientStats* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // ClientStats
 
-// required .grpc.testing.HistogramData latencies = 1;
+// optional .grpc.testing.HistogramData latencies = 1;
 bool ClientStats::has_latencies() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void ClientStats::set_has_latencies() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void ClientStats::clear_has_latencies() {
-  _has_bits_[0] &= ~0x00000001u;
+  return !_is_default_instance_ && latencies_ != NULL;
 }
 void ClientStats::clear_latencies() {
-  if (latencies_ != NULL) latencies_->::grpc::testing::HistogramData::Clear();
-  clear_has_latencies();
+  if (GetArenaNoVirtual() == NULL && latencies_ != NULL) delete latencies_;
+  latencies_ = NULL;
 }
  const ::grpc::testing::HistogramData& ClientStats::latencies() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientStats.latencies)
   return latencies_ != NULL ? *latencies_ : *default_instance_->latencies_;
 }
  ::grpc::testing::HistogramData* ClientStats::mutable_latencies() {
-  set_has_latencies();
+  
   if (latencies_ == NULL) {
     latencies_ = new ::grpc::testing::HistogramData;
   }
@@ -4142,7 +5540,7 @@ void ClientStats::clear_latencies() {
   return latencies_;
 }
  ::grpc::testing::HistogramData* ClientStats::release_latencies() {
-  clear_has_latencies();
+  
   ::grpc::testing::HistogramData* temp = latencies_;
   latencies_ = NULL;
   return temp;
@@ -4151,81 +5549,51 @@ void ClientStats::clear_latencies() {
   delete latencies_;
   latencies_ = latencies;
   if (latencies) {
-    set_has_latencies();
+    
   } else {
-    clear_has_latencies();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.ClientStats.latencies)
 }
 
-// required double time_elapsed = 3;
-bool ClientStats::has_time_elapsed() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void ClientStats::set_has_time_elapsed() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void ClientStats::clear_has_time_elapsed() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional double time_elapsed = 2;
 void ClientStats::clear_time_elapsed() {
   time_elapsed_ = 0;
-  clear_has_time_elapsed();
 }
  double ClientStats::time_elapsed() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientStats.time_elapsed)
   return time_elapsed_;
 }
  void ClientStats::set_time_elapsed(double value) {
-  set_has_time_elapsed();
+  
   time_elapsed_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientStats.time_elapsed)
 }
 
-// required double time_user = 4;
-bool ClientStats::has_time_user() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void ClientStats::set_has_time_user() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void ClientStats::clear_has_time_user() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional double time_user = 3;
 void ClientStats::clear_time_user() {
   time_user_ = 0;
-  clear_has_time_user();
 }
  double ClientStats::time_user() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientStats.time_user)
   return time_user_;
 }
  void ClientStats::set_time_user(double value) {
-  set_has_time_user();
+  
   time_user_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientStats.time_user)
 }
 
-// required double time_system = 5;
-bool ClientStats::has_time_system() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-void ClientStats::set_has_time_system() {
-  _has_bits_[0] |= 0x00000008u;
-}
-void ClientStats::clear_has_time_system() {
-  _has_bits_[0] &= ~0x00000008u;
-}
+// optional double time_system = 4;
 void ClientStats::clear_time_system() {
   time_system_ = 0;
-  clear_has_time_system();
 }
  double ClientStats::time_system() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientStats.time_system)
   return time_system_;
 }
  void ClientStats::set_time_system(double value) {
-  set_has_time_system();
+  
   time_system_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ClientStats.time_system)
 }
@@ -4245,6 +5613,7 @@ ClientStatus::ClientStatus()
 }
 
 void ClientStatus::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
   stats_ = const_cast< ::grpc::testing::ClientStats*>(&::grpc::testing::ClientStats::default_instance());
 }
 
@@ -4257,9 +5626,9 @@ ClientStatus::ClientStatus(const ClientStatus& from)
 }
 
 void ClientStatus::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   stats_ = NULL;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 ClientStatus::~ClientStatus() {
@@ -4299,13 +5668,8 @@ ClientStatus* ClientStatus::New(::google::protobuf::Arena* arena) const {
 }
 
 void ClientStatus::Clear() {
-  if (has_stats()) {
-    if (stats_ != NULL) stats_->::grpc::testing::ClientStats::Clear();
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
+  if (GetArenaNoVirtual() == NULL && stats_ != NULL) delete stats_;
+  stats_ = NULL;
 }
 
 bool ClientStatus::MergePartialFromCodedStream(
@@ -4337,8 +5701,7 @@ bool ClientStatus::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -4356,15 +5719,11 @@ void ClientStatus::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:grpc.testing.ClientStatus)
   // optional .grpc.testing.ClientStats stats = 1;
-  if (has_stats()) {
+  if (this->has_stats()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, *this->stats_, output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.ClientStatus)
 }
 
@@ -4372,16 +5731,12 @@ void ClientStatus::SerializeWithCachedSizes(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.ClientStatus)
   // optional .grpc.testing.ClientStats stats = 1;
-  if (has_stats()) {
+  if (this->has_stats()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, *this->stats_, target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.ClientStatus)
   return target;
 }
@@ -4390,17 +5745,12 @@ int ClientStatus::ByteSize() const {
   int total_size = 0;
 
   // optional .grpc.testing.ClientStats stats = 1;
-  if (has_stats()) {
+  if (this->has_stats()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->stats_);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -4421,13 +5771,8 @@ void ClientStatus::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ClientStatus::MergeFrom(const ClientStatus& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_stats()) {
-      mutable_stats()->::grpc::testing::ClientStats::MergeFrom(from.stats());
-    }
-  }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.has_stats()) {
+    mutable_stats()->::grpc::testing::ClientStats::MergeFrom(from.stats());
   }
 }
 
@@ -4445,9 +5790,6 @@ void ClientStatus::CopyFrom(const ClientStatus& from) {
 
 bool ClientStatus::IsInitialized() const {
 
-  if (has_stats()) {
-    if (!this->stats_->IsInitialized()) return false;
-  }
   return true;
 }
 
@@ -4457,7 +5799,6 @@ void ClientStatus::Swap(ClientStatus* other) {
 }
 void ClientStatus::InternalSwap(ClientStatus* other) {
   std::swap(stats_, other->stats_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -4475,24 +5816,18 @@ void ClientStatus::InternalSwap(ClientStatus* other) {
 
 // optional .grpc.testing.ClientStats stats = 1;
 bool ClientStatus::has_stats() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void ClientStatus::set_has_stats() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void ClientStatus::clear_has_stats() {
-  _has_bits_[0] &= ~0x00000001u;
+  return !_is_default_instance_ && stats_ != NULL;
 }
 void ClientStatus::clear_stats() {
-  if (stats_ != NULL) stats_->::grpc::testing::ClientStats::Clear();
-  clear_has_stats();
+  if (GetArenaNoVirtual() == NULL && stats_ != NULL) delete stats_;
+  stats_ = NULL;
 }
  const ::grpc::testing::ClientStats& ClientStatus::stats() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ClientStatus.stats)
   return stats_ != NULL ? *stats_ : *default_instance_->stats_;
 }
  ::grpc::testing::ClientStats* ClientStatus::mutable_stats() {
-  set_has_stats();
+  
   if (stats_ == NULL) {
     stats_ = new ::grpc::testing::ClientStats;
   }
@@ -4500,7 +5835,7 @@ void ClientStatus::clear_stats() {
   return stats_;
 }
  ::grpc::testing::ClientStats* ClientStatus::release_stats() {
-  clear_has_stats();
+  
   ::grpc::testing::ClientStats* temp = stats_;
   stats_ = NULL;
   return temp;
@@ -4509,9 +5844,9 @@ void ClientStatus::clear_stats() {
   delete stats_;
   stats_ = stats;
   if (stats) {
-    set_has_stats();
+    
   } else {
-    clear_has_stats();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.ClientStatus.stats)
 }
@@ -4534,6 +5869,7 @@ ServerConfig::ServerConfig()
 }
 
 void ServerConfig::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 ServerConfig::ServerConfig(const ServerConfig& from)
@@ -4545,13 +5881,13 @@ ServerConfig::ServerConfig(const ServerConfig& from)
 }
 
 void ServerConfig::SharedCtor() {
+    _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  server_type_ = 1;
-  threads_ = 1;
+  server_type_ = 0;
+  threads_ = 0;
   enable_ssl_ = false;
   host_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 ServerConfig::~ServerConfig() {
@@ -4591,18 +5927,21 @@ ServerConfig* ServerConfig::New(::google::protobuf::Arena* arena) const {
 }
 
 void ServerConfig::Clear() {
-  if (_has_bits_[0 / 32] & 15u) {
-    server_type_ = 1;
-    threads_ = 1;
-    enable_ssl_ = false;
-    if (has_host()) {
-      host_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    }
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<ServerConfig*>(16)->f)
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(server_type_, threads_);
+  enable_ssl_ = false;
+  host_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+
+#undef ZR_HELPER_
+#undef ZR_
+
 }
 
 bool ServerConfig::MergePartialFromCodedStream(
@@ -4615,18 +5954,14 @@ bool ServerConfig::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .grpc.testing.ServerType server_type = 1;
+      // optional .grpc.testing.ServerType server_type = 1;
       case 1: {
         if (tag == 8) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::grpc::testing::ServerType_IsValid(value)) {
-            set_server_type(static_cast< ::grpc::testing::ServerType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
+          set_server_type(static_cast< ::grpc::testing::ServerType >(value));
         } else {
           goto handle_unusual;
         }
@@ -4634,14 +5969,14 @@ bool ServerConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional int32 threads = 2 [default = 1];
+      // optional int32 threads = 2;
       case 2: {
         if (tag == 16) {
          parse_threads:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &threads_)));
-          set_has_threads();
+
         } else {
           goto handle_unusual;
         }
@@ -4649,14 +5984,14 @@ bool ServerConfig::MergePartialFromCodedStream(
         break;
       }
 
-      // optional bool enable_ssl = 3 [default = false];
+      // optional bool enable_ssl = 3;
       case 3: {
         if (tag == 24) {
          parse_enable_ssl:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &enable_ssl_)));
-          set_has_enable_ssl();
+
         } else {
           goto handle_unusual;
         }
@@ -4688,8 +6023,7 @@ bool ServerConfig::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -4706,24 +6040,24 @@ failure:
 void ServerConfig::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:grpc.testing.ServerConfig)
-  // required .grpc.testing.ServerType server_type = 1;
-  if (has_server_type()) {
+  // optional .grpc.testing.ServerType server_type = 1;
+  if (this->server_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->server_type(), output);
   }
 
-  // optional int32 threads = 2 [default = 1];
-  if (has_threads()) {
+  // optional int32 threads = 2;
+  if (this->threads() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->threads(), output);
   }
 
-  // optional bool enable_ssl = 3 [default = false];
-  if (has_enable_ssl()) {
+  // optional bool enable_ssl = 3;
+  if (this->enable_ssl() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->enable_ssl(), output);
   }
 
   // optional string host = 4;
-  if (has_host()) {
+  if (this->host().size() > 0) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->host().data(), this->host().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -4732,34 +6066,30 @@ void ServerConfig::SerializeWithCachedSizes(
       4, this->host(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.ServerConfig)
 }
 
 ::google::protobuf::uint8* ServerConfig::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.ServerConfig)
-  // required .grpc.testing.ServerType server_type = 1;
-  if (has_server_type()) {
+  // optional .grpc.testing.ServerType server_type = 1;
+  if (this->server_type() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->server_type(), target);
   }
 
-  // optional int32 threads = 2 [default = 1];
-  if (has_threads()) {
+  // optional int32 threads = 2;
+  if (this->threads() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->threads(), target);
   }
 
-  // optional bool enable_ssl = 3 [default = false];
-  if (has_enable_ssl()) {
+  // optional bool enable_ssl = 3;
+  if (this->enable_ssl() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->enable_ssl(), target);
   }
 
   // optional string host = 4;
-  if (has_host()) {
+  if (this->host().size() > 0) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->host().data(), this->host().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -4769,10 +6099,6 @@ void ServerConfig::SerializeWithCachedSizes(
         4, this->host(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.ServerConfig)
   return target;
 }
@@ -4780,37 +6106,31 @@ void ServerConfig::SerializeWithCachedSizes(
 int ServerConfig::ByteSize() const {
   int total_size = 0;
 
-  // required .grpc.testing.ServerType server_type = 1;
-  if (has_server_type()) {
+  // optional .grpc.testing.ServerType server_type = 1;
+  if (this->server_type() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->server_type());
   }
-  if (_has_bits_[1 / 32] & 14) {
-    // optional int32 threads = 2 [default = 1];
-    if (has_threads()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->threads());
-    }
 
-    // optional bool enable_ssl = 3 [default = false];
-    if (has_enable_ssl()) {
-      total_size += 1 + 1;
-    }
-
-    // optional string host = 4;
-    if (has_host()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->host());
-    }
-
+  // optional int32 threads = 2;
+  if (this->threads() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->threads());
   }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+
+  // optional bool enable_ssl = 3;
+  if (this->enable_ssl() != 0) {
+    total_size += 1 + 1;
   }
+
+  // optional string host = 4;
+  if (this->host().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->host());
+  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -4831,23 +6151,18 @@ void ServerConfig::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ServerConfig::MergeFrom(const ServerConfig& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_server_type()) {
-      set_server_type(from.server_type());
-    }
-    if (from.has_threads()) {
-      set_threads(from.threads());
-    }
-    if (from.has_enable_ssl()) {
-      set_enable_ssl(from.enable_ssl());
-    }
-    if (from.has_host()) {
-      set_has_host();
-      host_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.host_);
-    }
+  if (from.server_type() != 0) {
+    set_server_type(from.server_type());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.threads() != 0) {
+    set_threads(from.threads());
+  }
+  if (from.enable_ssl() != 0) {
+    set_enable_ssl(from.enable_ssl());
+  }
+  if (from.host().size() > 0) {
+
+    host_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.host_);
   }
 }
 
@@ -4864,7 +6179,6 @@ void ServerConfig::CopyFrom(const ServerConfig& from) {
 }
 
 bool ServerConfig::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
@@ -4878,7 +6192,6 @@ void ServerConfig::InternalSwap(ServerConfig* other) {
   std::swap(threads_, other->threads_);
   std::swap(enable_ssl_, other->enable_ssl_);
   host_.Swap(&other->host_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -4894,127 +6207,86 @@ void ServerConfig::InternalSwap(ServerConfig* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // ServerConfig
 
-// required .grpc.testing.ServerType server_type = 1;
-bool ServerConfig::has_server_type() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void ServerConfig::set_has_server_type() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void ServerConfig::clear_has_server_type() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional .grpc.testing.ServerType server_type = 1;
 void ServerConfig::clear_server_type() {
-  server_type_ = 1;
-  clear_has_server_type();
+  server_type_ = 0;
 }
  ::grpc::testing::ServerType ServerConfig::server_type() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerConfig.server_type)
   return static_cast< ::grpc::testing::ServerType >(server_type_);
 }
  void ServerConfig::set_server_type(::grpc::testing::ServerType value) {
-  assert(::grpc::testing::ServerType_IsValid(value));
-  set_has_server_type();
+  
   server_type_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerConfig.server_type)
 }
 
-// optional int32 threads = 2 [default = 1];
-bool ServerConfig::has_threads() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void ServerConfig::set_has_threads() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void ServerConfig::clear_has_threads() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional int32 threads = 2;
 void ServerConfig::clear_threads() {
-  threads_ = 1;
-  clear_has_threads();
+  threads_ = 0;
 }
  ::google::protobuf::int32 ServerConfig::threads() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerConfig.threads)
   return threads_;
 }
  void ServerConfig::set_threads(::google::protobuf::int32 value) {
-  set_has_threads();
+  
   threads_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerConfig.threads)
 }
 
-// optional bool enable_ssl = 3 [default = false];
-bool ServerConfig::has_enable_ssl() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void ServerConfig::set_has_enable_ssl() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void ServerConfig::clear_has_enable_ssl() {
-  _has_bits_[0] &= ~0x00000004u;
-}
+// optional bool enable_ssl = 3;
 void ServerConfig::clear_enable_ssl() {
   enable_ssl_ = false;
-  clear_has_enable_ssl();
 }
  bool ServerConfig::enable_ssl() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerConfig.enable_ssl)
   return enable_ssl_;
 }
  void ServerConfig::set_enable_ssl(bool value) {
-  set_has_enable_ssl();
+  
   enable_ssl_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerConfig.enable_ssl)
 }
 
 // optional string host = 4;
-bool ServerConfig::has_host() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
-}
-void ServerConfig::set_has_host() {
-  _has_bits_[0] |= 0x00000008u;
-}
-void ServerConfig::clear_has_host() {
-  _has_bits_[0] &= ~0x00000008u;
-}
 void ServerConfig::clear_host() {
   host_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  clear_has_host();
 }
  const ::std::string& ServerConfig::host() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerConfig.host)
   return host_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  void ServerConfig::set_host(const ::std::string& value) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:grpc.testing.ServerConfig.host)
 }
  void ServerConfig::set_host(const char* value) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:grpc.testing.ServerConfig.host)
 }
  void ServerConfig::set_host(const char* value, size_t size) {
-  set_has_host();
+  
   host_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:grpc.testing.ServerConfig.host)
 }
  ::std::string* ServerConfig::mutable_host() {
-  set_has_host();
+  
   // @@protoc_insertion_point(field_mutable:grpc.testing.ServerConfig.host)
   return host_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  ::std::string* ServerConfig::release_host() {
-  clear_has_host();
+  
   return host_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
  void ServerConfig::set_allocated_host(::std::string* host) {
   if (host != NULL) {
-    set_has_host();
+    
   } else {
-    clear_has_host();
+    
   }
   host_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), host);
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.ServerConfig.host)
@@ -5036,6 +6308,7 @@ ServerArgs::ServerArgs()
 }
 
 void ServerArgs::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
   ServerArgs_default_oneof_instance_->setup_ = const_cast< ::grpc::testing::ServerConfig*>(&::grpc::testing::ServerConfig::default_instance());
   ServerArgs_default_oneof_instance_->mark_ = const_cast< ::grpc::testing::Mark*>(&::grpc::testing::Mark::default_instance());
 }
@@ -5049,8 +6322,8 @@ ServerArgs::ServerArgs(const ServerArgs& from)
 }
 
 void ServerArgs::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
   clear_has_argtype();
 }
 
@@ -5112,10 +6385,6 @@ void ServerArgs::clear_argtype() {
 
 void ServerArgs::Clear() {
   clear_argtype();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
 }
 
 bool ServerArgs::MergePartialFromCodedStream(
@@ -5160,8 +6429,7 @@ bool ServerArgs::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -5190,10 +6458,6 @@ void ServerArgs::SerializeWithCachedSizes(
       2, *argtype_.mark_, output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.ServerArgs)
 }
 
@@ -5214,10 +6478,6 @@ void ServerArgs::SerializeWithCachedSizes(
         2, *argtype_.mark_, target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.ServerArgs)
   return target;
 }
@@ -5243,11 +6503,6 @@ int ServerArgs::ByteSize() const {
     case ARGTYPE_NOT_SET: {
       break;
     }
-  }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
   }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
@@ -5282,9 +6537,6 @@ void ServerArgs::MergeFrom(const ServerArgs& from) {
       break;
     }
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-  }
 }
 
 void ServerArgs::CopyFrom(const ::google::protobuf::Message& from) {
@@ -5301,9 +6553,6 @@ void ServerArgs::CopyFrom(const ServerArgs& from) {
 
 bool ServerArgs::IsInitialized() const {
 
-  if (has_setup()) {
-    if (!this->setup().IsInitialized()) return false;
-  }
   return true;
 }
 
@@ -5314,7 +6563,6 @@ void ServerArgs::Swap(ServerArgs* other) {
 void ServerArgs::InternalSwap(ServerArgs* other) {
   std::swap(argtype_, other->argtype_);
   std::swap(_oneof_case_[0], other->_oneof_case_[0]);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -5447,6 +6695,7 @@ ServerStatus::ServerStatus()
 }
 
 void ServerStatus::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
   stats_ = const_cast< ::grpc::testing::ServerStats*>(&::grpc::testing::ServerStats::default_instance());
 }
 
@@ -5459,10 +6708,10 @@ ServerStatus::ServerStatus(const ServerStatus& from)
 }
 
 void ServerStatus::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   stats_ = NULL;
   port_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 ServerStatus::~ServerStatus() {
@@ -5502,16 +6751,9 @@ ServerStatus* ServerStatus::New(::google::protobuf::Arena* arena) const {
 }
 
 void ServerStatus::Clear() {
-  if (_has_bits_[0 / 32] & 3u) {
-    if (has_stats()) {
-      if (stats_ != NULL) stats_->::grpc::testing::ServerStats::Clear();
-    }
-    port_ = 0;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
+  if (GetArenaNoVirtual() == NULL && stats_ != NULL) delete stats_;
+  stats_ = NULL;
+  port_ = 0;
 }
 
 bool ServerStatus::MergePartialFromCodedStream(
@@ -5536,14 +6778,14 @@ bool ServerStatus::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 port = 2;
+      // optional int32 port = 2;
       case 2: {
         if (tag == 16) {
          parse_port:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &port_)));
-          set_has_port();
+
         } else {
           goto handle_unusual;
         }
@@ -5558,8 +6800,7 @@ bool ServerStatus::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -5577,20 +6818,16 @@ void ServerStatus::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:grpc.testing.ServerStatus)
   // optional .grpc.testing.ServerStats stats = 1;
-  if (has_stats()) {
+  if (this->has_stats()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, *this->stats_, output);
   }
 
-  // required int32 port = 2;
-  if (has_port()) {
+  // optional int32 port = 2;
+  if (this->port() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->port(), output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.ServerStatus)
 }
 
@@ -5598,21 +6835,17 @@ void ServerStatus::SerializeWithCachedSizes(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.ServerStatus)
   // optional .grpc.testing.ServerStats stats = 1;
-  if (has_stats()) {
+  if (this->has_stats()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, *this->stats_, target);
   }
 
-  // required int32 port = 2;
-  if (has_port()) {
+  // optional int32 port = 2;
+  if (this->port() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->port(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.ServerStatus)
   return target;
 }
@@ -5620,24 +6853,20 @@ void ServerStatus::SerializeWithCachedSizes(
 int ServerStatus::ByteSize() const {
   int total_size = 0;
 
-  // required int32 port = 2;
-  if (has_port()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
-        this->port());
-  }
   // optional .grpc.testing.ServerStats stats = 1;
-  if (has_stats()) {
+  if (this->has_stats()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->stats_);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+  // optional int32 port = 2;
+  if (this->port() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->port());
   }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -5658,16 +6887,11 @@ void ServerStatus::MergeFrom(const ::google::protobuf::Message& from) {
 
 void ServerStatus::MergeFrom(const ServerStatus& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_stats()) {
-      mutable_stats()->::grpc::testing::ServerStats::MergeFrom(from.stats());
-    }
-    if (from.has_port()) {
-      set_port(from.port());
-    }
+  if (from.has_stats()) {
+    mutable_stats()->::grpc::testing::ServerStats::MergeFrom(from.stats());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.port() != 0) {
+    set_port(from.port());
   }
 }
 
@@ -5684,11 +6908,7 @@ void ServerStatus::CopyFrom(const ServerStatus& from) {
 }
 
 bool ServerStatus::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
 
-  if (has_stats()) {
-    if (!this->stats_->IsInitialized()) return false;
-  }
   return true;
 }
 
@@ -5699,7 +6919,6 @@ void ServerStatus::Swap(ServerStatus* other) {
 void ServerStatus::InternalSwap(ServerStatus* other) {
   std::swap(stats_, other->stats_);
   std::swap(port_, other->port_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -5717,24 +6936,18 @@ void ServerStatus::InternalSwap(ServerStatus* other) {
 
 // optional .grpc.testing.ServerStats stats = 1;
 bool ServerStatus::has_stats() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void ServerStatus::set_has_stats() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void ServerStatus::clear_has_stats() {
-  _has_bits_[0] &= ~0x00000001u;
+  return !_is_default_instance_ && stats_ != NULL;
 }
 void ServerStatus::clear_stats() {
-  if (stats_ != NULL) stats_->::grpc::testing::ServerStats::Clear();
-  clear_has_stats();
+  if (GetArenaNoVirtual() == NULL && stats_ != NULL) delete stats_;
+  stats_ = NULL;
 }
  const ::grpc::testing::ServerStats& ServerStatus::stats() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerStatus.stats)
   return stats_ != NULL ? *stats_ : *default_instance_->stats_;
 }
  ::grpc::testing::ServerStats* ServerStatus::mutable_stats() {
-  set_has_stats();
+  
   if (stats_ == NULL) {
     stats_ = new ::grpc::testing::ServerStats;
   }
@@ -5742,7 +6955,7 @@ void ServerStatus::clear_stats() {
   return stats_;
 }
  ::grpc::testing::ServerStats* ServerStatus::release_stats() {
-  clear_has_stats();
+  
   ::grpc::testing::ServerStats* temp = stats_;
   stats_ = NULL;
   return temp;
@@ -5751,33 +6964,23 @@ void ServerStatus::clear_stats() {
   delete stats_;
   stats_ = stats;
   if (stats) {
-    set_has_stats();
+    
   } else {
-    clear_has_stats();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.ServerStatus.stats)
 }
 
-// required int32 port = 2;
-bool ServerStatus::has_port() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void ServerStatus::set_has_port() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void ServerStatus::clear_has_port() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional int32 port = 2;
 void ServerStatus::clear_port() {
   port_ = 0;
-  clear_has_port();
 }
  ::google::protobuf::int32 ServerStatus::port() const {
   // @@protoc_insertion_point(field_get:grpc.testing.ServerStatus.port)
   return port_;
 }
  void ServerStatus::set_port(::google::protobuf::int32 value) {
-  set_has_port();
+  
   port_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.ServerStatus.port)
 }
@@ -5799,6 +7002,7 @@ SimpleRequest::SimpleRequest()
 }
 
 void SimpleRequest::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
   payload_ = const_cast< ::grpc::testing::Payload*>(&::grpc::testing::Payload::default_instance());
 }
 
@@ -5811,11 +7015,11 @@ SimpleRequest::SimpleRequest(const SimpleRequest& from)
 }
 
 void SimpleRequest::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
-  response_type_ = 1;
+  response_type_ = 0;
   response_size_ = 0;
   payload_ = NULL;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 SimpleRequest::~SimpleRequest() {
@@ -5855,17 +7059,21 @@ SimpleRequest* SimpleRequest::New(::google::protobuf::Arena* arena) const {
 }
 
 void SimpleRequest::Clear() {
-  if (_has_bits_[0 / 32] & 7u) {
-    response_type_ = 1;
-    response_size_ = 0;
-    if (has_payload()) {
-      if (payload_ != NULL) payload_->::grpc::testing::Payload::Clear();
-    }
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
+#define ZR_HELPER_(f) reinterpret_cast<char*>(\
+  &reinterpret_cast<SimpleRequest*>(16)->f)
+
+#define ZR_(first, last) do {\
+  ::memset(&first, 0,\
+           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
+} while (0)
+
+  ZR_(response_type_, response_size_);
+  if (GetArenaNoVirtual() == NULL && payload_ != NULL) delete payload_;
+  payload_ = NULL;
+
+#undef ZR_HELPER_
+#undef ZR_
+
 }
 
 bool SimpleRequest::MergePartialFromCodedStream(
@@ -5878,18 +7086,14 @@ bool SimpleRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .grpc.testing.PayloadType response_type = 1 [default = COMPRESSABLE];
+      // optional .grpc.testing.PayloadType response_type = 1;
       case 1: {
         if (tag == 8) {
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::grpc::testing::PayloadType_IsValid(value)) {
-            set_response_type(static_cast< ::grpc::testing::PayloadType >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
+          set_response_type(static_cast< ::grpc::testing::PayloadType >(value));
         } else {
           goto handle_unusual;
         }
@@ -5897,14 +7101,14 @@ bool SimpleRequest::MergePartialFromCodedStream(
         break;
       }
 
-      // optional int32 response_size = 2 [default = 0];
+      // optional int32 response_size = 2;
       case 2: {
         if (tag == 16) {
          parse_response_size:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &response_size_)));
-          set_has_response_size();
+
         } else {
           goto handle_unusual;
         }
@@ -5932,8 +7136,7 @@ bool SimpleRequest::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -5950,55 +7153,47 @@ failure:
 void SimpleRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:grpc.testing.SimpleRequest)
-  // optional .grpc.testing.PayloadType response_type = 1 [default = COMPRESSABLE];
-  if (has_response_type()) {
+  // optional .grpc.testing.PayloadType response_type = 1;
+  if (this->response_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->response_type(), output);
   }
 
-  // optional int32 response_size = 2 [default = 0];
-  if (has_response_size()) {
+  // optional int32 response_size = 2;
+  if (this->response_size() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->response_size(), output);
   }
 
   // optional .grpc.testing.Payload payload = 3;
-  if (has_payload()) {
+  if (this->has_payload()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, *this->payload_, output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.SimpleRequest)
 }
 
 ::google::protobuf::uint8* SimpleRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.SimpleRequest)
-  // optional .grpc.testing.PayloadType response_type = 1 [default = COMPRESSABLE];
-  if (has_response_type()) {
+  // optional .grpc.testing.PayloadType response_type = 1;
+  if (this->response_type() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->response_type(), target);
   }
 
-  // optional int32 response_size = 2 [default = 0];
-  if (has_response_size()) {
+  // optional int32 response_size = 2;
+  if (this->response_size() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->response_size(), target);
   }
 
   // optional .grpc.testing.Payload payload = 3;
-  if (has_payload()) {
+  if (this->has_payload()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         3, *this->payload_, target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.SimpleRequest)
   return target;
 }
@@ -6006,33 +7201,26 @@ void SimpleRequest::SerializeWithCachedSizes(
 int SimpleRequest::ByteSize() const {
   int total_size = 0;
 
-  if (_has_bits_[0 / 32] & 7) {
-    // optional .grpc.testing.PayloadType response_type = 1 [default = COMPRESSABLE];
-    if (has_response_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->response_type());
-    }
-
-    // optional int32 response_size = 2 [default = 0];
-    if (has_response_size()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->response_size());
-    }
-
-    // optional .grpc.testing.Payload payload = 3;
-    if (has_payload()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          *this->payload_);
-    }
-
+  // optional .grpc.testing.PayloadType response_type = 1;
+  if (this->response_type() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::EnumSize(this->response_type());
   }
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+
+  // optional int32 response_size = 2;
+  if (this->response_size() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int32Size(
+        this->response_size());
   }
+
+  // optional .grpc.testing.Payload payload = 3;
+  if (this->has_payload()) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->payload_);
+  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -6053,19 +7241,14 @@ void SimpleRequest::MergeFrom(const ::google::protobuf::Message& from) {
 
 void SimpleRequest::MergeFrom(const SimpleRequest& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_response_type()) {
-      set_response_type(from.response_type());
-    }
-    if (from.has_response_size()) {
-      set_response_size(from.response_size());
-    }
-    if (from.has_payload()) {
-      mutable_payload()->::grpc::testing::Payload::MergeFrom(from.payload());
-    }
+  if (from.response_type() != 0) {
+    set_response_type(from.response_type());
   }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.response_size() != 0) {
+    set_response_size(from.response_size());
+  }
+  if (from.has_payload()) {
+    mutable_payload()->::grpc::testing::Payload::MergeFrom(from.payload());
   }
 }
 
@@ -6094,7 +7277,6 @@ void SimpleRequest::InternalSwap(SimpleRequest* other) {
   std::swap(response_type_, other->response_type_);
   std::swap(response_size_, other->response_size_);
   std::swap(payload_, other->payload_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -6110,75 +7292,48 @@ void SimpleRequest::InternalSwap(SimpleRequest* other) {
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
 // SimpleRequest
 
-// optional .grpc.testing.PayloadType response_type = 1 [default = COMPRESSABLE];
-bool SimpleRequest::has_response_type() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void SimpleRequest::set_has_response_type() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void SimpleRequest::clear_has_response_type() {
-  _has_bits_[0] &= ~0x00000001u;
-}
+// optional .grpc.testing.PayloadType response_type = 1;
 void SimpleRequest::clear_response_type() {
-  response_type_ = 1;
-  clear_has_response_type();
+  response_type_ = 0;
 }
  ::grpc::testing::PayloadType SimpleRequest::response_type() const {
   // @@protoc_insertion_point(field_get:grpc.testing.SimpleRequest.response_type)
   return static_cast< ::grpc::testing::PayloadType >(response_type_);
 }
  void SimpleRequest::set_response_type(::grpc::testing::PayloadType value) {
-  assert(::grpc::testing::PayloadType_IsValid(value));
-  set_has_response_type();
+  
   response_type_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.SimpleRequest.response_type)
 }
 
-// optional int32 response_size = 2 [default = 0];
-bool SimpleRequest::has_response_size() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-void SimpleRequest::set_has_response_size() {
-  _has_bits_[0] |= 0x00000002u;
-}
-void SimpleRequest::clear_has_response_size() {
-  _has_bits_[0] &= ~0x00000002u;
-}
+// optional int32 response_size = 2;
 void SimpleRequest::clear_response_size() {
   response_size_ = 0;
-  clear_has_response_size();
 }
  ::google::protobuf::int32 SimpleRequest::response_size() const {
   // @@protoc_insertion_point(field_get:grpc.testing.SimpleRequest.response_size)
   return response_size_;
 }
  void SimpleRequest::set_response_size(::google::protobuf::int32 value) {
-  set_has_response_size();
+  
   response_size_ = value;
   // @@protoc_insertion_point(field_set:grpc.testing.SimpleRequest.response_size)
 }
 
 // optional .grpc.testing.Payload payload = 3;
 bool SimpleRequest::has_payload() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
-}
-void SimpleRequest::set_has_payload() {
-  _has_bits_[0] |= 0x00000004u;
-}
-void SimpleRequest::clear_has_payload() {
-  _has_bits_[0] &= ~0x00000004u;
+  return !_is_default_instance_ && payload_ != NULL;
 }
 void SimpleRequest::clear_payload() {
-  if (payload_ != NULL) payload_->::grpc::testing::Payload::Clear();
-  clear_has_payload();
+  if (GetArenaNoVirtual() == NULL && payload_ != NULL) delete payload_;
+  payload_ = NULL;
 }
  const ::grpc::testing::Payload& SimpleRequest::payload() const {
   // @@protoc_insertion_point(field_get:grpc.testing.SimpleRequest.payload)
   return payload_ != NULL ? *payload_ : *default_instance_->payload_;
 }
  ::grpc::testing::Payload* SimpleRequest::mutable_payload() {
-  set_has_payload();
+  
   if (payload_ == NULL) {
     payload_ = new ::grpc::testing::Payload;
   }
@@ -6186,7 +7341,7 @@ void SimpleRequest::clear_payload() {
   return payload_;
 }
  ::grpc::testing::Payload* SimpleRequest::release_payload() {
-  clear_has_payload();
+  
   ::grpc::testing::Payload* temp = payload_;
   payload_ = NULL;
   return temp;
@@ -6195,9 +7350,9 @@ void SimpleRequest::clear_payload() {
   delete payload_;
   payload_ = payload;
   if (payload) {
-    set_has_payload();
+    
   } else {
-    clear_has_payload();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.SimpleRequest.payload)
 }
@@ -6217,6 +7372,7 @@ SimpleResponse::SimpleResponse()
 }
 
 void SimpleResponse::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
   payload_ = const_cast< ::grpc::testing::Payload*>(&::grpc::testing::Payload::default_instance());
 }
 
@@ -6229,9 +7385,9 @@ SimpleResponse::SimpleResponse(const SimpleResponse& from)
 }
 
 void SimpleResponse::SharedCtor() {
+    _is_default_instance_ = false;
   _cached_size_ = 0;
   payload_ = NULL;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 SimpleResponse::~SimpleResponse() {
@@ -6271,13 +7427,8 @@ SimpleResponse* SimpleResponse::New(::google::protobuf::Arena* arena) const {
 }
 
 void SimpleResponse::Clear() {
-  if (has_payload()) {
-    if (payload_ != NULL) payload_->::grpc::testing::Payload::Clear();
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  if (_internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->Clear();
-  }
+  if (GetArenaNoVirtual() == NULL && payload_ != NULL) delete payload_;
+  payload_ = NULL;
 }
 
 bool SimpleResponse::MergePartialFromCodedStream(
@@ -6309,8 +7460,7 @@ bool SimpleResponse::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
         break;
       }
     }
@@ -6328,15 +7478,11 @@ void SimpleResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:grpc.testing.SimpleResponse)
   // optional .grpc.testing.Payload payload = 1;
-  if (has_payload()) {
+  if (this->has_payload()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, *this->payload_, output);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
   // @@protoc_insertion_point(serialize_end:grpc.testing.SimpleResponse)
 }
 
@@ -6344,16 +7490,12 @@ void SimpleResponse::SerializeWithCachedSizes(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:grpc.testing.SimpleResponse)
   // optional .grpc.testing.Payload payload = 1;
-  if (has_payload()) {
+  if (this->has_payload()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         1, *this->payload_, target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
   // @@protoc_insertion_point(serialize_to_array_end:grpc.testing.SimpleResponse)
   return target;
 }
@@ -6362,17 +7504,12 @@ int SimpleResponse::ByteSize() const {
   int total_size = 0;
 
   // optional .grpc.testing.Payload payload = 1;
-  if (has_payload()) {
+  if (this->has_payload()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->payload_);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -6393,13 +7530,8 @@ void SimpleResponse::MergeFrom(const ::google::protobuf::Message& from) {
 
 void SimpleResponse::MergeFrom(const SimpleResponse& from) {
   if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_payload()) {
-      mutable_payload()->::grpc::testing::Payload::MergeFrom(from.payload());
-    }
-  }
-  if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from.has_payload()) {
+    mutable_payload()->::grpc::testing::Payload::MergeFrom(from.payload());
   }
 }
 
@@ -6426,7 +7558,6 @@ void SimpleResponse::Swap(SimpleResponse* other) {
 }
 void SimpleResponse::InternalSwap(SimpleResponse* other) {
   std::swap(payload_, other->payload_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -6444,24 +7575,18 @@ void SimpleResponse::InternalSwap(SimpleResponse* other) {
 
 // optional .grpc.testing.Payload payload = 1;
 bool SimpleResponse::has_payload() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-void SimpleResponse::set_has_payload() {
-  _has_bits_[0] |= 0x00000001u;
-}
-void SimpleResponse::clear_has_payload() {
-  _has_bits_[0] &= ~0x00000001u;
+  return !_is_default_instance_ && payload_ != NULL;
 }
 void SimpleResponse::clear_payload() {
-  if (payload_ != NULL) payload_->::grpc::testing::Payload::Clear();
-  clear_has_payload();
+  if (GetArenaNoVirtual() == NULL && payload_ != NULL) delete payload_;
+  payload_ = NULL;
 }
  const ::grpc::testing::Payload& SimpleResponse::payload() const {
   // @@protoc_insertion_point(field_get:grpc.testing.SimpleResponse.payload)
   return payload_ != NULL ? *payload_ : *default_instance_->payload_;
 }
  ::grpc::testing::Payload* SimpleResponse::mutable_payload() {
-  set_has_payload();
+  
   if (payload_ == NULL) {
     payload_ = new ::grpc::testing::Payload;
   }
@@ -6469,7 +7594,7 @@ void SimpleResponse::clear_payload() {
   return payload_;
 }
  ::grpc::testing::Payload* SimpleResponse::release_payload() {
-  clear_has_payload();
+  
   ::grpc::testing::Payload* temp = payload_;
   payload_ = NULL;
   return temp;
@@ -6478,9 +7603,9 @@ void SimpleResponse::clear_payload() {
   delete payload_;
   payload_ = payload;
   if (payload) {
-    set_has_payload();
+    
   } else {
-    clear_has_payload();
+    
   }
   // @@protoc_insertion_point(field_set_allocated:grpc.testing.SimpleResponse.payload)
 }

@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+PERF_DB_HOSTNAME = '0.0.0.0'
+PERF_DB_PORT = 50052
 
 # Application definition
 

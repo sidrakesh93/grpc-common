@@ -43,7 +43,6 @@
 #include <grpc++/status.h>
 #include "user_data.grpc.pb.h"
 #include "database_manager.h"
-#include "leveldb/db.h"
 #include <cstdlib>
 #include <gflags/gflags.h>
 
@@ -83,12 +82,19 @@ public:
     return Status::OK;
   }
 private:
+  //Database manager 
   DatabaseManager dbManager;
 };
 
 void RunServer() {
   UserDataTransferServiceImpl service;
   ServerBuilder builder;
+
+  if(FLAGS_address.empty()) {
+    std::cout << "No address provided. Terminating.\n";
+    exit(1);
+  }
+
   builder.AddListeningPort(FLAGS_address, grpc::InsecureServerCredentials());
   builder.RegisterService(&service);
   std::unique_ptr<Server> server(builder.BuildAndStart());

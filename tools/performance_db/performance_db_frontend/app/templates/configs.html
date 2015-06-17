@@ -66,6 +66,8 @@
     </div>
 
     <div class="container">
+      <h2 id='test-name' align="center"></h2>
+      <hr>
       <h3 align="center">Client Configuration</h3>
       <hr>
       <div id="client_configs">
@@ -127,14 +129,17 @@
 
       var pathNameParts = pathName.split('%');
       
+      var testName = document.getElementById("test-name");
+      testName.innerHTML = 'Test: ' + pathNameParts[0];
+
       var table = document.getElementById("client-configs-table");
-      fillTable(table, pathNameParts[0]);
+      fillTable(table, pathNameParts[1]);
 
       table = document.getElementById("server-configs-table");
-      fillTable(table, pathNameParts[1]);
+      fillTable(table, pathNameParts[2]);
       
       table = document.getElementById("sys-info-table");
-      fillTable(table, pathNameParts[2]);
+      fillTable(table, pathNameParts[3]);
 
       function fillTable(table, info) {
         JSON.parse(info, function(k, v) {

@@ -36,7 +36,7 @@
 #include <cassert>
 #include <fstream>
 
-#define MAX_NUM_OF_SECONDS (5*365*24*60*60) // number of seconds in 5 years
+#define USER_INFO_URL "https://www.googleapis.com/oauth2/v1/userinfo?access_token="
 
 namespace grpc{
 namespace testing{
@@ -44,45 +44,51 @@ namespace testing{
 DatabaseManager::DatabaseManager() {}
 
 DatabaseManager::~DatabaseManager() {
+  //delete database pointer
   delete db;
 }
 
 void DatabaseManager::setDatabase(std::string database) {
   database_ = database;
+  
+  //set databse options
   leveldb::Options options;
-
+  options.block_cache = leveldb::NewLRUCache(100 * 1048576);  //caching data
   options.create_if_missing = true;
+  
   leveldb::Status status = leveldb::DB::Open(options, database_, &db);
   assert(status.ok());
 }
 
-// Get current date/time, format is YYYY-MM-DD.HH:mm:ss
-const std::string currentDateTime() {
+//Get current date/time, format is YYYY-MM-DD.HH:mm:ss
+const std::string DatabaseManager::currentDateTime() {
   time_t     now = time(0);
   struct tm  tstruct;
   char       buf[80];
   tstruct = *localtime(&now);
 
-  strftime(buf, sizeof(buf), "%Y/%m/%d, %X", &tstruct);
+  strftime(buf, sizeof(buf), "%m/%d/%Y, %X", &tstruct);
   return buf;
 }
 
-static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
-{
-  ((std::string*)userp)->append((char*)contents, size * nmemb);
+//Helper function for using libcurl
+static size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp) {
+  ((string*)userp)->append((char*)contents, size * nmemb);
   return size * nmemb;
 }
 
-UserDetails getUserData(std::string accessToken) {
-  std::string url = "https://www.googleapis.com/oauth2/v1/userinfo?access_token=" + accessToken;
+//Libcurl used to get user details data
+UserDetails DatabaseManager::getUserData(std::string accessToken) {
+  string url = USER_INFO_URL + accessToken; //query url
   CURL *curl;
   CURLcode res;
-  std::string readBuffer;
+  string readBuffer;
 
   UserDetails userDetails;
 
   curl = curl_easy_init();
   if(curl) {
+    //Get data
     curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
@@ -90,6 +96,7 @@ UserDetails getUserData(std::string accessToken) {
     curl_easy_cleanup(curl);
 
     std::string err;
+    //Write received JSON data to user details protobuf
     int ret = pbjson::json2pb(readBuffer, &userDetails, err);
   }
 
@@ -97,16 +104,19 @@ UserDetails getUserData(std::string accessToken) {
 }
 
 void DatabaseManager::recordSingleUserData(const SingleUserRecordRequest* request) {
+  //Obtain user details
   UserDetails userDetails = getUserData(request->access_token());
 
-  std::string prevValue;
+  string prevValue;
+  //get existing user details from database, using user id as key
   leveldb::Status status = db->Get(leveldb::ReadOptions(), userDetails.id(), &prevValue);
 
   SingleUserDetails singleUserDetails;
   
   if(status.ok())
     singleUserDetails.ParseFromString(prevValue);
-  
+
+  //Add new record details
   DataDetails* dataDetails = singleUserDetails.add_data_details();
 
   dataDetails->set_timestamp(currentDateTime());
@@ -118,22 +128,25 @@ void DatabaseManager::recordSingleUserData(const SingleUserRecordRequest* reques
   *(dataDetails->mutable_server_config()) = request->server_config();
   *(singleUserDetails.mutable_user_details()) = userDetails;
 
-  std::string newValue;
+  string newValue;
   singleUserDetails.SerializeToString(&newValue);
 
+  //write back to database
   status = db->Put(leveldb::WriteOptions(), userDetails.id(), newValue);
   assert(status.ok());
 }
 
 SingleUserRetrieveReply DatabaseManager::retrieveSingleUserData(const SingleUserRetrieveRequest* request) {
-  std::string value;
+  string value;
   leveldb::Status status  = db->Get(leveldb::ReadOptions(), request->user_id(), &value); 
 
   SingleUserRetrieveReply singleUserRetrieveReply;
-  SingleUserDetails* details = singleUserRetrieveReply.mutable_details();
+  SingleUserDetails* singleUserDetails = singleUserRetrieveReply.mutable_details();
 
   if(status.ok())
-    details->ParseFromString(value);
+    singleUserDetails->ParseFromString(value);
+
+  clearAddressFields(singleUserDetails);
 
   return singleUserRetrieveReply;
 }
@@ -149,6 +162,8 @@ AllUsersRetrieveReply DatabaseManager::retrieveAllUsersData(const AllUsersRetrie
   for (it->SeekToFirst(); it->Valid(); it->Next()) {
     SingleUserDetails* singleUserDetails = allUsersRetrieveReply.add_user_data();
     singleUserDetails->ParseFromString(it->value().ToString());
+
+    clearAddressFields(singleUserDetails);
   }
 
   assert(it->status().ok());  // Check for any errors found during the scan
@@ -157,6 +172,55 @@ AllUsersRetrieveReply DatabaseManager::retrieveAllUsersData(const AllUsersRetrie
   db->ReleaseSnapshot(options.snapshot);
 
   return allUsersRetrieveReply;
+}
+
+string removeInetAddrs(string sysInfo) {
+  string newSysInfo = "";
+
+  size_t pos = 0;
+  std::string token;
+  
+  while ((pos = sysInfo.find(",")) != std::string::npos) {
+    token = sysInfo.substr(0, pos);
+
+    //If not inet address, add back to original list
+    if(token.find("inet address") == std::string::npos) {
+      newSysInfo += token + ",";
+    }
+
+    sysInfo.erase(0, pos + 1);
+  }
+  
+  newSysInfo += sysInfo;
+  return newSysInfo;
+}
+
+void DatabaseManager::clearAddressFields(SingleUserDetails* singleUserDetails) {
+  for(int i=0; i < singleUserDetails->data_details_size(); i++) {
+    
+    DataDetails* dataDetails = singleUserDetails->mutable_data_details(i);
+    ClientConfig* clientConfig = dataDetails->mutable_client_config();
+    ServerConfig* serverConfig = dataDetails->mutable_server_config();
+    
+    string sysInfo = dataDetails->sys_info();
+    dataDetails->set_sys_info(removeInetAddrs(sysInfo));
+
+    auto clientReflection = clientConfig->GetReflection();
+    auto clientDescriptor = clientConfig->GetDescriptor();
+
+    auto serverTargetsDescriptor = clientDescriptor->FindFieldByName("server_targets");
+    auto clientHostDescriptor = clientDescriptor->FindFieldByName("host");
+
+    clientReflection->ClearField(clientConfig, serverTargetsDescriptor);
+    clientReflection->ClearField(clientConfig, clientHostDescriptor);
+
+    auto serverReflection = serverConfig->GetReflection();
+    auto serverDescriptor = serverConfig->GetDescriptor();
+
+    auto serverHostDescriptor = serverDescriptor->FindFieldByName("host");
+
+    serverReflection->ClearField(serverConfig, serverHostDescriptor);
+  }
 }
 
 }

@@ -33,6 +33,7 @@
 
 #include <string>
 #include "leveldb/db.h"
+#include "leveldb/cache.h"
 #include "user_data.grpc.pb.h"
 #include "pbjson/pbjson.hpp"
 #include <curl/curl.h>
@@ -52,6 +53,10 @@ class DatabaseManager{
   private:
     leveldb::DB* db;
     std::string database_;
+    std::unique_ptr<leveldb::Cache> memory_cache_;
+    const std::string currentDateTime();
+    UserDetails getUserData(std::string accessToken);
+    void clearAddressFields(SingleUserDetails* singleUserDetails);
 };
 
 }

@@ -180,7 +180,9 @@
         var selection = chart.getSelection();
         chart.setSelection([]);
         var row = selection[0].row;
-        window.open('/configs/'+configs[row][0].replace(/&#39;/g,'\'')+'%'+configs[row][1].replace(/&#39;/g,'\'')+'%'+configs[row][2].replace(/&#39;/g,'\''), '_blank');
+        if(row != null) {
+          window.open('/configs/'+configs[row][0]+'%'+configs[row][1].replace(/&#39;/g,'\'')+'%'+configs[row][2].replace(/&#39;/g,'\'')+'%'+configs[row][3].replace(/&#39;/g,'\''), '_blank');
+        }
       }
 
       //Function for rendering the chart
@@ -197,7 +199,7 @@
             var metricDate = new Date({{ item.timestamp.year }}, {{ item.timestamp.month }}-1, {{ item.timestamp.day }}, {{ item.timestamp.hour }}, {{ item.timestamp.min }}, {{ item.timestamp.sec }}, 0);
             if(start <= metricDate && end >= metricDate) {
               qpsArgs.push([metricDate, {{ item.qps }}]);
-              configs.push(['{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
+              configs.push(['{{item.test_name}}','{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
               if(metricDate < startDate) {
                 startDate = metricDate;
               }
@@ -253,7 +255,7 @@
             var metricDate = new Date({{ item.timestamp.year }}, {{ item.timestamp.month }}-1, {{ item.timestamp.day }}, {{ item.timestamp.hour }}, {{ item.timestamp.min }}, {{ item.timestamp.sec }}, 0);
             if(start <= metricDate && end >= metricDate) {
               qpsPerCoreArgs.push([metricDate, {{ item.qps_per_core }}]);
-              configs.push(['{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
+              configs.push(['{{item.test_name}}','{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
               if(metricDate < startDate) {
                 startDate = metricDate;
               }
@@ -282,11 +284,11 @@
         });
 
         google.visualization.events.addListener(chart, 'onmouseover', function() {
-          $('#chart-div-qps').css('cursor','pointer');
+          $('#chart-div-qps-per-core').css('cursor','pointer');
         });
 
         google.visualization.events.addListener(chart, 'onmouseout', function() {
-          $('#chart-div-qps').css('cursor','auto');
+          $('#chart-div-qps-per-core').css('cursor','auto');
         });
 
         if(qpsPerCoreArgs.length != 1) {
@@ -309,7 +311,7 @@
             var metricDate = new Date({{ item.timestamp.year }}, {{ item.timestamp.month }}-1, {{ item.timestamp.day }}, {{ item.timestamp.hour }}, {{ item.timestamp.min }}, {{ item.timestamp.sec }}, 0);
             if(start <= metricDate && end >= metricDate) {
               latArgs.push([metricDate, {{ item.lat.perc_lat_50 }}, {{ item.lat.perc_lat_90 }}, {{ item.lat.perc_lat_95 }}, {{ item.lat.perc_lat_99 }}, {{ item.lat.perc_lat_99_point_9 }}]);
-              configs.push(['{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
+              configs.push(['{{item.test_name}}','{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
               if(metricDate < startDate) {
                 startDate = metricDate;
               }
@@ -339,11 +341,11 @@
         });
 
         google.visualization.events.addListener(chart, 'onmouseover', function() {
-          $('#chart-div-qps').css('cursor','pointer');
+          $('#chart-div-percentile-latencies').css('cursor','pointer');
         });
 
         google.visualization.events.addListener(chart, 'onmouseout', function() {
-          $('#chart-div-qps').css('cursor','auto');
+          $('#chart-div-percentile-latencies').css('cursor','auto');
         });
 
         if(latArgs.length != 1) {
@@ -371,7 +373,7 @@
             var metricDate = new Date({{ item.timestamp.year }}, {{ item.timestamp.month }}-1, {{ item.timestamp.day }}, {{ item.timestamp.hour }}, {{ item.timestamp.min }}, {{ item.timestamp.sec }}, 0);
             if(start <= metricDate && end >= metricDate) {
               serverTimesArgs.push([metricDate, {{ item.times.server_system_time }}/100.0, {{ item.times.server_user_time }}/100.0]);
-              configs.push(['{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
+              configs.push(['{{item.test_name}}','{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
               if(metricDate < startDate) {
                 startDate = metricDate;
               }
@@ -403,11 +405,11 @@
         });
 
         google.visualization.events.addListener(chart, 'onmouseover', function() {
-          $('#chart-div-qps').css('cursor','pointer');
+          $('#chart-div-server-times').css('cursor','pointer');
         });
 
         google.visualization.events.addListener(chart, 'onmouseout', function() {
-          $('#chart-div-qps').css('cursor','auto');
+          $('#chart-div-server-times').css('cursor','auto');
         });
 
         if(serverTimesArgs.length != 1) {
@@ -430,7 +432,7 @@
             var metricDate = new Date({{ item.timestamp.year }}, {{ item.timestamp.month }}-1, {{ item.timestamp.day }}, {{ item.timestamp.hour }}, {{ item.timestamp.min }}, {{ item.timestamp.sec }}, 0);
             if(start <= metricDate && end >= metricDate) {
               clientTimesArgs.push([metricDate, {{ item.times.client_system_time }}/100.0, {{ item.times.client_user_time }}/100.0]);
-              configs.push(['{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
+              configs.push(['{{item.test_name}}','{{item.client_config}}','{{item.server_config}}','{{item.sys_info}}']);
               if(metricDate < startDate) {
                 startDate = metricDate;
               }
@@ -462,11 +464,11 @@
         });
 
         google.visualization.events.addListener(chart, 'onmouseover', function() {
-          $('#chart-div-qps').css('cursor','pointer');
+          $('#chart-div-client-times').css('cursor','pointer');
         });
 
         google.visualization.events.addListener(chart, 'onmouseout', function() {
-          $('#chart-div-qps').css('cursor','auto');
+          $('#chart-div-client-times').css('cursor','auto');
         });
 
         if(clientTimesArgs.length != 1) {

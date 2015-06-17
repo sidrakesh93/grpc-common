@@ -1738,12 +1738,6 @@ void DataDetails::CopyFrom(const DataDetails& from) {
 
 bool DataDetails::IsInitialized() const {
 
-  if (has_client_config()) {
-    if (!this->client_config_->IsInitialized()) return false;
-  }
-  if (has_server_config()) {
-    if (!this->server_config_->IsInitialized()) return false;
-  }
   return true;
 }
 
@@ -3676,7 +3670,6 @@ void SingleUserDetails::CopyFrom(const SingleUserDetails& from) {
 
 bool SingleUserDetails::IsInitialized() const {
 
-  if (!::google::protobuf::internal::AllAreInitialized(this->data_details())) return false;
   return true;
 }
 
@@ -4247,12 +4240,6 @@ void SingleUserRecordRequest::CopyFrom(const SingleUserRecordRequest& from) {
 
 bool SingleUserRecordRequest::IsInitialized() const {
 
-  if (has_client_config()) {
-    if (!this->client_config_->IsInitialized()) return false;
-  }
-  if (has_server_config()) {
-    if (!this->server_config_->IsInitialized()) return false;
-  }
   return true;
 }
 
@@ -5281,9 +5268,6 @@ void SingleUserRetrieveReply::CopyFrom(const SingleUserRetrieveReply& from) {
 
 bool SingleUserRetrieveReply::IsInitialized() const {
 
-  if (has_details()) {
-    if (!this->details_->IsInitialized()) return false;
-  }
   return true;
 }
 
@@ -5563,7 +5547,6 @@ void AllUsersRetrieveReply::CopyFrom(const AllUsersRetrieveReply& from) {
 
 bool AllUsersRetrieveReply::IsInitialized() const {
 
-  if (!::google::protobuf::internal::AllAreInitialized(this->user_data())) return false;
   return true;
 }
 

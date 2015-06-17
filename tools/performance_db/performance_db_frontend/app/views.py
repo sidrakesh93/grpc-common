@@ -27,15 +27,15 @@ def getMetricFullDesc(metric):
   elif metric == 'qpsPerCore':
     metricName = 'QPS Per Core'
   elif metric == 'p50':
-    metricName = '50th Percentile Latency'
+    metricName = '50th Percentile Latency (\xB5s)'
   elif metric == 'p90':
-    metricName = '90th Percentile Latency'
+    metricName = '90th Percentile Latency (\xB5s)'
   elif metric == 'p95':
-    metricName = '95th Percentile Latency'
+    metricName = '95th Percentile Latency (\xB5s)'
   elif metric == 'p99':
-    metricName = '99th Percentile Latency'
+    metricName = '99th Percentile Latency (\xB5s)'
   elif metric == 'p99point9':
-    metricName = '99.9th Percentile Latency'
+    metricName = '99.9th Percentile Latency (\xB5s)'
   elif metric == 'serverSysTime':
     metricName = 'Server System Time'
   elif metric == 'serverUserTime':
